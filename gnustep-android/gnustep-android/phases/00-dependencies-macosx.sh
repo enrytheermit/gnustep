@@ -49,8 +49,8 @@ if ! gnustepandroid_has_package cmake; then
 	make install
 	cd ..
 	### FIXME g++ ?	
-	#export CMAKE_CXX_COMPILER=gcc
-	#export CMAKE_CC_COMPILER=gcc
+	export CMAKE_CXX_COMPILER=gcc
+	export CMAKE_CC_COMPILER=gcc
 else
 	echo "cmake : Already installed"
 fi
