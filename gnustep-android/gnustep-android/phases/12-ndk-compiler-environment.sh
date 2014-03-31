@@ -1,5 +1,5 @@
 #!/bin/bash
 
-export CC=gcc
-export OBJCC=gcc
-export CXX=g++
+export CC=clang
+export OBJCC=clang
+export CXX=clang++
