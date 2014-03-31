@@ -11,7 +11,8 @@
 
 #. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/05-fetch-android-tools.sh
 #. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/06-fetch-android-sdk.sh
-. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx-rd9.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx.sh
+###. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx-r9d.sh
 #. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/11-ndk-environment-macosx.sh
 #. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/12-ndk-compiler-environment-macosx.sh
 

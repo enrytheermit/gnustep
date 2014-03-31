@@ -40,7 +40,10 @@ if ! gnustepandroid_has_package cmake; then
 	./configure --prefix=$BUILDDIR
 	make
 	make install
-	cd ..	
+	cd ..
+	### FIXME g++ ?	
+	export CMAKE_CXX_COMPILER=gcc
+	export CMAKE_CC_COMPILER=gcc
 	export PATH=$PATH:$BUILDDIR/bin
 else
 	echo "Already installed"
