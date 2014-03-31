@@ -27,8 +27,8 @@
 . ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/35-update-gnustep-make-for-androideabi-macosx.sh
 
 . ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/36-build-gnustep-make-macosx.sh
-. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/40-source-gnustep-sh.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/40-source-gnustep-sh-macosx.sh
 
-. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/45-patch-gnustep-base.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/45-patch-gnustep-base-macosx.sh
 . ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/46-build-gnustep-base.sh
 
