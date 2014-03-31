@@ -1,0 +1,81 @@
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 37522)
++++ configure.ac	(working copy)
+@@ -3438,8 +3438,13 @@
+ # If there's no TLS support ... try to get some limited functionality
+ # by using OpenSSL instead.
+ 
+-if test "$HAVE_TLS" = "0"; then
++# Using name "ENABLE_OPENSSL" instead of "HAVE_OPENSSL" because we're not
++# actually testing for presence of OpenSSL (which may be done in 
++# AC_CONFIG_SUBDIRS(SSL))
++ENABLE_OPENSSL=0
+ 
++if test "$HAVE_GNUTLS" = "0"; then
++
+ #--------------------------------------------------------------------
+ # Configure flags from sub-configure runs, so they show up in our
+ # help file.
+@@ -3447,7 +3452,6 @@
+ AC_ARG_ENABLE(openssl,
+   [  --disable-openssl		Disable support for openssl in URL classes],,
+   enable_openssl=yes)
+-  HAVE_GNUTLS=0
+ AC_ARG_WITH(openssl-include,
+   [  --with-openssl-include=PATH  include path for openssl headers],
+   openssl_incdir="$withval", openssl_incdir="no")
+@@ -3455,9 +3459,16 @@
+   [  --with-openssl-library=PATH  library path for openssl libraries],
+   openssl_libdir="$withval", openssl_libdir="no")
+ 
+-AC_CONFIG_SUBDIRS(SSL)
++if test $enable_openssl = yes; then 
++  ENABLE_OPENSSL=1
++  AC_CONFIG_SUBDIRS(SSL)
+ fi
+ 
++fi
++
++AC_DEFINE_UNQUOTED(ENABLE_OPENSSL,$ENABLE_OPENSSL,[Define if OpenSSL code should be used])
++AC_SUBST(ENABLE_OPENSSL)
++
+ #--------------------------------------------------------------------
+ # Record the version
+ #--------------------------------------------------------------------
+Index: GNUmakefile
+===================================================================
+--- GNUmakefile	(revision 37522)
++++ GNUmakefile	(working copy)
+@@ -66,12 +66,17 @@
+ #
+ SUBPROJECTS = Source
+ ifeq ($(GNUSTEP_BASE_HAVE_GNUTLS), 0)
++ifeq ($(GNUSTEP_BASE_ENABLE_OPENSSL), 1)
+ ifneq ($(GNUSTEP_TARGET_OS), mingw32)
+   SUBPROJECTS += SSL
+ endif
+ endif
+-SUBPROJECTS += Tools NSTimeZones Resources Tests
++endif
+ 
++ifneq ($(GNUSTEP_TARGET_OS), linux-androideabi)
++  SUBPROJECTS += Tools NSTimeZones Resources Tests
++endif
++
+ -include Makefile.preamble
+ 
+ include $(GNUSTEP_MAKEFILES)/aggregate.make
+Index: config.mak.in
+===================================================================
+--- config.mak.in	(revision 37522)
++++ config.mak.in	(working copy)
+@@ -42,6 +42,8 @@
+ GNUSTEP_BASE_HAVE_ICU=@HAVE_ICU@
+ GNUSTEP_BASE_HAVE_LIBDISPATCH=@HAVE_LIBDISPATCH@
+ 
++GNUSTEP_BASE_ENABLE_OPENSSL=@ENABLE_OPENSSL@
++
+ # Futureproofing ... if we ever use non-ascii string constants in base,
+ # we need to make sure that anyone building base uses the expected input
+ # characterset

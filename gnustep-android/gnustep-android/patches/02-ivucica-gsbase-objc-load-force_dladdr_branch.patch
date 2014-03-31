@@ -1,0 +1,13 @@
+Index: Source/objc-load.m
+===================================================================
+--- Source/objc-load.m	(revision 36630)
++++ Source/objc-load.m	(working copy)
+@@ -236,7 +236,7 @@
+   return 0;
+ }
+ 
+-
++#define LINKER_GETSYMBOL 1
+ #ifdef __MINGW__
+ // FIXME: We can probably get rid of this now - MinGW should include a working
+ // dladdr() wrapping this function, so we no longer need a Windows-only code

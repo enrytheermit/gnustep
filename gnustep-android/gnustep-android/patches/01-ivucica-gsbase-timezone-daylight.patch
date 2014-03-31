@@ -1,0 +1,13 @@
+Index: Source/NSTimeZone.m
+===================================================================
+--- Source/NSTimeZone.m	(revision 36630)
++++ Source/NSTimeZone.m	(working copy)
+@@ -1641,7 +1641,7 @@
+ 	{
+           localZoneSource = @"function: 'tzset()/tzname'";
+ 	  tzset();
+-	  if (NULL != tzname[0] && '\0' != *tzname[0] && 0 == daylight)
++	  if (NULL != tzname[0] && '\0' != *tzname[0])// && 0 == daylight)
+ 	    localZoneString = [NSString stringWithUTF8String: tzname[0]];
+ 	}
+ #endif
