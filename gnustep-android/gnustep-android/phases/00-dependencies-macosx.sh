@@ -41,6 +41,7 @@ if ! gnustepandroid_has_package cmake; then
 	make
 	make install
 	cd ..	
+	export PATH=$PATH:$BUILDDIR/bin
 else
 	echo "Already installed"
 fi
