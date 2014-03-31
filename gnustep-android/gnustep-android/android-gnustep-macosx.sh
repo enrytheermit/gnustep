@@ -12,23 +12,23 @@
 #. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/05-fetch-android-tools.sh
 #. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/06-fetch-android-sdk.sh
 . ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx.sh
-###. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx-r9d.sh
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/11-ndk-environment-macosx.sh
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/12-ndk-compiler-environment-macosx.sh
+### Later version # . ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx-r9d.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/11-ndk-environment-macosx.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/12-ndk-compiler-environment-macosx.sh
 
 ### eabi target not done
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/15-bootstrap-standalone-ndk-toolchain.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/15-bootstrap-standalone-ndk-toolchain-macosx.sh
 
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/20-fetch-gnustep-and-libobjc2-macosx.sh
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/25-fetch-android-cmake-toolchain-file-macosx.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/20-fetch-gnustep-and-libobjc2-macosx.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/25-fetch-android-cmake-toolchain-file-macosx.sh
 
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/30-build-libobjc2-macosx.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/30-build-libobjc2-macosx.sh
 
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/35-update-gnustep-make-for-androideabi-macosx.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/35-update-gnustep-make-for-androideabi-macosx.sh
 
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/36-build-gnustep-make-macosx.sh
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/40-source-gnustep-sh.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/36-build-gnustep-make-macosx.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/40-source-gnustep-sh.sh
 
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/45-patch-gnustep-base.sh
-#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/46-build-gnustep-base.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/45-patch-gnustep-base.sh
+. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/46-build-gnustep-base.sh
 
