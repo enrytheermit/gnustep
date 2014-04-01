@@ -1,0 +1,366 @@
+diff -ruN gnustep-android/.hgignore gnustep-android-with-macosx/.hgignore
+--- gnustep-android/.hgignore	2014-03-31 18:01:03.662382500 -0700
++++ gnustep-android-with-macosx/.hgignore	1969-12-31 16:00:00.000000000 -0800
+@@ -1,2 +0,0 @@
+-syntax: glob
+-build/*
+diff -ruN gnustep-android/android-gnustep-macosx.sh gnustep-android-with-macosx/android-gnustep-macosx.sh
+--- gnustep-android/android-gnustep-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/android-gnustep-macosx.sh	2014-04-01 00:17:01.131479200 -0700
+@@ -0,0 +1,34 @@
++#!/bin/bash
++
++### We don't use macports
++### Install wget before running this script
++### This is clean bash, no other return values for example 
++### Tested on Snow Leopard
++
++. $(dirname $BASH_SOURCE)/env.sh
++
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/00-dependencies-macosx.sh
++
++#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/05-fetch-android-tools.sh
++#. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/06-fetch-android-sdk.sh
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx.sh
++### Later version # . ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/10-fetch-android-ndk-macosx-r9d.sh
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/11-ndk-environment-macosx.sh
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/12-ndk-compiler-environment-macosx.sh
++
++### eabi target not done
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/15-bootstrap-standalone-ndk-toolchain-macosx.sh
++
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/20-fetch-gnustep-and-libobjc2-macosx.sh
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/25-fetch-android-cmake-toolchain-file-macosx.sh
++
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/30-build-libobjc2-macosx.sh
++
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/35-update-gnustep-make-for-androideabi-macosx.sh
++
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/36-build-gnustep-make-macosx.sh
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/40-source-gnustep-sh-macosx.sh
++
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/45-patch-gnustep-base-macosx.sh
++. ${ANDROID_GNUSTEP_SCRIPT_ROOT}/phases/46-build-gnustep-base.sh
++
+diff -ruN gnustep-android/phases/00-dependencies-macosx.sh gnustep-android-with-macosx/phases/00-dependencies-macosx.sh
+--- gnustep-android/phases/00-dependencies-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/00-dependencies-macosx.sh	2014-04-01 00:17:01.134479400 -0700
+@@ -0,0 +1,58 @@
++#!/bin/bash
++
++PWDDIR=`pwd`
++BUILDDIR=${PWDDIR%%}/build
++PATH=$PATH:$BUILDDIR/bin
++
++gnustepandroid_has_package()
++{
++	HASPACKAGE=`$1 --version`
++	if [[ $? != 127 ]] ; then
++		HASPACKAGE=`echo $HASPACKAGE | cut -d ' ' -f 3`
++		return 0
++	fi
++	if [[ $? != 0 ]] ; then
++		return 1
++	fi
++	HASPACKAGE=`echo $HASPACKAGE | cut -d ' ' -f 3`
++	if [ $HASPACKAGE == 'installed' ] ; then
++		return 0
++	else
++		echo $HASPACKAGE
++	fi
++	return 1
++	
++}
++
++### This should all be installed
++# we need build-essential for Make et al
++# add-apt-repository is in python-software-properties
++# android needs sun java
++# gnustep needs svn
++	
++if [[ ! -f build ]] ; then
++	mkdir build
++fi
++
++# libobjc2 needs cmake
++
++
++if ! gnustepandroid_has_package cmake; then
++
++	echo "Not installed...downloading"
++	cd build
++	wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz
++	tar xzf cmake-2.8.12.2.tar.gz
++	cd cmake-2.8.12.2
++	./configure --prefix=$BUILDDIR
++	make
++	make install
++	cd ..
++	### FIXME g++ ?	
++	export CMAKE_CXX_COMPILER=gcc
++	export CMAKE_CC_COMPILER=gcc
++else
++	echo "cmake : Already installed"
++fi
++echo
++
+diff -ruN gnustep-android/phases/10-fetch-android-ndk-macosx.sh gnustep-android-with-macosx/phases/10-fetch-android-ndk-macosx.sh
+--- gnustep-android/phases/10-fetch-android-ndk-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/10-fetch-android-ndk-macosx.sh	2014-04-01 00:17:01.145480000 -0700
+@@ -0,0 +1,30 @@
++#!/bin/bash
++
++# fetch android ndk
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++echo " ==> FETCHING ANDROID NDK"
++if [ ! -e android-ndk-r8d-darwin-x86.tar.bz2 ] ; then
++	wget http://dl.google.com/android/ndk/android-ndk-r8d-darwin-x86.tar.bz2
++else
++	echo "Already downloaded. Skipping."
++fi
++
++if [ ! -e android-ndk-r8d-darwin-x86.tar.bz2 ] ; then
++	echo "Failed to download. Aborting."
++	exit 1
++fi
++
++###
++echo " ==> UNPACKING ANDROID NDK"
++if [ ! -e android-ndk-r8d ] ; then
++	tar xfj android-ndk-r8d-darwin-x86.tar.bz2
++else
++	echo "Already unpacked. Skipping."
++fi
++
++if [ ! -e android-ndk-r8d ] ; then
++	echo "Failed to unpack. Aborting."
++	exit 1
++fi
++
++
+diff -ruN gnustep-android/phases/10-fetch-android-ndk-macosx-r9d.sh gnustep-android-with-macosx/phases/10-fetch-android-ndk-macosx-r9d.sh
+--- gnustep-android/phases/10-fetch-android-ndk-macosx-r9d.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/10-fetch-android-ndk-macosx-r9d.sh	2014-04-01 00:17:01.136479500 -0700
+@@ -0,0 +1,30 @@
++#!/bin/bash
++
++# fetch android ndk
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++echo " ==> FETCHING ANDROID NDK"
++if [ ! -e android-ndk-r9d-darwin-x86.tar.bz2 ] ; then
++	wget http://dl.google.com/android/ndk/android-ndk-r9d-darwin-x86.tar.bz2
++else
++	echo "Already downloaded. Skipping."
++fi
++
++if [ ! -e android-ndk-r9d-darwin-x86.tar.bz2 ] ; then
++	echo "Failed to download. Aborting."
++	exit 1
++fi
++
++###
++echo " ==> UNPACKING ANDROID NDK"
++if [ ! -e android-ndk-r9d ] ; then
++	tar xfj android-ndk-r9d-darwin-x86.tar.bz2
++else
++	echo "Already unpacked. Skipping."
++fi
++
++if [ ! -e android-ndk-r8d ] ; then
++	echo "Failed to unpack. Aborting."
++	exit 1
++fi
++
++
+diff -ruN gnustep-android/phases/11-ndk-environment-macosx.sh gnustep-android-with-macosx/phases/11-ndk-environment-macosx.sh
+--- gnustep-android/phases/11-ndk-environment-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/11-ndk-environment-macosx.sh	2014-04-01 00:17:01.160480900 -0700
+@@ -0,0 +1,4 @@
++#!/bin/bash
++
++export ANDROID_NDK="${ANDROID_GNUSTEP_INSTALL_ROOT}/android-ndk-r8d"
++export ANDROID_NDK_LLVM="${ANDROID_GNUSTEP_INSTALL_ROOT}/android-ndk-r8d/toolchains/llvm-3.1/prebuilt/darwin-x86/bin/"
+diff -ruN gnustep-android/phases/12-ndk-compiler-environment-macosx.sh gnustep-android-with-macosx/phases/12-ndk-compiler-environment-macosx.sh
+--- gnustep-android/phases/12-ndk-compiler-environment-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/12-ndk-compiler-environment-macosx.sh	2014-04-01 00:17:01.161480900 -0700
+@@ -0,0 +1,5 @@
++#!/bin/bash
++
++export CC=gcc
++export OBJCC=gcc
++export CXX=g++
+diff -ruN gnustep-android/phases/15-bootstrap-standalone-ndk-toolchain-macosx.sh gnustep-android-with-macosx/phases/15-bootstrap-standalone-ndk-toolchain-macosx.sh
+--- gnustep-android/phases/15-bootstrap-standalone-ndk-toolchain-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/15-bootstrap-standalone-ndk-toolchain-macosx.sh	2014-04-01 00:17:01.163481000 -0700
+@@ -0,0 +1,8 @@
++#!/bin/bash
++
++# bootstrap a standalone toolchain
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++rm -rf /tmp/my-android-toolchain
++${ANDROID_NDK}/build/tools/make-standalone-toolchain.sh --platform=android-14 --install-dir=/tmp/my-android-toolchain --toolchain=arm-linux-androideabi-clang3.1
++export PATH=/tmp/my-android-toolchain/bin:$PATH
++
+diff -ruN gnustep-android/phases/20-fetch-gnustep-and-libobjc2-macosx.sh gnustep-android-with-macosx/phases/20-fetch-gnustep-and-libobjc2-macosx.sh
+--- gnustep-android/phases/20-fetch-gnustep-and-libobjc2-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/20-fetch-gnustep-and-libobjc2-macosx.sh	2014-04-01 00:17:01.165481100 -0700
+@@ -0,0 +1,23 @@
++#!/bin/bash
++
++# fetch gnustep and libobjc2
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++if false ; then
++	# fetch all
++	echo " ==> FETCHING GNUSTEP"
++	svn co http://svn.gna.org/svn/gnustep/modules gnustep
++else
++	# fetch just gnustep-make, gnustep-base and libobjc2
++	mkdir -p gnustep/core
++	mkdir -p gnustep/dev-libs
++	cd gnustep/core
++	echo " ==> FETCHING GNUSTEP MAKE & BASE"
++	svn co http://svn.gna.org/svn/gnustep/tools/make/trunk/ make
++	svn co http://svn.gna.org/svn/gnustep/libs/base/trunk/ base
++	cd ../..
++	cd gnustep/dev-libs
++	echo " ==> FETCHING LIBOBJC2"
++	svn co http://svn.gna.org/svn/gnustep/libs/libobjc2/trunk libobjc2
++	cd ../../
++fi
++
+diff -ruN gnustep-android/phases/25-fetch-android-cmake-toolchain-file-macosx.sh gnustep-android-with-macosx/phases/25-fetch-android-cmake-toolchain-file-macosx.sh
+--- gnustep-android/phases/25-fetch-android-cmake-toolchain-file-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/25-fetch-android-cmake-toolchain-file-macosx.sh	2014-04-01 00:17:01.167481300 -0700
+@@ -0,0 +1,36 @@
++#!/bin/bash
++
++# fetch android-cmake toolchain file
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++if false ; then
++	# not used; no clang support
++	wget http://android-cmake.googlecode.com/hg/toolchain/android.toolchain.cmake
++else
++	# source: http://root.cern.ch/svn/root/trunk/interpreter/llvm/src/cmake/platforms/Android.cmake
++	# modified to replace CMAKE_C_COMPILER's reference to CMAKE_BINARY_DIR with LLVM_ANDROID_TOOLCHAIN_DIR
++	# also, changed sysroot
++	cat > android.toolchain.cmake << _EOF
++	# Toolchain config for Android NDK.
++	# This is expected to be used with a standalone Android toolchain (see
++	# docs/STANDALONE-TOOLCHAIN.html in the NDK on how to get one).
++	#
++	# Usage:
++	# mkdir build; cd build
++	# cmake ..; make
++	# mkdir android; cd android
++	# cmake -DLLVM_ANDROID_TOOLCHAIN_DIR=/path/to/android/ndk \
++	#   -DCMAKE_TOOLCHAIN_FILE=../../cmake/platforms/Android.cmake ../..
++	# make <target>
++
++	SET(CMAKE_SYSTEM_NAME Linux)
++	SET(CMAKE_C_COMPILER \${LLVM_ANDROID_TOOLCHAIN_DIR}/bin/clang)
++	SET(CMAKE_CXX_COMPILER \${LLVM_ANDROID_TOOLCHAIN_DIR}/bin/clang++)
++	SET(ANDROID "1" CACHE STRING "ANDROID" FORCE)
++
++	SET(ANDROID_COMMON_FLAGS "-target arm-linux-androideabi -B\${LLVM_ANDROID_TOOLCHAIN_DIR}") # -mllvm -arm-enable-ehabi")
++	SET(CMAKE_C_FLAGS "\${ANDROID_COMMON_FLAGS}" CACHE STRING "toolchain_cflags" FORCE)
++	SET(CMAKE_CXX_FLAGS "\${ANDROID_COMMON_FLAGS}" CACHE STRING "toolchain_cxxflags" FORCE)
++	SET(CMAKE_LINK_FLAGS "\${ANDROID_COMMON_FLAGS}" CACHE STRING "toolchain_linkflags" FORCE)
++_EOF
++fi
++
+diff -ruN gnustep-android/phases/30-build-libobjc2-macosx.sh gnustep-android-with-macosx/phases/30-build-libobjc2-macosx.sh
+--- gnustep-android/phases/30-build-libobjc2-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/30-build-libobjc2-macosx.sh	2014-04-01 00:17:01.168481300 -0700
+@@ -0,0 +1,13 @@
++#!/bin/bash
++
++# build libobjc2
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++cd gnustep/dev-libs/libobjc2
++
++rm -rf build
++mkdir -p build && cd build
++#cmake -DCMAKE_TOOLCHAIN_FILE="${ANDROID_GNUSTEP_INSTALL_ROOT}/android.toolchain.cmake" -DCOMPILER_FAMILY=clang -DCOMPILER_FAMILY_PP=clang++ ..
++cmake -DCMAKE_TOOLCHAIN_FILE="${ANDROID_GNUSTEP_INSTALL_ROOT}/android.toolchain.cmake" -DLLVM_ANDROID_TOOLCHAIN_DIR="/tmp/my-android-toolchain/" -DTESTS=FALSE ..
++make -j8 objc objcxx
++make install
++
+diff -ruN gnustep-android/phases/35-update-gnustep-make-for-androideabi-macosx.sh gnustep-android-with-macosx/phases/35-update-gnustep-make-for-androideabi-macosx.sh
+--- gnustep-android/phases/35-update-gnustep-make-for-androideabi-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/35-update-gnustep-make-for-androideabi-macosx.sh	2014-04-01 00:17:01.170481400 -0700
+@@ -0,0 +1,9 @@
++#!/bin/bash
++
++# update gnustep-make's config.sub to recognize androideabi
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++cd gnustep/core/make
++
++rm config.sub
++wget "http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD" -O config.sub
++
+diff -ruN gnustep-android/phases/36-build-gnustep-make-macosx.sh gnustep-android-with-macosx/phases/36-build-gnustep-make-macosx.sh
+--- gnustep-android/phases/36-build-gnustep-make-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/36-build-gnustep-make-macosx.sh	2014-04-01 00:17:01.172481500 -0700
+@@ -0,0 +1,11 @@
++#!/bin/bash
++
++# build gnustep-make
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++cd gnustep/core/make
++
++./configure --host=arm-linux-androideabi
++make
++make install
++
++
+diff -ruN gnustep-android/phases/40-source-gnustep-sh-macosx.sh gnustep-android-with-macosx/phases/40-source-gnustep-sh-macosx.sh
+--- gnustep-android/phases/40-source-gnustep-sh-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/40-source-gnustep-sh-macosx.sh	2014-04-01 00:17:01.173481600 -0700
+@@ -0,0 +1,5 @@
++#!/bin/bash
++
++# 'source' GNUstep.sh
++. /usr/local/share/GNUstep/Makefiles/GNUstep.sh
++
+diff -ruN gnustep-android/phases/45-patch-gnustep-base-macosx.sh gnustep-android-with-macosx/phases/45-patch-gnustep-base-macosx.sh
+--- gnustep-android/phases/45-patch-gnustep-base-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/45-patch-gnustep-base-macosx.sh	2014-04-01 00:17:01.175481700 -0700
+@@ -0,0 +1,16 @@
++#!/bin/bash
++
++# patch gnustep-base
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++cd gnustep/core/base
++
++#patch -p1 < ${ANDROID_GNUSTEP_SCRIPT_ROOT}/patches/00-emmanuel-gsbase_configure_ac.patch
++#patch -p1 < ${ANDROID_GNUSTEP_SCRIPT_ROOT}/patches/01-ivucica-gsbase-timezone-daylight.patch
++#patch -p1 < ${ANDROID_GNUSTEP_SCRIPT_ROOT}/patches/02-ivucica-gsbase-objc-load-force_dladdr_branch.patch
++patch -p1 < ${ANDROID_GNUSTEP_SCRIPT_ROOT}/patches/03-ivucica-gsbase-disabling_openssl.patch
++patch -p1 < ${ANDROID_GNUSTEP_SCRIPT_ROOT}/patches/04-ivucica-gsbase-sysinfo_syscall.patch
++
++# tell gnustep-base that we DO have an objc2 runtime
++svn revert cross.config
++echo "cross_objc2_runtime=1" >> cross.config
++
+diff -ruN gnustep-android/phases/46-build-gnustep-base-macosx.sh gnustep-android-with-macosx/phases/46-build-gnustep-base-macosx.sh
+--- gnustep-android/phases/46-build-gnustep-base-macosx.sh	1969-12-31 16:00:00.000000000 -0800
++++ gnustep-android-with-macosx/phases/46-build-gnustep-base-macosx.sh	2014-04-01 00:17:01.177481800 -0700
+@@ -0,0 +1,18 @@
++#!/bin/bash
++
++# build gnustep-base
++cd "${ANDROID_GNUSTEP_INSTALL_ROOT}"
++cd gnustep/core/base
++
++autoreconf # to apply changes to configure.ac
++./configure --host=arm-linux-androideabi \
++	--enable-nxconstantstring \
++	--disable-invocations \
++	--disable-iconv \
++	--disable-tls \
++	--disable-icu \
++	--disable-xml \
++	--disable-openssl \
++	--with-cross-compilation-info=./cross.config
++make -j2
++make install
