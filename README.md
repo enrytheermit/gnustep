@@ -8,3 +8,5 @@ gnustep-android : macos x and linux build scripts for porting GNUstep
     from https://bitbucket.org/ivucica/gnustep-android
 
 x-dev : X11 Application code with simple indow management
+
+GSGamePlatform : iOS and GNUstep game demo code and engines
