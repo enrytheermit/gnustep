@@ -49,14 +49,24 @@ namespace sound
   int ESDSample::play_file_audiofile (string fn, string fn2)
   {
 	int infd, outfd;
+	FILE *ifd = fopen(fn.c_str(), "r");
+	int t;
 
+	fseek(ifd, 0L, SEEK_END);
+	t = ftell(ifd);
+
+	fclose(ifd);
+
+
+	std::cout << "input filelen = " << t << std::endl;
         const int kFrameCount = 500;
         const int kSampleCount = 2 * kFrameCount;
 
         int16_t data[kSampleCount];
         int16_t readData[kSampleCount];
 
-        for (int i=0; i<kSampleCount; i++)
+	int i;
+        for (i=0; i<kSampleCount; i++)
                 data[i] = 3*i + 2;
 
         AFfilesetup setup = afNewFileSetup();
@@ -67,30 +77,24 @@ namespace sound
         afInitChannels(setup, AF_DEFAULT_TRACK, 1);
         afInitRate(setup, AF_DEFAULT_TRACK, 44100);
 
-        //ASSERT_GE(::pipe(pipefd), 0);
-        // Read from pipe.
         AFfilehandle handle;
         handle = afOpenFD(infd, "r", setup);
-        //ASSERT_TRUE(handle);
         AFframecount framesRead;
         framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, kFrameCount);
-        //ASSERT_EQ(framesRead, kFrameCount);
-        //ASSERT_TRUE(!::memcmp(readData, data, kFrameCount * sizeof (int16_t))) <<
                 "Data read does not match data written";
         if (!::memcmp(readData, data, kFrameCount * sizeof (int16_t)))
                 std::cout << "Data read does not match data written";
 
 
-        // Write into pipe.
-
        handle = afOpenFile(fn2.c_str(), "w", setup);
-        //ASSERT_TRUE(handle);
         AFframecount framesWritten;
-        framesWritten = afWriteFrames(handle, AF_DEFAULT_TRACK, data, kFrameCount);
+        framesWritten = afWriteFrames(handle, AF_DEFAULT_TRACK, readData, kFrameCount);
 
 
-        ;
-        ///ASSERT_EQ(framesWritten, kFrameCount);
+	int dataFramesCount = (t - i) / 2;	
+        int16_t writeData[dataFramesCount];
+        framesWritten = afWriteFrames(handle, AF_DEFAULT_TRACK, writeData, dataFramesCount);
+
         afCloseFile(handle);
 
         //ASSERT_EQ(afCloseFile(handle), 0);
