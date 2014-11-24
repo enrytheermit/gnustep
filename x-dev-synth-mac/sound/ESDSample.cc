@@ -57,8 +57,8 @@ namespace sound
 
 	fclose(ifd);
 
-
 	std::cout << "input filelen = " << t << std::endl;
+
         const int kFrameCount = 500;
         const int kSampleCount = 2 * kFrameCount;
 
@@ -76,11 +76,23 @@ namespace sound
         afInitSampleFormat(setup, AF_DEFAULT_TRACK, AF_SAMPFMT_TWOSCOMP, 16);
         afInitChannels(setup, AF_DEFAULT_TRACK, 1);
         afInitRate(setup, AF_DEFAULT_TRACK, 44100);
-
         AFfilehandle handle;
         handle = afOpenFD(infd, "r", setup);
+	AFfileoffset dataoffset = afGetDataOffset(handle, AF_DEFAULT_TRACK);
+	std::cout << dataoffset << std::endl;
         AFframecount framesRead;
-        framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, kFrameCount);
+
+	int nativeByteOrder;
+
+#ifdef WORDS_BIGENDIAN
+        nativeByteOrder = AF_BYTEORDER_BIGENDIAN;
+#else
+        nativeByteOrder = AF_BYTEORDER_LITTLEENDIAN;
+#endif   
+	if (afGetByteOrder(handle, AF_DEFAULT_TRACK) == nativeByteOrder)
+                std::cout << "test file not in native byte order" <<std::endl;
+
+	framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, kFrameCount);
                 "Data read does not match data written";
         if (!::memcmp(readData, data, kFrameCount * sizeof (int16_t)))
                 std::cout << "Data read does not match data written";
