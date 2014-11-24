@@ -1,0 +1,1 @@
+. Window& w fault in textlabel of button and button itself
