@@ -39,6 +39,7 @@ class ESDSample
   ESDSample(string filename);
   virtual ~ESDSample();
 
+  uint32_t swap_endian(uint32_t n); 
   void readinSample();
   int play_file_audiofile (string fn, string fn2);
   void playSample();

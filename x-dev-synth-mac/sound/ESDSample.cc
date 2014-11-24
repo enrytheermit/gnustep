@@ -45,7 +45,20 @@ namespace sound
 
   ESDSample::~ESDSample()
   {}
-  
+
+  uint32_t ESDSample::swap_endian(uint32_t n) 
+  {
+	union {
+		uint32_t u;
+		unsigned char u8[sizeof(uint32_t)];
+	} source, dest;
+
+	source.u = n;
+	for (int i; i < sizeof(uint32_t); i++)
+		dest.u8[i] = source.u8[sizeof(uint32_t) - i - 1];
+
+	return dest.u;
+  } 
   int ESDSample::play_file_audiofile (string fn, string fn2)
   {
 	int infd, outfd;
@@ -79,7 +92,7 @@ namespace sound
         AFfilehandle handle;
         handle = afOpenFD(infd, "r", setup);
 	AFfileoffset dataoffset = afGetDataOffset(handle, AF_DEFAULT_TRACK);
-	std::cout << dataoffset << std::endl;
+	std::cout << swap_endian(dataoffset) << std::endl;
         AFframecount framesRead;
 
 	int nativeByteOrder;
