@@ -23,6 +23,7 @@
 #include "ESDSample.h"
 #include "../esound/esd.h"
 
+#include <iostream>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -47,58 +48,54 @@ namespace sound
   
   int ESDSample::play_file_audiofile (string fn, string fn2)
   {
-    
-  char buf[ESD_BUF_SIZE];
-  int buf_frames;
-  int frames_read = 0, bytes_written = 0;
+	int infd, outfd;
 
-  /* input from libaudiofile... */
+        const int kFrameCount = 500;
+        const int kSampleCount = 2 * kFrameCount;
 
-  AFfilehandle in_file, in_file2, out_file;
-  int in_format, in_width, in_channels, frame_count;
-  double in_rate;
-  int bytes_per_frame;
+        int16_t data[kSampleCount];
+        int16_t readData[kSampleCount];
 
-  /* output to esound... */
-  
-  int out_sock, out_bits, out_channels, out_rate;
-  int out_mode = ESD_STREAM, out_func = ESD_PLAY;
-  esd_format_t out_format;
+        for (int i=0; i<kSampleCount; i++)
+                data[i] = 3*i + 2;
 
-  in_file = afOpenFile(fn.c_str(), "r", NULL);
-  if (!in_file)
-    return 1;
+        AFfilesetup setup = afNewFileSetup();
+        //ASSERT_TRUE(setup);
 
-  AFfilesetup setup = afNewFileSetup();
-  out_file = afOpenFile(fn2.c_str(), "w", setup);
-  if (!out_file)
-    return 1;
+        afInitFileFormat(setup, AF_FILE_RAWDATA);
+        afInitSampleFormat(setup, AF_DEFAULT_TRACK, AF_SAMPFMT_TWOSCOMP, 16);
+        afInitChannels(setup, AF_DEFAULT_TRACK, 1);
+        afInitRate(setup, AF_DEFAULT_TRACK, 44100);
 
-  frame_count = afGetFrameCount (in_file, AF_DEFAULT_TRACK);
-  in_channels = afGetChannels (in_file, AF_DEFAULT_TRACK);
-  in_rate = afGetRate (in_file, AF_DEFAULT_TRACK);
-  afGetSampleFormat (in_file, AF_DEFAULT_TRACK, &in_format, &in_width);
+        //ASSERT_GE(::pipe(pipefd), 0);
+        // Read from pipe.
+        AFfilehandle handle;
+        handle = afOpenFD(infd, "r", setup);
+        //ASSERT_TRUE(handle);
+        AFframecount framesRead;
+        framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, kFrameCount);
+        //ASSERT_EQ(framesRead, kFrameCount);
+        //ASSERT_TRUE(!::memcmp(readData, data, kFrameCount * sizeof (int16_t))) <<
+                "Data read does not match data written";
+        if (!::memcmp(readData, data, kFrameCount * sizeof (int16_t)))
+                std::cout << "Data read does not match data written";
 
-  afSetVirtualByteOrder (in_file, AF_DEFAULT_TRACK, AF_BYTEORDER_LITTLEENDIAN);
 
-  /*  printf ("frames: %i channels: %i rate: %f format: %i width: %i\n",
-   *	  frame_count, in_channels, in_rate, in_format, in_width);
-   */
-  const int kFrameCount = 500;
-  const int kSampleCount = 2 * kFrameCount;
+        // Write into pipe.
 
-  int16_t data[kSampleCount];
+       handle = afOpenFile(fn2.c_str(), "w", setup);
+        //ASSERT_TRUE(handle);
+        AFframecount framesWritten;
+        framesWritten = afWriteFrames(handle, AF_DEFAULT_TRACK, data, kFrameCount);
 
-  for (int i = 0; i < kSampleCount; i++)
-    data[i] = 3*i + 2;
 
-  AFframecount framesWritten;
-  framesWritten = afWriteFrames(out_file, AF_DEFAULT_TRACK, data, kFrameCount);
+        ;
+        ///ASSERT_EQ(framesWritten, kFrameCount);
+        afCloseFile(handle);
 
-  afCloseFile(in_file);
-  afCloseFile(out_file);
+        //ASSERT_EQ(afCloseFile(handle), 0);
 
-  afFreeFileSetup(setup);
+        afFreeFileSetup(setup);  
   /* convert audiofile parameters to EsounD parameters */
   /****
   if (in_width == 8)

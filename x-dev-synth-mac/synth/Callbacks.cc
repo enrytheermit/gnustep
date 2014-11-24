@@ -32,15 +32,16 @@ void *playcallback(void *, void *)
   argv[0] = arg1;
   //system("./esound/esdcat.exe ./esound/test.wav");//,argv[0]);
 
-  string *s = new string("./esound/youcannot.wav");
-  string *s2 = new string("./esound/test.wav");
+  string *s = new string("./sounds/out.wav");
+  string *s2 = new string("./sounds/test.wav");
   sound::ESDSample *sample = new sound::ESDSample;
-  //sample->play_file(*s2,*s);
+  sample->play_file_audiofile(*s2,*s);
 
-  sound::ESDCat esdc;
+  /* sound::ESDCat esdc;
   //esdc.esdcat("./esound/test.wav");
   esdc.addSample("./esound/test.wav");
   
   esdc.playSampleFilename("./esound/test.wav");
   //esdc.play_file("./esound/test.wav");
+  */
 }
