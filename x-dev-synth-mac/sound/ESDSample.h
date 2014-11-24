@@ -40,7 +40,7 @@ class ESDSample
   virtual ~ESDSample();
 
   void readinSample();
-  int play_file (string fn, string fn2);
+  int play_file_audiofile (string fn, string fn2);
   void playSample();
   void playSampleSampled();
 

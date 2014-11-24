@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <sys/stat.h>
-
+#include <fcntl.h>
 
 namespace sound
 {
@@ -45,7 +45,7 @@ namespace sound
   ESDSample::~ESDSample()
   {}
   
-  int ESDSample::play_file (string fn, string fn2)
+  int ESDSample::play_file_audiofile (string fn, string fn2)
   {
     
   char buf[ESD_BUF_SIZE];
@@ -54,7 +54,7 @@ namespace sound
 
   /* input from libaudiofile... */
 
-  AFfilehandle in_file, in_file2;
+  AFfilehandle in_file, in_file2, out_file;
   int in_format, in_width, in_channels, frame_count;
   double in_rate;
   int bytes_per_frame;
@@ -69,8 +69,9 @@ namespace sound
   if (!in_file)
     return 1;
 
-  in_file2 = afOpenFile(fn2.c_str(), "r", NULL);
-  if (!in_file2)
+  AFfilesetup setup = afNewFileSetup();
+  out_file = afOpenFile(fn2.c_str(), "w", setup);
+  if (!out_file)
     return 1;
 
   frame_count = afGetFrameCount (in_file, AF_DEFAULT_TRACK);
@@ -83,9 +84,23 @@ namespace sound
   /*  printf ("frames: %i channels: %i rate: %f format: %i width: %i\n",
    *	  frame_count, in_channels, in_rate, in_format, in_width);
    */
+  const int kFrameCount = 500;
+  const int kSampleCount = 2 * kFrameCount;
 
+  int16_t data[kSampleCount];
+
+  for (int i = 0; i < kSampleCount; i++)
+    data[i] = 3*i + 2;
+
+  AFframecount framesWritten;
+  framesWritten = afWriteFrames(out_file, AF_DEFAULT_TRACK, data, kFrameCount);
+
+  afCloseFile(in_file);
+  afCloseFile(out_file);
+
+  afFreeFileSetup(setup);
   /* convert audiofile parameters to EsounD parameters */
-
+  /****
   if (in_width == 8)
     out_bits = ESD_BITS8;
   else if (in_width == 16)
@@ -115,9 +130,9 @@ namespace sound
   //tullyout_sock = esd_play_stream_fallback (out_format, out_rate, NULL, (char *) fn.c_str());
   if (out_sock <= 0)
     return 1;
-
+  ****/
   /* play */
-
+  /****
   buf_frames = ESD_BUF_SIZE / bytes_per_frame;
 
   //  char rbuf[ESD_BUF_SIZE][4096];
@@ -156,7 +171,7 @@ namespace sound
     return 1;
 
   printf("bytes_written = %d\n", bytes_written);
-
+  ****/
   return 0;
 }
 
