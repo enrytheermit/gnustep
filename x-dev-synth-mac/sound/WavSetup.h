@@ -14,8 +14,8 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef ESDSAMPLE_H
-#define ESDSAMPLE_H
+#ifndef WAVSETUP_H
+#define WAVSETUP_H
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -25,50 +25,26 @@
 #include <vector>
 #include <string>
 #include "../esound/esd.h"
-#include "ESDSampleBuf.h"
-#include "WavFilename.h"
-#include "WavSetup.h"
-#include "WavHandle.h"
 
 using namespace std;
 
 namespace sound
 {
 
-const  int BUF_MAX = 4096;
-class ESDSample
+class WavSetup
 {
  public:
-  ESDSample();
-  ESDSample(string filename);
-  virtual ~ESDSample();
+  WavSetup();
+  virtual ~WavSetup();
 
-  uint32_t swap_endian(uint32_t n); 
-  void readinSample();
-  int play_file_audiofile (WavFilename* fn1, WavFilename* fn2);
-  void playSample();
-  void playSampleSampled();
-
- protected:
-  //char ***get_buffer();
- char _buffer[ESD_BUF_SIZE * BUF_MAX];
- int nbytes;//, ntimes;
- vector<int> _lengths;
- string get_filename();
-
+ AFfilesetup& get();
+ void init();
 
  private:
-  string _filename;
+  AFfilesetup setup;
   double rate;
-  int ratediv, nchannels;  
-
-  ESDSampleBuf _buf;
-  WavSetup setup;
-  WavHandle handle;  
-  WavHandle outhandle;  
+  int ratediv;
 };
-
-// static char ESDSample::_buffer = (char **)0;
 
 }//namespace sound
 #endif

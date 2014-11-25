@@ -5,7 +5,7 @@ CFLAGS = -g -I../esound
 CXXFLAGS = -g -I/Users/bubble/sound/include -I/Users/bubble/sound/include
 LIBS = -L/Users/bubble/sound/lib -laudiofile #### -lesd -lm
 
-OBJS = WavFilename.o ESDSampleBuf.o ESDSample.o ESDCache.o ESDCat.o Frame.o XSynth.o XSynthFrameBuilder.o
+OBJS = WavHandle.o WavSetup.o WavFilename.o ESDSampleBuf.o ESDSample.o ESDCache.o ESDCat.o Frame.o XSynth.o XSynthFrameBuilder.o
 
 all: LIBSOUNDDev
 

@@ -35,7 +35,7 @@ namespace sound
 {
 
   ESDSample::ESDSample(string filename)
-    :_filename(filename), nbytes(0), ratediv(4), rate(44100)//, ntimes(0)//, _buffer(NULL)
+    :_filename(filename), nbytes(0), ratediv(16), rate(44100)
   {
 
   }
@@ -73,15 +73,8 @@ namespace sound
 
 	std::cout << "input filelen = " << filelen << std::endl;
 
-        AFfilesetup setup = afNewFileSetup();
-
-        afInitFileFormat(setup, AF_FILE_WAVE);
-        //afInitSampleFormat(setup, AF_DEFAULT_TRACK, AF_SAMPFMT_TWOSCOMP, 16);
-        //afInitChannels(setup, AF_DEFAULT_TRACK, 1);
-        //afInitRate(setup, AF_DEFAULT_TRACK, 44100);
-
-	AFfilehandle handle;
-        handle = afOpenFile("./sounds/test.wav", "r", setup);
+	setup.init();
+	handle.init(fn->get_filename(), setup);
 
 	int nativeByteOrder;
 
@@ -90,34 +83,30 @@ namespace sound
 #else
         nativeByteOrder = AF_BYTEORDER_LITTLEENDIAN;
 #endif   
-	if (afGetByteOrder(handle, AF_DEFAULT_TRACK) == nativeByteOrder)
+	if (afGetByteOrder(handle.get(), AF_DEFAULT_TRACK) == nativeByteOrder)
                 std::cout << "file not in native byte order" <<std::endl;
-
-	int fileformat = afGetFileFormat(handle, NULL);
+/*****
+	int fileformat = afGetFileFormat(handle.get(), NULL);
 	std::cout << "fileformat=" << fileformat << std::endl;
-	double rate0 = afGetRate(handle, AF_DEFAULT_TRACK);
+	double rate0 = afGetRate(handle.get(), AF_DEFAULT_TRACK);
 	std::cout << "rate=" << rate0 << std::endl;
-	AFframecount framecount = afGetFrameCount(handle, AF_DEFAULT_TRACK);
+	AFframecount framecount = afGetFrameCount(handle.get(), AF_DEFAULT_TRACK);
 	std::cout << "framecount=" << framecount << std::endl;
-	AFfileoffset fileoffset = afGetTrackBytes(handle, AF_DEFAULT_TRACK); 
+	AFfileoffset fileoffset = afGetTrackBytes(handle.get(), AF_DEFAULT_TRACK); 
 	std::cout << "fileoffset=" << fileoffset << std::endl;
-	AFfileoffset dataoffset = afGetDataOffset(handle, AF_DEFAULT_TRACK);
+****/	
+	AFfileoffset dataoffset = afGetDataOffset(handle.get(), AF_DEFAULT_TRACK);
 	std::cout << "dataoffset=" << dataoffset << std::endl;
-	
 	int16_t readData[filelen];	
         AFframecount framesRead;
-	framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, filelen-dataoffset);
-        afCloseFile(handle);
+	framesRead = afReadFrames(handle.get(), AF_DEFAULT_TRACK, readData, filelen-dataoffset);
+        afCloseFile(handle.get());
 
-	//ratediv = 4;
-	afInitRate(setup, AF_DEFAULT_TRACK, rate/ratediv);
-        //afInitChannels(setup, AF_DEFAULT_TRACK, 1);
-        AFfilehandle outhandle;
-        outhandle = afOpenFile(fn2->get_filename().c_str(), "w", setup);
+	outhandle.init(fn2->get_filename(), setup);
         AFframecount framesWritten;
-        framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, (filelen-dataoffset));
+        framesWritten = afWriteFrames(outhandle.get(), AF_DEFAULT_TRACK, readData, (filelen-dataoffset));
 
-        afCloseFile(outhandle);
+        afCloseFile(outhandle.get());
 
   return 0;
 }

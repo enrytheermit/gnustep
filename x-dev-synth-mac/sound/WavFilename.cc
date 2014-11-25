@@ -35,7 +35,7 @@ namespace sound
   WavFilename::~WavFilename()
   {}
 
-  string WavFilename::get_filename()
+  string& WavFilename::get_filename()
   {
 	return _filename;
   }

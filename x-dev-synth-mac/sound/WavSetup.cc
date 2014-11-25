@@ -14,35 +14,38 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef WAVFILENAME_H
-#define WAVFILENAME_H
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-
-#include <vector>
-#include <string>
+#include "WavSetup.h"
 #include "../esound/esd.h"
 
-using namespace std;
+#include <iostream>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 namespace sound
 {
 
-class WavFilename
-{
- public:
-  WavFilename(string fn);
-  virtual ~WavFilename();
+  WavSetup::WavSetup() : rate(44100), ratediv(16)
+  {}
 
- string& get_filename();
+  WavSetup::~WavSetup()
+  {}
 
- private:
-  string _filename;
+  AFfilesetup& WavSetup::get()
+  {
+	return setup;
+  }
 
-};
+  void WavSetup::init() 
+  {
+	setup = afNewFileSetup();
+        afInitFileFormat(setup, AF_FILE_WAVE);
+	afInitRate(setup, AF_DEFAULT_TRACK, rate/ratediv);
+  }
 
-}//namespace sound
-#endif
+
+}

@@ -14,35 +14,34 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef WAVFILENAME_H
-#define WAVFILENAME_H
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-
-#include <vector>
-#include <string>
+#include "WavHandle.h"
 #include "../esound/esd.h"
 
-using namespace std;
+#include <iostream>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 namespace sound
 {
 
-class WavFilename
-{
- public:
-  WavFilename(string fn);
-  virtual ~WavFilename();
+  WavHandle::WavHandle()
+  {}
 
- string& get_filename();
+  WavHandle::~WavHandle()
+  {}
 
- private:
-  string _filename;
+  AFfilehandle& WavHandle::get()
+  {
+	return handle;
+  }
 
-};
-
-}//namespace sound
-#endif
+  void WavHandle::init(string& fn, WavSetup& setup)
+  {
+        handle = afOpenFile(fn.c_str(), "r", setup.get());
+  }
+}
