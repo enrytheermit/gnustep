@@ -14,8 +14,8 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef ESDSAMPLE_H
-#define ESDSAMPLE_H
+#ifndef ESDSAMPLEBUF_H
+#define ESDSAMPLEBUF_H
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -25,43 +25,24 @@
 #include <vector>
 #include <string>
 #include "../esound/esd.h"
-#include "ESDSampleBuf.h"
 
 using namespace std;
 
 namespace sound
 {
 
-const  int BUF_MAX = 4096;
-class ESDSample
+class ESDSampleBuf
 {
  public:
-  ESDSample();
-  ESDSample(string filename);
-  virtual ~ESDSample();
+  ESDSampleBuf();
+  virtual ~ESDSampleBuf();
 
   uint32_t swap_endian(uint32_t n); 
-  void readinSample();
-  int play_file_audiofile (string fn, string fn2);
-  void playSample();
-  void playSampleSampled();
 
- protected:
-  //char ***get_buffer();
- char _buffer[ESD_BUF_SIZE * BUF_MAX];
- int nbytes;//, ntimes;
- vector<int> _lengths;
- string get_filename();
  private:
-  string _filename;
-  double rate;
-  int ratediv, nchannels;  
-
-  ESDSampleBuf _buf;
+  uint16_t *_buf;
 
 };
-
-// static char ESDSample::_buffer = (char **)0;
 
 }//namespace sound
 #endif
