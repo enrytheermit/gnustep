@@ -74,7 +74,7 @@ namespace sound
 	std::cout << "input filelen = " << filelen << std::endl;
 
 	setup.init();
-	handle.init(fn->get_filename(), setup);
+	handle.initread(fn->get_filename(), setup);
 
 	int nativeByteOrder;
 
@@ -97,14 +97,18 @@ namespace sound
 ****/	
 	AFfileoffset dataoffset = afGetDataOffset(handle.get(), AF_DEFAULT_TRACK);
 	std::cout << "dataoffset=" << dataoffset << std::endl;
-	int16_t readData[filelen];	
-        AFframecount framesRead;
-	framesRead = afReadFrames(handle.get(), AF_DEFAULT_TRACK, readData, filelen-dataoffset);
-        afCloseFile(handle.get());
+//	int16_t readData[filelen];	
+ //       AFframecount framesRead;
+//	framesRead = afReadFrames(handle.get(), AF_DEFAULT_TRACK, readData, filelen-dataoffset);
+ 
+	handle.read(filelen);
 
-	outhandle.init(fn2->get_filename(), setup);
+       afCloseFile(handle.get());
+
+	outhandle.initwrite(fn2->get_filename(), setup);
         AFframecount framesWritten;
-        framesWritten = afWriteFrames(outhandle.get(), AF_DEFAULT_TRACK, readData, (filelen-dataoffset));
+        framesWritten = afWriteFrames(outhandle.get(), AF_DEFAULT_TRACK, 
+					handle.getreaddata(), (filelen-dataoffset));
 
         afCloseFile(outhandle.get());
 

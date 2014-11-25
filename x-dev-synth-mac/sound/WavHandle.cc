@@ -40,8 +40,28 @@ namespace sound
 	return handle;
   }
 
-  void WavHandle::init(string& fn, WavSetup& setup)
+  void WavHandle::initread(string& fn, WavSetup& setup)
   {
         handle = afOpenFile(fn.c_str(), "r", setup.get());
   }
+
+  void WavHandle::initwrite(string& fn, WavSetup& setup)
+  {
+        handle = afOpenFile(fn.c_str(), "w", setup.get());
+  }
+
+  AFframecount WavHandle::read(int filelen)
+  { 
+	AFfileoffset dataoffset = afGetDataOffset(handle, AF_DEFAULT_TRACK);
+	////std::cout << "dataoffset=" << dataoffset << std::endl;
+	///int16_t readData[filelen];
+	readData = new int16_t[filelen];	
+	return afReadFrames(handle, AF_DEFAULT_TRACK, &*readData, filelen-dataoffset);
+  }
+
+  int16_t* WavHandle::getreaddata()
+  {
+	return readData;
+  };
+  
 }

@@ -40,11 +40,13 @@ class WavHandle
   virtual ~WavHandle();
 
  AFfilehandle& get();
- void init(string& fn, WavSetup& setup);
-
+ void initread(string& fn, WavSetup& setup);
+ void initwrite(string& fn, WavSetup& setup);
+ AFframecount read(int filelen);
+ int16_t* getreaddata();
  private:
   AFfilehandle handle;
-
+  int16_t *readData;
 };
 
 }//namespace sound
