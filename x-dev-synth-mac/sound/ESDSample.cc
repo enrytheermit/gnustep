@@ -80,7 +80,7 @@ namespace sound
         //afInitRate(setup, AF_DEFAULT_TRACK, 44100);
 
 	AFfilehandle handle;
-        handle = afOpenFile("./sounds/test.wav", "r", setup);//afOpenNamedFD(infd, "r", setup, "./sounds/test.wav");
+        handle = afOpenFile("./sounds/test.wav", "r", setup);
 
 	int nativeByteOrder;
 
@@ -105,98 +105,18 @@ namespace sound
 	
 	int16_t readData[filelen];	
         AFframecount framesRead;
-	//framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, dataoffset);
 	framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, filelen-dataoffset);
         afCloseFile(handle);
 
+	int ratediv = 4;
+	afInitRate(setup, AF_DEFAULT_TRACK, 44100/ratediv);
         AFfilehandle outhandle;
         outhandle = afOpenFile(fn2.c_str(), "w", setup);
         AFframecount framesWritten;
-        //framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, dataoffset);
-        framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, filelen-dataoffset);
-
-	//int dataFramesCount = (t - i) / 2;	
-        //int16_t writeData[dataFramesCount];
-        //AFframecount framesWrittenout = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, dataoffset);
+        framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, (filelen-dataoffset));
 
         afCloseFile(outhandle);
 
-        //ASSERT_EQ(afCloseFile(handle), 0);
-
-        afFreeFileSetup(setup);  
-  /* convert audiofile parameters to EsounD parameters */
-  /****
-  if (in_width == 8)
-    out_bits = ESD_BITS8;
-  else if (in_width == 16)
-    out_bits = ESD_BITS16;
-  else
-    {
-      fputs ("only sample widths of 8 and 16 supported\n", stderr);
-      return 1;
-    }
-
-  bytes_per_frame = (in_width  * in_channels) / 8;
-
-  if (in_channels == 1)
-    out_channels = ESD_MONO;
-  else if (in_channels == 2)
-    out_channels = ESD_STEREO;
-  else
-    {
-      fputs ("only 1 or 2 channel samples supported\n", stderr);
-      return 1;
-    }
-
-  out_format = out_bits | out_channels | out_mode | out_func;
-
-  out_rate = (int) in_rate;
-
-  //tullyout_sock = esd_play_stream_fallback (out_format, out_rate, NULL, (char *) fn.c_str());
-  if (out_sock <= 0)
-    return 1;
-  ****/
-  /* play */
-  /****
-  buf_frames = ESD_BUF_SIZE / bytes_per_frame;
-
-  //  char rbuf[ESD_BUF_SIZE][4096];
-  vector<int> _lens;
-  vector<char*> _bytes;
-  int i;
-  while ((frames_read = afReadFrames(in_file, AF_DEFAULT_TRACK, 
-				    buf, buf_frames)))
-    {
-      printf("frames read, bytes_per_frame : %d, %d\n", frames_read, bytes_per_frame);   
-
-      //int ii;
-      //while (ii++ < 1024)
-      //buf[ii] &= 256;
-
-      bytes_written += frames_read * bytes_per_frame;
-      //memcpy(rbuf[i], buf, frames_read * bytes_per_frame);
-      _bytes.push_back((char *)buf);
-      _lens.push_back(frames_read);
-      i++;
-    }
-  int j;
-  //while (j < (bytes_written / bytes_per_frame)) {
-  //printf("frames written, bytes_per_frame : %d, %d\n", j, bytes_per_frame);   
-  while (write (out_sock, _bytes[j], _lens[j])) {
-    printf("error writing to esd!");
-    //      if (write (out_sock, buf, _lens[j]) <= 0)
-    return 1;
-  }
-  j++;
-  //}
-
-  close (out_sock);
-
-  if (afCloseFile (in_file))
-    return 1;
-
-  printf("bytes_written = %d\n", bytes_written);
-  ****/
   return 0;
 }
 
