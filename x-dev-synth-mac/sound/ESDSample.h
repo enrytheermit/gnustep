@@ -59,8 +59,6 @@ class ESDSample
 
  private:
   string _filename;
-  double rate;
-  int ratediv, nchannels;  
 
   ESDSampleBuf _buf;
   WavSetup setup;

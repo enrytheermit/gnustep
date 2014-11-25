@@ -35,7 +35,7 @@ namespace sound
 {
 
   ESDSample::ESDSample(string filename)
-    :_filename(filename), nbytes(0), ratediv(16), rate(44100)
+    :_filename(filename), nbytes(0)
   {
 
   }
