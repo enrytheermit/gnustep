@@ -35,7 +35,7 @@ namespace sound
 {
 
   ESDSample::ESDSample(string filename)
-    :_filename(filename), nbytes(0)//, ntimes(0)//, _buffer(NULL)
+    :_filename(filename), nbytes(0), ratediv(4), rate(44100)//, ntimes(0)//, _buffer(NULL)
   {
 
   }
@@ -94,8 +94,8 @@ namespace sound
 
 	int fileformat = afGetFileFormat(handle, NULL);
 	std::cout << "fileformat=" << fileformat << std::endl;
-	double rate = afGetRate(handle, AF_DEFAULT_TRACK);
-	std::cout << "rate=" << rate << std::endl;
+	double rate0 = afGetRate(handle, AF_DEFAULT_TRACK);
+	std::cout << "rate=" << rate0 << std::endl;
 	AFframecount framecount = afGetFrameCount(handle, AF_DEFAULT_TRACK);
 	std::cout << "framecount=" << framecount << std::endl;
 	AFfileoffset fileoffset = afGetTrackBytes(handle, AF_DEFAULT_TRACK); 
@@ -108,8 +108,9 @@ namespace sound
 	framesRead = afReadFrames(handle, AF_DEFAULT_TRACK, readData, filelen-dataoffset);
         afCloseFile(handle);
 
-	int ratediv = 4;
-	afInitRate(setup, AF_DEFAULT_TRACK, 44100/ratediv);
+	//ratediv = 4;
+	afInitRate(setup, AF_DEFAULT_TRACK, rate/ratediv);
+        //afInitChannels(setup, AF_DEFAULT_TRACK, 1);
         AFfilehandle outhandle;
         outhandle = afOpenFile(fn2.c_str(), "w", setup);
         AFframecount framesWritten;

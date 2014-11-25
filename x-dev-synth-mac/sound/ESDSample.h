@@ -53,7 +53,8 @@ class ESDSample
  string get_filename();
  private:
   string _filename;
-  
+  double rate;
+  int ratediv, nchannels;  
 };
 
 // static char ESDSample::_buffer = (char **)0;
