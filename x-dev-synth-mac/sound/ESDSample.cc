@@ -83,18 +83,31 @@ namespace sound
                 data[i] = 3*i + 2;
 
         AFfilesetup setup = afNewFileSetup();
-        //ASSERT_TRUE(setup);
 
+        //ASSERT_TRUE(setup);
         afInitFileFormat(setup, AF_FILE_RAWDATA);
         afInitSampleFormat(setup, AF_DEFAULT_TRACK, AF_SAMPFMT_TWOSCOMP, 16);
         afInitChannels(setup, AF_DEFAULT_TRACK, 1);
         afInitRate(setup, AF_DEFAULT_TRACK, 44100);
-        AFfilehandle handle;
-        handle = afOpenFD(infd, "r", setup);
-	AFfileoffset dataoffset = afGetDataOffset(handle, AF_DEFAULT_TRACK);
-	std::cout << swap_endian(dataoffset) << std::endl;
+
+	AFfilehandle handle;
+
+        handle = afOpenNamedFD(infd, "r", setup, "./sounds/test.wav");
         AFframecount framesRead;
 
+	int fileformat = afGetFileFormat(handle, NULL);
+	std::cout << "fileformat=" << fileformat << std::endl;
+	double rate = afGetRate(handle, AF_DEFAULT_TRACK);
+	std::cout << "rate=" << rate << std::endl;
+
+/***
+	AFframecount framecount = afGetFrameCount(handle, AF_DEFAULT_TRACK);
+	std::cout << framecount << std::endl;
+	AFfileoffset fileoffset = afGetTrackBytes(handle, AF_DEFAULT_TRACK); 
+	std::cout << fileoffset << std::endl;
+	AFfileoffset dataoffset = afGetDataOffset(handle, AF_DEFAULT_TRACK);
+	std::cout << dataoffset << std::endl;
+***/	
 	int nativeByteOrder;
 
 #ifdef WORDS_BIGENDIAN
@@ -111,16 +124,19 @@ namespace sound
                 std::cout << "Data read does not match data written";
 
 
-       handle = afOpenFile(fn2.c_str(), "w", setup);
+        AFfilehandle outhandle;
+/***
+        outhandle = afOpenFile(fn2.c_str(), "w", setup);
         AFframecount framesWritten;
-        framesWritten = afWriteFrames(handle, AF_DEFAULT_TRACK, readData, kFrameCount);
-
+        framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, kFrameCount);
+***/
 
 	int dataFramesCount = (t - i) / 2;	
-        int16_t writeData[dataFramesCount];
-        framesWritten = afWriteFrames(handle, AF_DEFAULT_TRACK, writeData, dataFramesCount);
+        //int16_t writeData[dataFramesCount];
+        AFframecount framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, dataFramesCount);
 
         afCloseFile(handle);
+        afCloseFile(outhandle);
 
         //ASSERT_EQ(afCloseFile(handle), 0);
 
