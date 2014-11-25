@@ -15,6 +15,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "LabelButton.h"
+#include "LabelButtonManipulator.h"
 #include <iostream>
 #include <cmath>
 #include <cstdio>
@@ -41,9 +42,19 @@ LabelButtonWidget::~LabelButtonWidget()
   printf("LabelButtonWidget destroyed.\n");
 }
 
+LabelButtonManipulator *LabelButtonWidget::createLabelButtonManipulator(sound::WavFilename& fn1, sound::WavFilename& fn2)
+{
+	return new LabelButtonManipulator(fn1,fn2);
+}
+
 void LabelButtonWidget::decorate(Display **dpy, Window& w, GC& gc, int x1, int y1, int x2 ,int y2)
 {
   //show(dpy,w,x1,y1,x2,y2);
+}
+
+void LabelButtonWidget::set_manipulator(LabelButtonManipulator* man)
+{
+	_labelbuttonmanipulator = man;
 }
 
 void LabelButtonWidget::show(Display **dpy, Window& w)
@@ -84,7 +95,8 @@ void LabelButtonWidget::buttonpress(XButtonEvent& e)
       &&
       e.y >= get_y() && e.y <= get_y() + get_height()) {
     if (_callback != NULL) {
-      (*_callback)(NULL,NULL);
+      (*_callback)(&_labelbuttonmanipulator->getinwavfile(),
+			&_labelbuttonmanipulator->getoutwavfile());
     }
     printf("pressed LABEL button!\n");
   }

@@ -5,7 +5,7 @@ CFLAGS = -g -I./src
 
 LIBS = -L/usr/X11R6/lib -lX11 -lXpm -lXext -lpthread -L/Users/bubble/sound/lib -laudiofile
 
-XDEV = -L./src -lx-dev -L./widgets -lx-dev-widgets -L./synth -lx-synth -L./sound -lx-dev-sound
+XDEV = -I/Users/bubble/sound/include -L./src -lx-dev -L./widgets -lx-dev-widgets -L./synth -lx-synth -L./sound -lx-dev-sound
 
 all: LIBXDev XDevMain
 
@@ -41,7 +41,7 @@ distclean:
 	rm *.o xdevsynth.exe */*.o 
 
 .cpp.o:
-	$(CXX) $(CFLAGS) $(INCLUDES) $< -o $@
+	$(CXX) $(XDEV) $(CFLAGS) $(INCLUDES) $< -o $@
 
 .cc.o :
-	$(CXX) $(CFLAGS) $(INLCUDES) -c $<
+	$(CXX) $(XDEV) $(CFLAGS) $(INLCUDES) -c $<

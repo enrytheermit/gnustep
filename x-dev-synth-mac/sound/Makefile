@@ -2,10 +2,10 @@
 
 CXX = g++
 CFLAGS = -g -I../esound
-CXXFLAGS = -g -I../esound -I/Users/bubble/sound/include
+CXXFLAGS = -g -I/Users/bubble/sound/include -I/Users/bubble/sound/include
 LIBS = -L/Users/bubble/sound/lib -laudiofile #### -lesd -lm
 
-OBJS = ESDSampleBuf.o ESDSample.o ESDCache.o ESDCat.o Frame.o XSynth.o XSynthFrameBuilder.o
+OBJS = WavFilename.o ESDSampleBuf.o ESDSample.o ESDCache.o ESDCat.o Frame.o XSynth.o XSynthFrameBuilder.o
 
 all: LIBSOUNDDev
 

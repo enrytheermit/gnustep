@@ -14,12 +14,24 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CALLBACKSSYNTHWIDGETWINDOW_H
-#define CALLBACKSSYNTHWIDGETWINDOW_H
+#ifndef LABELBUTTONMANIPULATOR_H
+#define LABELBUTTONMANIPULATOR_H
+#include <X11/Xlib.h>
 
 #include "../sound/WavFilename.h"
 
-void *playcallback(void *arg1, void *arg2);
+class LabelButtonManipulator {
 
+public:
+  //ctors
+  LabelButtonManipulator(sound::WavFilename& fn1, sound::WavFilename& fn2); 
+  ~LabelButtonManipulator();
+
+   sound::WavFilename& getinwavfile();
+   sound::WavFilename& getoutwavfile();
+ private:
+   sound::WavFilename _inwavfilename;
+   sound::WavFilename _outwavfilename;
+};
 #endif
 

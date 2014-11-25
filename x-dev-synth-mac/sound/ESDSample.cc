@@ -19,7 +19,7 @@
  From esdcat.c from esound
 */
 
-//tully #include "XDev.h"
+#include "WavFilename.h"
 #include "ESDSample.h"
 #include "../esound/esd.h"
 
@@ -59,10 +59,11 @@ namespace sound
 
 	return dest.u;
   } 
-  int ESDSample::play_file_audiofile (string fn, string fn2)
+
+  int ESDSample::play_file_audiofile (WavFilename* fn, WavFilename* fn2)
   {
 	int infd, outfd;
-	FILE *ifd = fopen(fn.c_str(), "r");
+	FILE *ifd = fopen(fn->get_filename().c_str(), "r");
 	int filelen;
 
 	fseek(ifd, 0L, SEEK_END);
@@ -112,7 +113,7 @@ namespace sound
 	afInitRate(setup, AF_DEFAULT_TRACK, rate/ratediv);
         //afInitChannels(setup, AF_DEFAULT_TRACK, 1);
         AFfilehandle outhandle;
-        outhandle = afOpenFile(fn2.c_str(), "w", setup);
+        outhandle = afOpenFile(fn2->get_filename().c_str(), "w", setup);
         AFframecount framesWritten;
         framesWritten = afWriteFrames(outhandle, AF_DEFAULT_TRACK, readData, (filelen-dataoffset));
 

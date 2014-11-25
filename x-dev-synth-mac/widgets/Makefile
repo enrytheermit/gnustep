@@ -2,11 +2,11 @@
 
 CC = g++
 
-CFLAGS = -I/usr/include/X11 -L/usr/X11R6/lib -lX11 -lXext -lXpm
+CFLAGS = -I../esound -I/Users/bubble/sound/include -I/usr/include/X11 -L/usr/X11R6/lib -lX11 -lXext -lXpm
 
 LIBS = -L/usr/X11R6/lib -lX11 -lXext -lXpm -L../src -lx-dev 
 
-OBJS = XDevWidgetizedWindow.o Button.o LabelButton.o WindowWidget.o WidgetTree.o Widget.o WidgetWindowManipulator.o
+OBJS = XDevWidgetizedWindow.o Button.o LabelButtonManipulator.o LabelButton.o WindowWidget.o WidgetTree.o Widget.o WidgetWindowManipulator.o
 
 all: LIBXDevWidgets
 

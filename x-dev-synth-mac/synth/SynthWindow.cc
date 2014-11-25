@@ -22,7 +22,7 @@
 #define NIL (0)
 
 SynthWindow::SynthWindow(DisplayBase<Display **>& dpyb, Window& w, Window& title) 
-  : XDevWidgetWindow(dpyb, w, title), _widgettree(NULL)
+  : XDevWidgetWindow(dpyb, w, title), _widgettree(NULL), _inwavfile("./sounds/test.wav"), _outwavfile("./sounds/out.wav")
 {
 
   printf("creating SynthWindow..\n");
@@ -49,6 +49,10 @@ void SynthWindow::init(DisplayBase<Display**>& dpyb, XDev& xdev0)
   playbutton = new LabelButtonWidget(dpyb, wm, "Play"); 
   playbutton->set_locus(0,32);
   playbutton->set_size(48,48);
+
+  _labelbuttonmanipulator = playbutton->createLabelButtonManipulator(this->getinwavfile(), this->getoutwavfile());
+  playbutton->set_manipulator(_labelbuttonmanipulator);
+
   char *bc = (char *)malloc(256);
   char *tc = (char *)malloc(256);
   sprintf(bc, "%s", "darkblue\0");
@@ -75,6 +79,17 @@ void SynthWindow::init(DisplayBase<Display**>& dpyb, XDev& xdev0)
 
   set_windowwidget(windowwidget);
 }
+
+sound::WavFilename& SynthWindow::getinwavfile()
+{
+	return _inwavfile;
+}
+
+sound::WavFilename& SynthWindow::getoutwavfile()
+{
+	return _outwavfile;
+}
+
 
 void SynthWindow::decorate(DisplayBase<Display**>& dpyb, Window& w, GC gc)
 {

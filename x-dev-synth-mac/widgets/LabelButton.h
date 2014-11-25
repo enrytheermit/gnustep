@@ -19,7 +19,8 @@
 #include <X11/Xlib.h>
 
 #include "Button.h"
-
+#include "../sound/WavFilename.h"
+class LabelButtonManipulator;
 class LabelButtonWidget : public ButtonWidget {
 
 public:
@@ -31,12 +32,14 @@ public:
   char *get_textcolor();
   void set_textcolor(char *s);
 
+  LabelButtonManipulator *createLabelButtonManipulator(sound::WavFilename& fn1, sound::WavFilename& fn2);
   //other methods
   void decorate(Display **dpy, Window& w, GC& gc, int x1, int y1, int x2 ,int y2);
   void show(Display **dpy, Window& w);
 
   void drawString(Display**dpy, Window& w, GC& gc, int xx, int yy);
   XFontSet createFontSet(DisplayBase<Display **>& dpyb);
+  void set_manipulator(LabelButtonManipulator* man);
 
   virtual void buttonpress(XButtonEvent& e);
 
@@ -44,6 +47,7 @@ public:
   XFontSet fontset;
   char *_text;
   char *_textcolor;
+  LabelButtonManipulator *_labelbuttonmanipulator;
 };
 #endif
 

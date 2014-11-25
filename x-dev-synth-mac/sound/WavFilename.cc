@@ -14,12 +14,29 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef CALLBACKSSYNTHWIDGETWINDOW_H
-#define CALLBACKSSYNTHWIDGETWINDOW_H
 
-#include "../sound/WavFilename.h"
+#include "WavFilename.h"
+#include "../esound/esd.h"
 
-void *playcallback(void *arg1, void *arg2);
+#include <iostream>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-#endif
+namespace sound
+{
 
+  WavFilename::WavFilename(string fn) : _filename(fn)
+  {}
+
+  WavFilename::~WavFilename()
+  {}
+
+  string WavFilename::get_filename()
+  {
+	return _filename;
+  }
+}

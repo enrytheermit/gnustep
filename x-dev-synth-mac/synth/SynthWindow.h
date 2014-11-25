@@ -23,6 +23,7 @@
 #include "../widgets/LabelButton.h"
 #include "../widgets/WindowWidget.h"
 #include "../widgets/WidgetTree.h"
+#include "../widgets/LabelButtonManipulator.h"
 
 class SynthWindow : public XDevWidgetWindow {
 
@@ -42,6 +43,13 @@ public:
 
  private:
   WidgetTree *_widgettree;
+  LabelButtonManipulator *_labelbuttonmanipulator;
+
+  sound::WavFilename& getinwavfile();
+  sound::WavFilename& getoutwavfile();
+
+  sound::WavFilename _inwavfile;
+  sound::WavFilename _outwavfile;
   //tully  WindowWidget *_windowwidget;
 }; //class XDevWindow
 #endif
