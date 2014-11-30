@@ -29,7 +29,7 @@
 namespace sound
 {
 
-  WavSetup::WavSetup() : rate(44100), ratediv(16)
+  WavSetup::WavSetup() : rate(44100), ratediv(4)
   {}
 
   WavSetup::~WavSetup()
