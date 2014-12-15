@@ -1,0 +1,2836 @@
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzy.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzy.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzy.h	2014-12-15 09:22:37.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzy.h	2014-12-12 16:41:31.000000000 +0100
+@@ -1,82 +1,80 @@
+- /*
+-    OpalFuzzy.h
+- 
+-    Copyright (C) 2014 Free Software Foundation, Inc.
+- 
+-    Author: Johan Ceuppens <johan@yellowcouch.org> 
+-    Date: Dec 2014
+- 
+-    This file is part of GNUstep.
+- 
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Lesser General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+- 
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-    Lesser General Public License for more details.
+- 
+-    You should have received a copy of the GNU Lesser General Public
+-    License along with this library; see the file COPYING.LIB.
+-    If not, see <http://www.gnu.org/licenses/> or write to the
+-    Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-    Boston, MA 021101301, USA.
+- */
+- 
+- #ifndef OpalFuzzy_h_defined
+- #define OpalFuzzy_h_defined
+- 
+- @interface OpalFuzzyFunction : NSObject {
+- 	SEL pf;
+- 	long int x;
+- }
+--  (id) new:(SEL) pif; 
+-- (void)perform:(id)c;
+--  (void) perform;
+--  (long int)x;
+--  (void)x:(long int)xx;
+- @end
+- 
+- @interface OpalFuzzyFunctionLittle : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionSlightly : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionVery : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionExtremely : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionVeryVery : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionMoreorLess : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionSomewhat : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- @interface OpalFuzzyFunctionIndeed : OpalFuzzyFunction {
+- }
+-  (id) new; 
+- @end
+- 
+- @interface OpalFuzzy : NSObject {
+- 	
+- }
+- 
+- 
+- @end
+- 
+- #endif
++/*
++   OpalFuzzy.h
++
++   Copyright (C) 2014 Free Software Foundation, Inc.
++
++   Author: Johan Ceuppens <johan@yellowcouch.org> 
++   Date: Dec 2014
++
++   This file is part of GNUstep.
++
++   This library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2 of the License, or (at your option) any later version.
++
++   This library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with this library; see the file COPYING.LIB.
++   If not, see <http://www.gnu.org/licenses/> or write to the
++   Free Software Foundation, 51 Franklin Street, Fifth Floor,
++   Boston, MA 02110-1301, USA.
++*/
++
++#ifndef OpalFuzzy_h_defined
++#define OpalFuzzy_h_defined
++
++@interface OpalFuzzyFunction : NSObject {
++	SEL pf;
++	double x;
++}
++- (id) new:(SEL) pif; 
++-(void)perform:(id)c;
++- (void) perform;
++@end
++
++@interface OpalFuzzyFunctionLittle : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionSlightly : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionVery : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionExtremely : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionVeryVery : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionMoreorLess : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionSomewhat : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++@interface OpalFuzzyFunctionIndeed : OpalFuzzyFunction {
++}
++- (id) new; 
++@end
++
++@interface OpalFuzzy : NSObject {
++	
++}
++
++
++@end
++
++#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyDB.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyDB.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyDB.h	2014-12-15 09:30:33.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyDB.h	2014-12-12 16:41:31.000000000 +0100
+@@ -1,40 +1,39 @@
+- /*
+-    OpalFuzzyDB.h
+- 
+-    Copyright (C) 2014 Free Software Foundation, Inc.
+- 
+-    Author: Johan Ceuppens <johan@yellowcouch.org> 
+-    Date: Dec 2014
+- 
+-    This file is part of GNUstep.
+- 
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Lesser General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+- 
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-    Lesser General Public License for more details.
+- 
+-    You should have received a copy of the GNU Lesser General Public
+-    License along with this library; see the file COPYING.LIB.
+-    If not, see <http://www.gnu.org/licenses/> or write to the
+-    Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-    Boston, MA 02110-1301, USA.
+- */
+- 
+- #ifndef OpalFuzzyDB_h_defined
+- #define OpalFuzzyDB_h_defined
+- 
+- @interface OpalFuzzyDB : NSMutableDictionary {
+- }
+- - (id)new;
+- - (void)addToDict:(NSString*)key :(SEL)pif;
+- - (SEL)getWithKey:(NSString*)key;
+- - (void)reinitCapacity;
+- 
+- @end
+- 
+- #endif
++/*
++   OpalFuzzyDB.h
++
++   Copyright (C) 2014 Free Software Foundation, Inc.
++
++   Author: Johan Ceuppens <johan@yellowcouch.org> 
++   Date: Dec 2014
++
++   This file is part of GNUstep.
++
++   This library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2 of the License, or (at your option) any later version.
++
++   This library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with this library; see the file COPYING.LIB.
++   If not, see <http://www.gnu.org/licenses/> or write to the
++   Free Software Foundation, 51 Franklin Street, Fifth Floor,
++   Boston, MA 02110-1301, USA.
++*/
++
++#ifndef OpalFuzzyDB_h_defined
++#define OpalFuzzyDB_h_defined
++
++@interface OpalFuzzyDB : NSMutableDictionary {
++}
++- (id)new;
++- (void)addToDict:(NSString*)key :(SEL)pif;
++- (SEL)getWithKey:(NSString*)key;
++
++@end
++
++#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyManipulator.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyManipulator.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyManipulator.h	2014-12-15 11:00:20.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyManipulator.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,46 +0,0 @@
+-/*
+-   OpalFuzzyManipulator.h
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org> 
+-   Date: Dec 2014
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef OpalFuzzyManipulator_h_defined
+-#define OpalFuzzyManipulator_h_defined
+-
+-@interface OpalFuzzyPaintManipulator : OpalFuzzyManipulator
+-{
+-}
+-
+-- (id) new:(id)painter;
+-@end
+-
+-@interface OpalFuzzyManipulator : NSObject
+-{
+-	id _o;
+-}
+-- (id) new:(id)o;
+-- (id) o;
+-@end
+-
+-#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyMatrix.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyMatrix.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyMatrix.h	2014-12-15 08:41:41.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyMatrix.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,58 +0,0 @@
+-/*
+-   OpalFuzzyMatrix.h
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org> 
+-   Date: Dec 2014
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef OpalFuzzyMatrix_h_defined
+-#define OpalFuzzyMatrix_h_defined
+-
+-#import <Foundation/NSAffineTransform.h>
+-
+-#define MAKEMatrixElement(i,j) \
+-	OpalFuzzyNode * m ## #i#j;
+-
+-/* FIXME extra handle or not */
+-#define MAKEMatrix(w, h) \
+-	typedef struct {
+-		for (i = 0; i < h; i++) \
+-			for (j = 0; j < w; j++) \
+-				makeMatrixElement(i,j) \
+-} _OpalMatrix;		
+-
+-@class _OpalMatrix;
+-
+-@interface OpalFuzzyMatrix : NSObject {
+-	long int _w,_h;
+-	_OpalMatrix *_matrix;	
+-}
+-
+-- (id) new;
+-- (id)setWidth:(long int)w height:(long int)h;
+-- (BOOL)hasDimensionsBeenSet:(BOOL)b;
+-- (void) calibrateDimensions;
+- 
+-@end
+-
+-#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyNetwork.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyNetwork.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyNetwork.h	2014-12-15 07:08:58.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyNetwork.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,37 +0,0 @@
+-/*
+-   OpalFuzzyNetwork.h
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org> 
+-   Date: Dec 2014
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef OpalFuzzyNetwork_h_defined
+-#define OpalFuzzyNetwork_h_defined
+-
+-@interface OpalFuzzyNetwork : NSObject {
+-}
+-- (id) new;
+- 
+-@end
+-
+-#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyNode.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyNode.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyNode.h	2014-12-15 10:51:27.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyNode.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,44 +0,0 @@
+-/*
+-   OpalFuzzyNode.h
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org> 
+-   Date: Dec 2014
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef OpalFuzzyNode_h_defined
+-#define OpalFuzzyNode_h_defined
+-
+-@class OpalFuzzyRuleSystem;
+-
+-@interface OpalFuzzyPaintNode : OpalFuzzyNode
+-{}
+-
+-@end
+-
+-@interface OpalFuzzyNode : NSObject
+-{
+-	OpalFuzzyRuleSystem *_rules;
+-}
+-@end
+-
+-#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyPaintRuleSystem.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyPaintRuleSystem.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyPaintRuleSystem.h	2014-12-15 11:09:11.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyPaintRuleSystem.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,57 +0,0 @@
+-/*
+-   OpalFuzzyPaintRuleSystem.h
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org> 
+-   Date: Dec 2014
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef OpalFuzzyPaintRuleSystem_h_defined
+-#define OpalFuzzyPaintRuleSystem_h_defined
+-
+-@class OpalFuzzyRuleSystem;
+-
+-
+-@interface OpalFuzzyPaintRuleSystem : OpalFuzzyRuleSystem 
+-{
+-	id _painter;
+-}
+-- (id) new;
+-- (void)setPainter:(id)paintsystem;
+-- (void)painter;
+-- (void)paintOn;
+-- (void)paintOn:(id)painter;
+-
+-/*
+- * NOTE :
+- * Call the createManipulator method and you can paint on this
+- * painter system with rules from the super class.
+-
+- * The PaintManipulator then hashes the method paintOn: in the dictionary
+- * and paints on the _painter of the dispatched class due to a call
+- * of e.g. parseFor:"paint extremely". 
+- */ 
+-- (id) createManipulator;
+-
+-@end
+-
+-#endif
+diff -Naur gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyRuleSystem.h gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyRuleSystem.h
+--- gnustep-back-work/Headers/opal/fuzzy/OpalFuzzyRuleSystem.h	2014-12-15 11:06:02.000000000 +0100
++++ gnustep-back-todiffdir/Headers/opal/fuzzy/OpalFuzzyRuleSystem.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,53 +0,0 @@
+-/*
+-   OpalFuzzyRuleSystem.h
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org> 
+-   Date: Dec 2014
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#ifndef OpalFuzzyRuleSystem_h_defined
+-#define OpalFuzzyRuleSystem_h_defined
+-
+-@class OpalFuzzyDB;
+-
+-@interface OpalFuzzyRuleSystem : NSObject
+-{
+-
+-	OpalFuzzyDB *_rules;
+-
+-}
+-- (id) new;
+-- (void) addRule:(NSString*)r with:(SEL)s;
+-- (void) parseFor:(NSString*)predicate On:o;
+-- (id) match:(NSString*)predicate On:o;
+-
+-/*
+- * NOTE :
+- * Call the createManipulator method of a derived class, see
+- * for example OpalFuzzyPaintRuleSystem.h
+- */ 
+-- (id)createManipulator;
+-
+-@end
+-
+-#endif
+diff -Naur gnustep-back-work/Headers/win32/.svn/entries gnustep-back-todiffdir/Headers/win32/.svn/entries
+--- gnustep-back-work/Headers/win32/.svn/entries	2014-12-12 09:42:44.000000000 +0100
++++ gnustep-back-todiffdir/Headers/win32/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 935497d8e294d9e6d7ec1d1f83d2ca33
+ 2013-05-11T20:20:54.899680Z
+ 36612
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 681ff690c0d196304ebd46cf76949b70
+ 2008-10-17T15:22:41.573545Z
+ 26926
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 05ce1901b0ab607d290cb78b5809abe1
+ 2009-03-04T09:58:41.847963Z
+ 28036
+diff -Naur gnustep-back-work/Headers/winlib/.svn/entries gnustep-back-todiffdir/Headers/winlib/.svn/entries
+--- gnustep-back-work/Headers/winlib/.svn/entries	2014-12-12 09:42:44.000000000 +0100
++++ gnustep-back-todiffdir/Headers/winlib/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ e18141933af34d2b623867c9ef67cfeb
+ 2010-06-22T22:18:56.704696Z
+ 30829
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 288ee24defb793e4d946eff17be29f70
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 3c1c05036669147b0d0e5907cda88403
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 25900109c1d20ca928995920e429945a
+ 2008-06-10T04:12:46.711035Z
+ 26620
+diff -Naur gnustep-back-work/Headers/x11/.svn/entries gnustep-back-todiffdir/Headers/x11/.svn/entries
+--- gnustep-back-work/Headers/x11/.svn/entries	2014-12-12 09:42:44.000000000 +0100
++++ gnustep-back-todiffdir/Headers/x11/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 671bf927a4d25c1e2bd1edb5846f6326
+ 2011-10-19T07:35:27.911766Z
+ 34025
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ ae82dfdd66d60cd8283b6f412d16aed1
+ 2006-02-22T06:44:24.259491Z
+ 22533
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 6c460c110a0e44a523f9cdd37fe3820b
+ 2011-07-14T19:09:17.781332Z
+ 33549
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 981cac41aa02ce5118aae0c21e99811f
+ 2011-06-01T20:56:27.300612Z
+ 33224
+@@ -168,7 +168,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ b83b12a36d512fc3058b350ddfa4e73f
+ 2006-02-22T06:44:24.259491Z
+ 22533
+@@ -202,7 +202,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ f7d17c73fe15b96f0a93fd0dcb52933d
+ 2013-07-03T16:06:38.210420Z
+ 36821
+@@ -236,7 +236,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 89810e39f79e46cda59d7b42c9169c96
+ 2012-05-13T02:41:30.941428Z
+ 35152
+@@ -270,7 +270,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ f0370078f24009ec39d75bedd2dc06ab
+ 2011-06-22T22:09:41.504892Z
+ 33365
+@@ -304,7 +304,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 97f6726e6bdef044114b79207c541e06
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -338,7 +338,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 59822506b53d5e69e0fd09c9c40e3962
+ 2006-02-22T06:44:24.259491Z
+ 22533
+diff -Naur gnustep-back-work/Headers/xdps/.svn/entries gnustep-back-todiffdir/Headers/xdps/.svn/entries
+--- gnustep-back-work/Headers/xdps/.svn/entries	2014-12-12 09:42:44.000000000 +0100
++++ gnustep-back-todiffdir/Headers/xdps/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ a440f73dd1231addec6dbcf40668a402
+ 2008-06-10T04:12:46.711035Z
+ 26620
+diff -Naur gnustep-back-work/Headers/xlib/.svn/entries gnustep-back-todiffdir/Headers/xlib/.svn/entries
+--- gnustep-back-work/Headers/xlib/.svn/entries	2014-12-12 09:42:44.000000000 +0100
++++ gnustep-back-todiffdir/Headers/xlib/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 7db7c712ee5a60a16759312766411495
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ d2da3f4a7fc266a61ee1251d9a6c0cfc
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ 09034deb2f42166fc264f69942799c44
+ 2010-02-20T16:33:30.138644Z
+ 29689
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ f4d89f2e479ca01c4ca6a7464631a8c7
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -168,7 +168,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ d8f02316e1dd966c70aa12d1b606f8c1
+ 2010-02-20T16:33:30.138644Z
+ 29689
+@@ -202,7 +202,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:44.000000Z
++2014-12-12T15:40:44.000000Z
+ ce9a74f6b41af56391017a6bb5f4d1bb
+ 2008-06-10T04:12:46.711035Z
+ 26620
+diff -Naur gnustep-back-work/Source/.svn/entries gnustep-back-todiffdir/Source/.svn/entries
+--- gnustep-back-work/Source/.svn/entries	2014-12-12 09:42:47.000000000 +0100
++++ gnustep-back-todiffdir/Source/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -38,7 +38,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:47.000000Z
++2014-12-12T15:40:47.000000Z
+ 4dd548d1d97c86c7bfdfc7f52ca77d15
+ 2008-12-19T13:05:05.699964Z
+ 27349
+@@ -93,7 +93,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:47.000000Z
++2014-12-12T15:40:47.000000Z
+ b4bc1c94eb45fab1420b3114d2721cc8
+ 2013-06-23T22:41:31.129918Z
+ 36749
+@@ -127,7 +127,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:47.000000Z
++2014-12-12T15:40:47.000000Z
+ b066107d4017d4d1f66c5054604ca0ac
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -164,7 +164,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:47.000000Z
++2014-12-12T15:40:47.000000Z
+ d0235cb7ff45c0310c440dc9e2a636db
+ 2006-02-22T06:44:24.259491Z
+ 22533
+@@ -198,7 +198,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:47.000000Z
++2014-12-12T15:40:47.000000Z
+ 0d77ed17263880869d5d900be9822231
+ 2013-07-04T16:44:28.065556Z
+ 36837
+diff -Naur gnustep-back-work/Source/English.lproj/.svn/entries gnustep-back-todiffdir/Source/English.lproj/.svn/entries
+--- gnustep-back-work/Source/English.lproj/.svn/entries	2014-12-12 09:42:45.000000000 +0100
++++ gnustep-back-todiffdir/Source/English.lproj/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ 29815459c4c7c7292991dc902db7325b
+ 2006-02-22T06:44:24.259491Z
+ 22533
+diff -Naur gnustep-back-work/Source/Swedish.lproj/.svn/entries gnustep-back-todiffdir/Source/Swedish.lproj/.svn/entries
+--- gnustep-back-work/Source/Swedish.lproj/.svn/entries	2014-12-12 09:42:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/Swedish.lproj/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ cd6f01421d503470aaf0c638ce14a681
+ 2006-02-22T06:44:24.259491Z
+ 22533
+diff -Naur gnustep-back-work/Source/art/.svn/all-wcprops gnustep-back-todiffdir/Source/art/.svn/all-wcprops
+--- gnustep-back-work/Source/art/.svn/all-wcprops	2014-12-12 09:42:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/art/.svn/all-wcprops	2014-12-12 16:40:53.000000000 +0100
+@@ -9,29 +9,23 @@
+ V 61
+ /svn/gnustep/!svn/ver/26813/libs/back/trunk/Source/art/blit.h
+ END
+-ARTGState.h
+-K 25
+-svn:wc:ra_dav:version-url
+-V 66
+-/svn/gnustep/!svn/ver/26620/libs/back/trunk/Source/art/ARTGState.h
+-END
+ ReadRect.m
+ K 25
+ svn:wc:ra_dav:version-url
+ V 65
+ /svn/gnustep/!svn/ver/26620/libs/back/trunk/Source/art/ReadRect.m
+ END
+-blit.m
++ARTGState.h
+ K 25
+ svn:wc:ra_dav:version-url
+-V 61
+-/svn/gnustep/!svn/ver/37615/libs/back/trunk/Source/art/blit.m
++V 66
++/svn/gnustep/!svn/ver/26620/libs/back/trunk/Source/art/ARTGState.h
+ END
+-ftfont.h
++blit.m
+ K 25
+ svn:wc:ra_dav:version-url
+-V 63
+-/svn/gnustep/!svn/ver/36063/libs/back/trunk/Source/art/ftfont.h
++V 61
++/svn/gnustep/!svn/ver/37615/libs/back/trunk/Source/art/blit.m
+ END
+ ARTContext.m
+ K 25
+@@ -39,6 +33,12 @@
+ V 67
+ /svn/gnustep/!svn/ver/36025/libs/back/trunk/Source/art/ARTContext.m
+ END
++ftfont.h
++K 25
++svn:wc:ra_dav:version-url
++V 63
++/svn/gnustep/!svn/ver/36063/libs/back/trunk/Source/art/ftfont.h
++END
+ GNUmakefile
+ K 25
+ svn:wc:ra_dav:version-url
+@@ -75,18 +75,18 @@
+ V 63
+ /svn/gnustep/!svn/ver/36063/libs/back/trunk/Source/art/ftfont.m
+ END
+-FTFontEnumerator.m
+-K 25
+-svn:wc:ra_dav:version-url
+-V 73
+-/svn/gnustep/!svn/ver/32489/libs/back/trunk/Source/art/FTFontEnumerator.m
+-END
+ composite.m
+ K 25
+ svn:wc:ra_dav:version-url
+ V 66
+ /svn/gnustep/!svn/ver/36063/libs/back/trunk/Source/art/composite.m
+ END
++FTFontEnumerator.m
++K 25
++svn:wc:ra_dav:version-url
++V 73
++/svn/gnustep/!svn/ver/32489/libs/back/trunk/Source/art/FTFontEnumerator.m
++END
+ FTFaceInfo.m
+ K 25
+ svn:wc:ra_dav:version-url
+diff -Naur gnustep-back-work/Source/art/.svn/entries gnustep-back-todiffdir/Source/art/.svn/entries
+--- gnustep-back-work/Source/art/.svn/entries	2014-12-12 09:42:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/art/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ e4afda521b9096a4ba6cc1a4b9151fa5
+ 2008-08-19T17:25:10.975632Z
+ 26813
+@@ -60,14 +60,14 @@
+ 
+ 5589
+ 
+-ARTGState.h
++ReadRect.m
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-bd584929fb2bb884a828c66f1207c042
++2014-12-12T15:40:46.000000Z
++7d4dad210eb2062302bd05b617392be4
+ 2008-06-10T04:12:46.711035Z
+ 26620
+ fedor
+@@ -92,16 +92,16 @@
+ 
+ 
+ 
+-2917
++4086
+ 
+-ReadRect.m
++ARTGState.h
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-7d4dad210eb2062302bd05b617392be4
++2014-12-12T15:40:46.000000Z
++bd584929fb2bb884a828c66f1207c042
+ 2008-06-10T04:12:46.711035Z
+ 26620
+ fedor
+@@ -126,7 +126,7 @@
+ 
+ 
+ 
+-4086
++2917
+ 
+ blit.m
+ file
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ bffdeedae909eaf47088d5f841d8d5bb
+ 2014-01-19T10:39:21.595326Z
+ 37615
+@@ -162,16 +162,16 @@
+ 
+ 33600
+ 
+-ftfont.h
++ARTContext.m
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-1f5e288c1aa389735a539cb4e8514f86
+-2013-02-05T19:18:49.375052Z
+-36063
++2014-12-12T15:40:46.000000Z
++f81cee006d949af76f985576a933f166
++2013-01-27T14:38:16.106703Z
++36025
+ fredkiefer
+ has-props
+ 
+@@ -194,18 +194,18 @@
+ 
+ 
+ 
+-2330
++4353
+ 
+-ARTContext.m
++ftfont.h
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-f81cee006d949af76f985576a933f166
+-2013-01-27T14:38:16.106703Z
+-36025
++2014-12-12T15:40:46.000000Z
++1f5e288c1aa389735a539cb4e8514f86
++2013-02-05T19:18:49.375052Z
++36063
+ fredkiefer
+ has-props
+ 
+@@ -228,7 +228,7 @@
+ 
+ 
+ 
+-4353
++2330
+ 
+ GNUmakefile
+ file
+@@ -236,7 +236,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 708daa4988cfd266b767b28c3a0db51b
+ 2008-12-19T13:05:05.699964Z
+ 27349
+@@ -270,7 +270,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 2e92b3ca4d964eb312735ff1681e08e8
+ 2013-02-05T19:18:49.375052Z
+ 36063
+@@ -304,7 +304,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 182e4a11bd6e96c25dae30e8fffca03e
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -338,7 +338,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 2ccadc29c4f98dbfccd5ee108d6eace3
+ 2013-02-05T19:18:49.375052Z
+ 36063
+@@ -372,7 +372,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 28a2872104db10f6dee1836e2042fd6a
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -406,7 +406,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ d2e570de989c43bbb044f86a99b1a66f
+ 2013-02-05T19:18:49.375052Z
+ 36063
+@@ -434,18 +434,18 @@
+ 
+ 71995
+ 
+-FTFontEnumerator.m
++composite.m
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-628320036b35666d3f8558be6a4b3263
+-2011-03-07T17:48:05.235590Z
+-32489
+-rfm
+-
++2014-12-12T15:40:46.000000Z
++14461d38a3cab7a3231bb53695ac7c50
++2013-02-05T19:18:49.375052Z
++36063
++fredkiefer
++has-props
+ 
+ 
+ 
+@@ -466,20 +466,19 @@
+ 
+ 
+ 
+-14841
++34278
+ 
+-composite.m
++FTFontEnumerator.m
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-14461d38a3cab7a3231bb53695ac7c50
+-2013-02-05T19:18:49.375052Z
+-36063
+-fredkiefer
+-has-props
++2014-12-12T15:40:46.000000Z
++628320036b35666d3f8558be6a4b3263
++2011-03-07T17:48:05.235590Z
++32489
++rfm
+ 
+ 
+ 
+@@ -500,7 +499,8 @@
+ 
+ 
+ 
+-34278
++
++14841
+ 
+ FTFaceInfo.m
+ file
+@@ -508,7 +508,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 080fccc2905b6ef2daedc4fa90864b46
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -542,7 +542,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ bc7aba26b1ed45cff1c4da6e3e62522b
+ 2008-08-19T17:25:10.975632Z
+ 26813
+@@ -576,7 +576,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ e1bd849dab776c44b2c42d41687f3dcb
+ 2013-02-05T19:18:49.375052Z
+ 36063
+@@ -610,7 +610,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ f82c73dc0bd2e04795e6028d9e5f62c7
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -644,7 +644,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ b04fe95dffda734bd80bdde7f14ecc33
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -672,17 +672,17 @@
+ 
+ 19276
+ 
+-.cvsignore
++GNUmakefile.preamble
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-fe6f9bec7b47187b73adcbf4eac86571
+-2006-02-22T06:44:24.259491Z
+-22533
+-rfm
++2014-12-12T15:40:46.000000Z
++4e0b35ea0adf78a536cc5df863f5c670
++2008-06-10T04:12:46.711035Z
++26620
++fedor
+ has-props
+ 
+ 
+@@ -704,19 +704,19 @@
+ 
+ 
+ 
+-15
++1625
+ 
+-image.m
++.cvsignore
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-b9772c553043fa45a1e9db43042ed4f2
+-2014-01-19T10:39:21.595326Z
+-37615
+-fredkiefer
++2014-12-12T15:40:46.000000Z
++fe6f9bec7b47187b73adcbf4eac86571
++2006-02-22T06:44:24.259491Z
++22533
++rfm
+ has-props
+ 
+ 
+@@ -738,19 +738,19 @@
+ 
+ 
+ 
+-21626
++15
+ 
+-GNUmakefile.preamble
++image.m
+ file
+ 
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
+-4e0b35ea0adf78a536cc5df863f5c670
+-2008-06-10T04:12:46.711035Z
+-26620
+-fedor
++2014-12-12T15:40:46.000000Z
++b9772c553043fa45a1e9db43042ed4f2
++2014-01-19T10:39:21.595326Z
++37615
++fredkiefer
+ has-props
+ 
+ 
+@@ -772,5 +772,5 @@
+ 
+ 
+ 
+-1625
++21626
+ 
+diff -Naur gnustep-back-work/Source/cairo/.svn/entries gnustep-back-todiffdir/Source/cairo/.svn/entries
+--- gnustep-back-work/Source/cairo/.svn/entries	2014-12-12 09:42:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/cairo/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ aad2c11578f436781bea159b6410b46f
+ 2013-09-10T21:07:03.331966Z
+ 37066
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 6b6b6ad22396ba9cd889555728d20b5c
+ 2012-11-26T17:56:31.031662Z
+ 35824
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 950babe7de233742e544b1454a2a5e80
+ 2013-12-23T12:36:09.578576Z
+ 37490
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ a629b48a6368350b86a3a267c8fb6a21
+ 2013-10-20T22:16:03.271569Z
+ 37268
+@@ -168,7 +168,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 7a8dee1b41d4ba4049a64078cc672871
+ 2013-09-10T21:07:03.331966Z
+ 37066
+@@ -202,7 +202,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ dab74e6b6f4803413b3b81dc7887f51b
+ 2012-11-26T05:39:22.083770Z
+ 35821
+@@ -236,7 +236,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 83bac4d33aa86f1cb1fd4c84dd90e279
+ 2013-12-29T22:43:15.645467Z
+ 37523
+@@ -270,7 +270,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ d929bf6530523bdcf2aa8cecf0685b60
+ 2013-02-10T17:32:47.042691Z
+ 36106
+@@ -304,7 +304,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 11c21f0524aac6b843ab1a302ed5285d
+ 2013-07-24T07:34:24.596763Z
+ 36920
+@@ -338,7 +338,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ e15f8a3f3d2b7fa1a2eacb2b030a1fad
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -372,7 +372,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 7bb28cdcfe1a5885c640a660ac3d6f92
+ 2011-07-03T23:59:35.170010Z
+ 33444
+@@ -406,7 +406,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 72a4b8fa5d956b09f227fbeb97240076
+ 2014-10-25T18:14:50.120545Z
+ 38135
+@@ -440,7 +440,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 8ea81d35bc4d477f865891e404bd68eb
+ 2012-09-26T19:09:19.295199Z
+ 35610
+@@ -474,7 +474,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 77e9d5b86ac841f9d0621b43722b2c5b
+ 2012-09-26T19:09:19.295199Z
+ 35610
+@@ -508,7 +508,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ e67cc9ca32d62ae879ec32a639f92b72
+ 2011-10-13T21:37:44.537627Z
+ 33978
+@@ -542,7 +542,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 15c60421e0de4a88bd5af56508d844e0
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -576,7 +576,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 4e0b35ea0adf78a536cc5df863f5c670
+ 2008-06-10T04:12:46.711035Z
+ 26620
+diff -Naur gnustep-back-work/Source/config.h gnustep-back-todiffdir/Source/config.h
+--- gnustep-back-work/Source/config.h	2014-12-12 09:43:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/config.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,155 +0,0 @@
+-/* config.h.  Generated from config.h.in by configure.  */
+-/* config.h.in.  Generated from configure.ac by autoheader.  */
+-
+-
+-#define SERVER_x11      1
+-#define SERVER_win32    2
+-#define GRAPHICS_xdps   0
+-#define GRAPHICS_art    1
+-#define GRAPHICS_xlib   2
+-#define GRAPHICS_winlib 3
+-#define GRAPHICS_cairo  4
+-#define GRAPHICS_opal   5
+-
+-
+-/* Define to type of graphics context to build */
+-#define BUILD_GRAPHICS GRAPHICS_cairo
+-
+-/* Define to type of window server to build */
+-#define BUILD_SERVER SERVER_x11
+-
+-/* Define if X11 doesn't automatically use prototypes */
+-/* #undef FUNCPROTO */
+-
+-/* Define to 1 if you have the <DPS/dpsclient.h> header file. */
+-/* #undef HAVE_DPS_DPSCLIENT_H */
+-
+-/* Define to 1 if you have the <DPS/dpsNXargs.h> header file. */
+-/* #undef HAVE_DPS_DPSNXARGS_H */
+-
+-/* Define if you have FcPatternCreate */
+-#define HAVE_FC 1
+-
+-/* Define if you have glitz-glx */
+-/* #undef HAVE_GLITZ_GLX */
+-
+-/* Define if you have glitz-wgl */
+-/* #undef HAVE_GLITZ_WGL */
+-
+-/* Define if you have the glx library */
+-/* #undef HAVE_GLX */
+-
+-/* Define to 1 if you have the <inttypes.h> header file. */
+-#define HAVE_INTTYPES_H 1
+-
+-/* Define to 1 if you have the `Xext' library (-lXext). */
+-#define HAVE_LIBXEXT 1
+-
+-/* Define to 1 if you have the `Xft' library (-lXft). */
+-#define HAVE_LIBXFT 1
+-
+-/* Define to 1 if you have the `Xmu' library (-lXmu). */
+-#define HAVE_LIBXMU 1
+-
+-/* Define to 1 if you have the `Xt' library (-lXt). */
+-#define HAVE_LIBXT 1
+-
+-/* Define to 1 if you have the `shape' extension. */
+-#define HAVE_XSHAPE 1
+-
+-/* Define to 1 if you have the <memory.h> header file. */
+-#define HAVE_MEMORY_H 1
+-
+-/* Define to 1 if you have the `shmctl' function. */
+-#define HAVE_SHMCTL 1
+-
+-/* Define to 1 if you have the <stdint.h> header file. */
+-#define HAVE_STDINT_H 1
+-
+-/* Define to 1 if you have the <stdlib.h> header file. */
+-#define HAVE_STDLIB_H 1
+-
+-/* Define to 1 if you have the <strings.h> header file. */
+-#define HAVE_STRINGS_H 1
+-
+-/* Define to 1 if you have the <string.h> header file. */
+-#define HAVE_STRING_H 1
+-
+-/* Define to 1 if you have the `syslog' function. */
+-#define HAVE_SYSLOG 1
+-
+-/* Define to 1 if you have the <syslog.h> header file. */
+-#define HAVE_SYSLOG_H 1
+-
+-/* Define to 1 if you have the <sys/stat.h> header file. */
+-#define HAVE_SYS_STAT_H 1
+-
+-/* Define to 1 if you have the <sys/types.h> header file. */
+-#define HAVE_SYS_TYPES_H 1
+-
+-/* Define to 1 if you have the <unistd.h> header file. */
+-#define HAVE_UNISTD_H 1
+-
+-/* Define to 1 if you have the `usleep' function. */
+-#define HAVE_USLEEP 1
+-
+-/* Define if you have XftDrawStringUtf8 */
+-#define HAVE_UTF8 1
+-
+-/* Define if you have the wgl library */
+-/* #undef HAVE_WGL */
+-
+-/* Define to 1 if you have the <X11/extensions/XShm.h> header file. */
+-#define HAVE_X11_EXTENSIONS_XSHM_H 1
+-
+-/* Define to enable Xcursor support */
+-#define HAVE_XCURSOR 1
+-
+-/* Define to enable Xfixes support */
+-#define HAVE_XFIXES 1
+-
+-/* Define if you have a functional XFreeType installation, including libXft.
+-   */
+-#define HAVE_XFT 1
+-
+-/* Define to 1 if you have 'XInternAtoms' function. */
+-#define HAVE_XINTERNATOMS 1
+-
+-/* Define to 1 if you have the `Xutf8LookupString' function. */
+-#define HAVE_XUTF8LOOKUPSTRING 1
+-
+-/* Define to the address where bug reports for this package should be sent. */
+-#define PACKAGE_BUGREPORT ""
+-
+-/* Define to the full name of this package. */
+-#define PACKAGE_NAME ""
+-
+-/* Define to the full name and version of this package. */
+-#define PACKAGE_STRING ""
+-
+-/* Define to the one symbol short name of this package. */
+-#define PACKAGE_TARNAME ""
+-
+-/* Define to the home page for this package. */
+-#define PACKAGE_URL ""
+-
+-/* Define to the version of this package. */
+-#define PACKAGE_VERSION ""
+-
+-/* Define to 1 if you have the ANSI C header files. */
+-#define STDC_HEADERS 1
+-
+-/* Define to enable glitz support */
+-/* #undef USE_GLITZ */
+-
+-/* Define to enable XIM support */
+-#define USE_XIM 1
+-
+-/* Define if you have X11 XRender extension */
+-#define XRENDER 1
+-
+-/* Define if you have X11 XShm extensions */
+-#define XSHM 1
+-
+-/* Define to 1 if the X Window System is missing or not being used. */
+-/* #undef X_DISPLAY_MISSING */
+diff -Naur gnustep-back-work/Source/fontconfig/.svn/entries gnustep-back-todiffdir/Source/fontconfig/.svn/entries
+--- gnustep-back-work/Source/fontconfig/.svn/entries	2014-12-12 09:42:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/fontconfig/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 91981c16c2502e31dd1a333d73d789ad
+ 2013-09-16T22:46:45.820378Z
+ 37082
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 0f6edda92e0ddbe1f12df9a18917ae98
+ 2013-09-10T21:07:03.331966Z
+ 37066
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ af7605c51cbb0f04eed51d591e5d9cd0
+ 2013-09-10T21:07:03.331966Z
+ 37066
+diff -Naur gnustep-back-work/Source/gsc/.svn/entries gnustep-back-todiffdir/Source/gsc/.svn/entries
+--- gnustep-back-work/Source/gsc/.svn/entries	2014-12-12 09:42:45.000000000 +0100
++++ gnustep-back-todiffdir/Source/gsc/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ 2883cd2847142c2b7a730922f2fd9203
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ e8b41cf1f1d14d17e67305374acb3f3c
+ 2013-02-10T17:32:47.042691Z
+ 36106
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ 599b0f897d01beec84bb5425e424b225
+ 2008-12-19T13:05:05.699964Z
+ 27349
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ 1516dfb511e0e3abc70a833be8407c76
+ 2013-02-10T17:32:47.042691Z
+ 36106
+@@ -168,7 +168,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ f58bc51f8507b88fa496e431103a212b
+ 2013-07-29T20:59:38.606670Z
+ 36939
+@@ -202,7 +202,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ 84097a93d8d750e6f8869bbe338db84e
+ 2011-04-09T17:10:49.122815Z
+ 32823
+@@ -236,7 +236,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ c446aef8a12b7acc179e1f50a677bbf6
+ 2013-02-05T19:18:49.375052Z
+ 36063
+@@ -270,7 +270,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ b44ec8863f2d120537a4449a83bf5abe
+ 2008-06-10T04:12:46.711035Z
+ 26620
+@@ -304,7 +304,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ fe6f9bec7b47187b73adcbf4eac86571
+ 2006-02-22T06:44:24.259491Z
+ 22533
+@@ -338,7 +338,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:45.000000Z
++2014-12-12T15:40:47.000000Z
+ 44b67634f15d581b61de56b9f85bfda9
+ 2008-06-10T04:12:46.711035Z
+ 26620
+diff -Naur gnustep-back-work/Source/gsc/obj/gsc.obj/GSContext.m.d gnustep-back-todiffdir/Source/gsc/obj/gsc.obj/GSContext.m.d
+--- gnustep-back-work/Source/gsc/obj/gsc.obj/GSContext.m.d	2014-12-12 10:04:26.000000000 +0100
++++ gnustep-back-todiffdir/Source/gsc/obj/gsc.obj/GSContext.m.d	1970-01-01 01:00:00.000000000 +0100
+@@ -1,28 +0,0 @@
+-obj/gsc.obj/GSContext.m.o: GSContext.m ../../Headers/gsc/GSContext.h \
+-  ../../Headers/gsc/GSStreamContext.h ../../Headers/gsc/GSContext.h \
+-  ../../Headers/gsc/GSGState.h ../../Headers/gsc/gscolors.h \
+-  ../../Headers/gsc/GSGStateOps.h \
+-  /Users/bubble/gnustep/usr/local/include/GNUstepBase/GSIArray.h \
+-  /Users/bubble/gnustep/usr/local/include/GNUstepBase/GSVersionMacros.h \
+-  /Users/bubble/gnustep/usr/local/include/GNUstepBase/GSConfig.h \
+-  /Users/bubble/gnustep/usr/local/include/GNUstepBase/GSUnion.h
+-
+-../../Headers/gsc/GSContext.h:
+-
+-../../Headers/gsc/GSStreamContext.h:
+-
+-../../Headers/gsc/GSContext.h:
+-
+-../../Headers/gsc/GSGState.h:
+-
+-../../Headers/gsc/gscolors.h:
+-
+-../../Headers/gsc/GSGStateOps.h:
+-
+-/Users/bubble/gnustep/usr/local/include/GNUstepBase/GSIArray.h:
+-
+-/Users/bubble/gnustep/usr/local/include/GNUstepBase/GSVersionMacros.h:
+-
+-/Users/bubble/gnustep/usr/local/include/GNUstepBase/GSConfig.h:
+-
+-/Users/bubble/gnustep/usr/local/include/GNUstepBase/GSUnion.h:
+diff -Naur gnustep-back-work/Source/gsc/obj/gsc.obj/gscolors.c.d gnustep-back-todiffdir/Source/gsc/obj/gsc.obj/gscolors.c.d
+--- gnustep-back-work/Source/gsc/obj/gsc.obj/gscolors.c.d	2014-12-12 09:43:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/gsc/obj/gsc.obj/gscolors.c.d	1970-01-01 01:00:00.000000000 +0100
+@@ -1,6 +0,0 @@
+-obj/gsc.obj/gscolors.c.o: gscolors.c .././config.h \
+-  ../../Headers/gsc/gscolors.h
+-
+-.././config.h:
+-
+-../../Headers/gsc/gscolors.h:
+diff -Naur gnustep-back-work/Source/gsc/obj/gsc.obj/gscolors.c.o gnustep-back-todiffdir/Source/gsc/obj/gsc.obj/gscolors.c.o
+--- gnustep-back-work/Source/gsc/obj/gsc.obj/gscolors.c.o	2014-12-12 09:43:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/gsc/obj/gsc.obj/gscolors.c.o	1970-01-01 01:00:00.000000000 +0100
+@@ -1,13 +0,0 @@
+-Ïúíþ           °             H                          x!      Ð      x!                   __text          __TEXT                  è      Ð     H'       €            __debug_frame   __DWARF         è      p      ¸     (                    __debug_info    __DWARF         X      ü      (      H(                    __debug_abbrev  __DWARF         T            $                             __debug_aranges __DWARF         [      0       +      Ø(                    __debug_macinfo __DWARF         ‹              [                             __debug_line    __DWARF         ‹      H      [      à(                    __debug_loc     __DWARF         Ó            £                             __debug_pubnames__DWARF         Ô      —       ¤#                             __debug_pubtypes__DWARF         k      O       ;$                             __debug_inlined __DWARF         º              Š$                             __debug_str     __DWARF         º      k       Š$                             __debug_ranges  __DWARF         %      p       õ$                             __literal4      __TEXT          ˜             h%                            __literal8      __TEXT                 @       p%                            __eh_frame      __TEXT          à      ˜      °%     ø(        h                  ø)     +        P                                                                       UH‰å‰7óGóOóWó_ÉÃ@ UH‰åóGWÛ(Ð(È¾   Éé     UH‰åóWógóoWÛ.ã„á   óY1  ó,Âó*Àó\ÐóZÝóZÄò  f(ñò\ðf(ÆòYÃòZø(ÄóYÂóZÀf(ñò\ðf(ÆòYÃòZðóÞ  ó\ÂóYÄóZÀò\ÈòYÙòZÃƒøv5(å(È(ÇfD  fD  WÛ(Ð(Ä¾   Éé    fD  fD  ‰ÀH   Hc‚HÐÿàf·ÿÿÿe   Z   L   A   6   @ Šÿÿÿ(Õ(Í(Å¾   Éé    (å(Ï(Æë‹(à(Ï(Åë€(ç(Î(Åérÿÿÿ(ç(Íégÿÿÿ(æ(Í(ÇéYÿÿÿf„     UH‰åógóOóWó_Wí.Ýu@z>óÒ  (Øó\Ü(ã(Øó\Ù(Ëó\Â(ÐWÛ(Ä¾   Éé    f.„     ó”  .Ø„   ó\ÃóZØóZÄ(åf.ÃvJóZÁ(Íf.ÃvóZÂ(Õf.Ãw¥ò\ØòZÓë›fD  f(Ëò\ÈòZÉóZÂ(Õf.Ã‡xÿÿÿëÑf(ãò\àòZäóZÁ(Íf.ÃwªëÅD  Š{ÿÿÿ(å(Í(ÕéAÿÿÿfD  fD  UH‰å‹ƒøt5ƒøt …ÀuÉé    fD  ÉÃ€    €    Éé    f.„     Éé    f.„     UH‰åSHƒìH‰û‹ƒøt'sÇ    HƒÄ[ÉÃ€    €    ƒøwàè    óZCòYa  óZKòY\  òXÁóZKòYS  òXÁòZÀóCÇ    HƒÄ[ÉÃUH‰åSHƒìH‰û‹ƒøt"‚—   ƒøtÇ   HƒÄ[ÉÃD  è    óß  (Øó\[(Ðó\S(Èó\KWäó[ócó\ÓóSó\ËóK.ÑvW.áv (Äó\ÁóCó\ÑóSóXÙó[ócéxÿÿÿf.„     ‹G‰G1À‰G‰G‰GÇ   HƒÄ[ÉÃf.â†Eÿÿÿ(Äó\ÂóCó\KóKóX[ó[ócéÿÿÿfD  €    UH‰åSHƒìH‰û‹ƒøt"rKƒøtÇ   HƒÄ[ÉÃf„     è    óSó[ók.Óu7z5.Õu0z.(ÂWÒ(Êé   ‹G‰G1À‰G‰GÇ   HƒÄ[ÉÃD  (Âó_ÃóZàóZÍf(Áò_Äf(à(Âó]ÃóZÀò]Èf(ôò\ñóZÂf.àuTzRó\ÝóZÃò^Æf.n  rtòl  ò^ÁòZÈò^ôòZÖòZÄóKóSóCÇ   HƒÄ[ÉÃ@ óZÃf.àuzó\êóZÅò^ÆòX   ë˜ó\ÓóZÂò^ÆòXò  ë‚zŠòö  òXÁë„   ÿÿÿÿ x      $                         †   $                         †   $       @       W         †   $                       †   $       °      F          †   ,                        †      ƒ ,       €               †      ƒ ,             X         †      ƒ ø       GNU C 4.2.1 (Apple Inc. build 5666) (dot 3) gscolors.c /Users/bubble/gnustep/gna.org/gnustep-back/Source/gsc         è          signed char unsigned char short int short unsigned int int unsigned int long long int long long unsigned int long int char long unsigned int float double  ¢  gray_colorspace  rgb_colorspace hsb_colorspace cmyk_colorspace  device_colorspace_t "S  _device_color $ô  space %¢  # field &ô  # 	@    
+-    device_color_t '½      $                   …  dst #…  Uspace #¢  Ta #@  ab #@  bc #@  cd #@  d   D   .        =       L   ½  >   -…  ˜    3   5@       —      »   ‡  >   4…    i 6Ò   P  h 7@  ™  s 7@  Ï  v 7@  d  f 8@  ­  p 8@  ö  q 8@  ?  t 8@  ˆ  red 9@    green 9@  Ÿ  blue 9@  !      t       ¤      £  .  >   s…  ï  c u@  %  m u@  n  y u@  Ê  k u@  &  red v@  ‚  green v@  Þ  blue v@  M  white wI  ©      –°      ö      ß  `  >   •…  +	   P   «             t	  ’  >   ª…  À	   %   À€      ƒ      	
+-  Ä  >   ¿…  U
+-   ^   ÷      è      ±
+-  Ç  >   ö…  ý
+-      r @    g @    b @  M  _hue_component @  ƒ  _saturation_component @  ¹  _brightness_component @  ï  @   H I  %  V I  n  Temp I  Þ  diff I  g   	Ò   Ò   __CFConstantStringClassReference Ç   %á  $ >  $ >  :;  (    :;I  :;   :;I8
+-  	I  
+-! I/  .?:;'@á   :;I
+-   I   :;I  4 :;I  U  4 :;I  4 :;I
+-  !   4 I?4<   ,                     è                      D   A   û      ../../Headers/gsc  gscolors.c    gscolors.h     	        #K/YYYYjK0ˆPYYZÀƒKƒ$×æ"×^s0h.ÖR XXÑ§!fOYYY[ !Ÿt­täx‚ÉÉ¹»:»w<äKòs ¬ûéx ä»gpJ^[8g†»1 gWº[óƒƒ?YY‘‘ZZ»‘‘f<gY=+<gp’»ŸŸf»Á ÖgFò\YY[r¬gY<<g\º­ó­Kƒ¼
+-º$ƒƒLYY`ge¬¼\Z0                 w               w               v                        !        w!       $        w$       =        v                        =        U                @       A        wA       D        wD       —       v                @              U      Z       UZ      —       U                k              P             P             P                I       s        c<      I       c                N       Þ        e      Z       eZ      ]       ee      h       ep      s       e~             e‰      Œ       e                S              f      Z       fZ      —       f                s       ö        c      <       cZ      —       c                —              h      <       hZ      —       h                ¶              g      <       gZ      —       g                Ö       ä        aä       ù        a      <       aZ      c       ae      n       ap      y       a~      ’       a                Þ              e]      e       eh      p       es      ~       e      ‰       eŒ      —       e                á              b`      e       bk      p       bv      ~       b„      ‰       b      —       b                ä       ù        aù              cc      e       an      p       ay      ~       a’      —       a                       ¡       w¡      ¤       w¤      ¤       v                       ö       Uö      ¤       U                ©      Ô       eö              e‹      ™       e                ®      Þ       bö      -       bo      ƒ       b‹      œ       b                ³      å       cö      :       cJ      c       co      Ÿ       c                ¸      Í       då      è       dö             d‹      ¤       d                Ô      ö       e       t       e|      ‹       e™      ¤       e                Þ      ö       b-      T       b\      o       bƒ      ‹       bœ      ¤       b                å      ö       c:      J       cc      o       cŸ      ¤       c                å      è       d      ‹       d                °      ±       w±      ´       w´      ö       v                °      Ê       UÊ      æ       Uæ      ö       U                              w             w             v                       :       U:      }       S}             U                €             w      „       w„      ƒ       v                €      µ       Uµ      &       S&      N       UN      ƒ       S                      ‘       w‘      ”       w”      è       v                      Å       UÅ      ð       Sð             U      š       Sš      œ       Uœ      è       S                Ê      è       c             c      #       a.      2       cð2      6       aF      |       cðœ      è       cð                Ï      ð       d      è       d                Ô      ð       f      è       f                ë      ð       bt      œ       b                è      ð       c|      œ       c                å      ð       a€      œ       a                V      €       a´      Â       aÊ      è       a                             e      +       b+      :       e:      L       bL      è       eð                6      F       a                “        ü    gsMakeColor ‹  gsGrayToRGB ½  gsHSBToRGB ‡  gsCMYKToRGB .  gsColorToRGB `  gsColorToGray ’  gsColorToCMYK Ä  gsColorToHSB     K        ü  ¢  device_colorspace_t ½  _device_color   device_color_t     gsMakeColor gsCMYKToRGB gsColorToRGB gsColorToCMYK gsHSBToRGB color gsGrayToRGB gsColorToGray gsColorToHSB Å      ð             è                                        €             è                           À@  €?      ð?333333Ó?áz®Gáâ?)\Âõ(¼?       @      @              @       zR x  ,      øÿÿÿÿÿÿÿ           †          ,      øÿÿÿÿÿÿÿ           †          ,      øÿÿÿÿÿÿÿW          †          ,      øÿÿÿÿÿÿÿ          †          ,      øÿÿÿÿÿÿÿF           †          ,      øÿÿÿÿÿÿÿ           †      ƒ,      øÿÿÿÿÿÿÿ          †      ƒ,      øÿÿÿÿÿÿÿX          †      ƒÞ    Ò    ¼    h    ^    Á  	  -¹    ±  	  -a    P    C    6  	  -ò    -â    -Æ    -    ò    -Æ    V    -     -º          c     9     -H        è     À     ˜     p     H           Õ    Í    £    ›    q    i    ?    7    ˜        Î    Æ    œ    ”    +    #    ƒ     {          N          T     p    ^p    l     \l    @    ^@    <     \<        ^         \    à   
+-  ^à   	  Ü      \Ü   
+-  °     ^°     ¬      \¬     €     ^€     |      \|     P     ^P     L      \L           ^            \     ó     à      '                 ˆ       Q     €      Ð     !      B            ¾     è       `           â     H!      4     °      ­     ¸                    ~     (            @       Ž     X                    n     ø       _gsMakeColor _gsGrayToRGB _gsHSBToRGB _gsCMYKToRGB _gsColorToRGB _gsColorToGray _gsColorToCMYK _gsColorToHSB _gsMakeColor.eh _gsGrayToRGB.eh _gsHSBToRGB.eh _gsCMYKToRGB.eh _gsColorToRGB.eh _gsColorToGray.eh _gsColorToCMYK.eh _gsColorToHSB.eh EH_frame1    
+\ No newline at end of file
+diff -Naur gnustep-back-work/Source/libgnustep-back-024Info.plist gnustep-back-todiffdir/Source/libgnustep-back-024Info.plist
+--- gnustep-back-work/Source/libgnustep-back-024Info.plist	2014-12-12 09:43:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/libgnustep-back-024Info.plist	1970-01-01 01:00:00.000000000 +0100
+@@ -1,6 +0,0 @@
+-{
+-  GSBundleShortVersionString = "0.24.0";
+-  GSBundleVersion = 024.0;
+-  CFBundleShortVersionString = "0.24.0";
+-  CFBundleVersion = 024.0;
+-}
+diff -Naur gnustep-back-work/Source/opal/.svn/entries gnustep-back-todiffdir/Source/opal/.svn/entries
+--- gnustep-back-work/Source/opal/.svn/entries	2014-12-12 09:42:46.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/.svn/entries	2014-12-12 16:40:53.000000000 +0100
+@@ -32,7 +32,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ fe6614ee40da673b6e604e531d1d52a9
+ 2013-09-16T22:46:45.820378Z
+ 37082
+@@ -66,7 +66,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 0560536d739f15941ebf7d3a861edcc4
+ 2013-09-29T20:11:38.534818Z
+ 37172
+@@ -100,7 +100,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 2bb9c56937f80cec1bcaac70d76ef046
+ 2013-09-16T22:46:45.820378Z
+ 37082
+@@ -134,7 +134,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ d41d8cd98f00b204e9800998ecf8427e
+ 2013-06-23T22:41:31.129918Z
+ 36749
+@@ -168,7 +168,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 9d0ffe0376a57b2c8ada0d50205656a2
+ 2013-09-16T22:46:45.820378Z
+ 37082
+@@ -202,7 +202,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 9a353d9545e59c4c52aae47bf3a35b64
+ 2013-09-17T21:51:02.964230Z
+ 37099
+@@ -236,7 +236,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ d41d8cd98f00b204e9800998ecf8427e
+ 2013-06-23T22:41:31.129918Z
+ 36749
+@@ -270,7 +270,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ f17a3661311abaa9696cfcd4914a7593
+ 2013-09-29T20:11:38.534818Z
+ 37172
+@@ -304,7 +304,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 4e0b35ea0adf78a536cc5df863f5c670
+ 2013-06-25T17:13:37.337831Z
+ 36757
+@@ -338,7 +338,7 @@
+ 
+ 
+ 
+-2014-12-12T08:42:46.000000Z
++2014-12-12T15:40:46.000000Z
+ 3e3e96fbfaede2a2fa31c3c036c57aa9
+ 2013-09-29T17:10:26.804638Z
+ 37170
+diff -Naur gnustep-back-work/Source/opal/GNUmakefile.orig gnustep-back-todiffdir/Source/opal/GNUmakefile.orig
+--- gnustep-back-work/Source/opal/GNUmakefile.orig	2014-12-12 16:47:19.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/GNUmakefile.orig	1970-01-01 01:00:00.000000000 +0100
+@@ -1,70 +0,0 @@
+-#  Copyright (C) 2013 Free Software Foundation, Inc.
+-#
+-#  Author: Ivan Vucica <ivan@vucica.net>
+-#
+-#  This file is part of the GNUstep Backend.
+-#
+-#  This library is free software; you can redistribute it and/or
+-#  modify it under the terms of the GNU Lesser General Public
+-#  License as published by the Free Software Foundation; either
+-#  version 2 of the License, or (at your option) any later version.
+-#
+-#  This library is distributed in the hope that it will be useful,
+-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-#  Lesser General Public License for more details.
+-#
+-#  You should have received a copy of the GNU Lesser General Public
+-#  License along with this library; see the file COPYING.LIB.
+-#  If not, see <http://www.gnu.org/licenses/> or write to the 
+-#  Free Software Foundation, 51 Franklin Street, Fifth Floor, 
+-#  Boston, MA 02110-1301, USA.
+-
+-PACKAGE_NAME = gnustep-back
+-GNUSTEP_LOCAL_ADDITIONAL_MAKEFILES=../../back.make
+-include $(GNUSTEP_MAKEFILES)/common.make
+-
+-include ../../config.make
+-
+-SUBPROJECT_NAME=opal
+-
+-# The Objective-C source files to be compiled
+-opal_OBJC_FILES = OpalSurface.m \
+-  OpalFontInfo.m \
+-  OpalGState.m \
+-  OpalContext.m \
+-  OpalFontEnumerator.m \
+-  OpalFaceInfo.m \
+-  OpalPSSurface.m \
+-  OpalPDFSurface.m \
+-  ../fontconfig/FCFaceInfo.m \
+-  ../fontconfig/FCFontEnumerator.m \
+-  ../fontconfig/FCFontInfo.m \
+-  fuzzy/OpalFuzzy.m \
+-  fuzzy/OpalFuzzyDB.m \
+- 
+-ifeq ($(BUILD_SERVER),x11DISABLED)
+-  ifeq ($(WITH_GLITZ),yes)
+-    opal_OBJC_FILES += XGCairoGlitzSurface.m
+-  else
+-    opal_OBJC_FILES += XGCairoSurface.m XGCairoXImageSurface.m XGCairoModernSurface.m
+-  endif
+-else
+-  ifeq ($(BUILD_GRAPHICS),opalDISABLED)
+-    ifeq ($(WITH_GLITZ),yes)
+-      opal_OBJC_FILES += Win32CairoGlitzSurface.m
+-    else
+-      opal_OBJC_FILES += Win32CairoSurface.m Win32CairoGState.m
+-      # Win32CairoXImageSurface.m 
+-    endif
+-  endif
+-endif
+-
+-opal_OBJC_FILES += 
+-
+--include GNUmakefile.preamble
+-
+-include $(GNUSTEP_MAKEFILES)/subproject.make
+-
+--include GNUmakefile.postamble
+-
+diff -Naur gnustep-back-work/Source/opal/GNUmakefile.rej gnustep-back-todiffdir/Source/opal/GNUmakefile.rej
+--- gnustep-back-work/Source/opal/GNUmakefile.rej	2014-12-15 07:09:01.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/GNUmakefile.rej	1970-01-01 01:00:00.000000000 +0100
+@@ -1,19 +0,0 @@
+-***************
+-*** 40,46 ****
+-    ../fontconfig/FCFaceInfo.m \
+-    ../fontconfig/FCFontEnumerator.m \
+-    ../fontconfig/FCFontInfo.m \
+-- 
+-  
+-  
+-  
+---- 40,48 ----
+-    ../fontconfig/FCFaceInfo.m \
+-    ../fontconfig/FCFontEnumerator.m \
+-    ../fontconfig/FCFontInfo.m \
+-+   fuzzy/OpalFuzzy.m \
+-+   fuzzy/OpalFuzzyDB.m \
+-+  
+-  
+-  
+-  
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzy.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzy.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzy.m	2014-12-15 09:20:51.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzy.m	2014-12-12 16:47:28.000000000 +0100
+@@ -1,159 +1,150 @@
+- /*
+-    OpalFuzzy.m
+- 
+-    Copyright (C) 2014 Free Software Foundation, Inc.
+- 
+-    Author: Johan Ceuppens <johan@yellowcouch.org>
+-    Date: Dec 2014 
+- 
+-    This file is part of GNUstep.
+- 
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Lesser General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+- 
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-    Lesser General Public License for more details.
+- 
+-    You should have received a copy of the GNU Lesser General Public
+-    License along with this library; see the file COPYING.LIB.
+-    If not, see <http://www.gnu.org/licenses/> or write to the
+-    Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-    Boston, MA 02110-1301, USA.
+- */
+- 
+- #import "opal/fuzzy/OpalFuzzy.h"
+- 
+- @implementation OpalFuzzyFunction
+- 
+- - (id)new:(SEL)pif
+- {
+- 	[super alloc];
+- 	pf = pif;
+- 	x = .0;	
+- 	return self;
+- } 
+- 
+- -(void)perform:(id)c
+- {
+- 	[c performSelector:pf]
+- }
+- 
+- -(void)perform
+- {
+- 	[self performSelector:pf]
+- }
+- 
+- - (long int)x
+- {
+- 	return x;
+- }
+- 
+- - (void)x:(long int)xx
+- {
+- 	x = xx;
+- }
+- @end
+- 
+- @implementation OpalFuzzyFunctionLittle
+- 
+- -(void) littlef
+- {
+- 	return sqrt(x) / 1.3;
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(littlef)];
+- }
+- 
+- @end
+- 
+- @implementation OpalFuzzyFunctionSlightly
+- 
+- -(void) slightlyf
+- {
+- 	return sqrt(x) / 1.7;
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(slightlyf)];
+- }
+- 
+- @end
+- 
+- @implementation OpalFuzzyFunctionVery
+- 
+- -(void) veryf
+- {
+- 	return x * x;
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(veryf)];
+- }
+- 
+- @end
+- 
+- @implementation OpalFuzzyFunctionExtremely
+- 
+- -(void) extremelyf
+- {
+- 	return x * x * x;
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(extremelyf)];
+- }
+- 
+- @end
+- 
+- @implementation OpalFuzzyFunctionVeryVery
+- 
+- -(void) veryveryf
+- {
+- 	return x * x * x * x;
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(veryveryf)];
+- }
+- 
+- @end
+- 
+- @implementation OpalFuzzyFunctionMoreorLess
+- 
+- -(void) moreorlessf
+- {
+- 	return sqrt(x);
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(moreorlessf)];
+- }
+- 
+- @end
+- 
+- @implementation OpalFuzzyFunctionIndeed
+- 
+- -(void) indeedf
+- {
+- 	return 2 * x * x;
+- }
+- 
+- -(id) new 
+- {
+- 	[self new:@selector(indeedf)];
+- }
+- 
+- @end
+- 
+- 
++/*
++   OpalContext.m
++
++   Copyright (C) 2014 Free Software Foundation, Inc.
++
++   Author: Johan Ceuppens <johan@yellowcouch.org>
++   Date: Dec 2014 
++
++   This file is part of GNUstep.
++
++   This library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2 of the License, or (at your option) any later version.
++
++   This library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with this library; see the file COPYING.LIB.
++   If not, see <http://www.gnu.org/licenses/> or write to the
++   Free Software Foundation, 51 Franklin Street, Fifth Floor,
++   Boston, MA 02110-1301, USA.
++*/
++
++#import "opal/fuzzy/OpalFuzzy.h"
++
++@implementation OpalFuzzyFunction
++
++- (id)new:(SEL)pif
++{
++	[super alloc];
++	pf = pif;
++	x = .0;	
++	return self;
++} 
++
++-(void)perform:(id)c
++{
++	[c performSelector:pf]
++}
++
++-(void)perform
++{
++	[self performSelector:pf]
++}
++
++@end
++
++@implementation OpalFuzzyFunctionLittle
++
++-(void) littlef
++{
++	return sqrt(x) / 1.3;
++}
++
++-(id) new 
++{
++	[self new:@selector(littlef)];
++}
++
++@end
++
++@implementation OpalFuzzyFunctionSlightly
++
++-(void) slightlyf
++{
++	return sqrt(x) / 1.7;
++}
++
++-(id) new 
++{
++	[self new:@selector(slightlyf)];
++}
++
++@end
++
++@implementation OpalFuzzyFunctionVery
++
++-(void) veryf
++{
++	return x * x;
++}
++
++-(id) new 
++{
++	[self new:@selector(veryf)];
++}
++
++@end
++
++@implementation OpalFuzzyFunctionExtremely
++
++-(void) extremelyf
++{
++	return x * x * x;
++}
++
++-(id) new 
++{
++	[self new:@selector(extremelyf)];
++}
++
++@end
++
++@implementation OpalFuzzyFunctionVeryVery
++
++-(void) veryveryf
++{
++	return x * x * x * x;
++}
++
++-(id) new 
++{
++	[self new:@selector(veryveryf)];
++}
++
++@end
++
++@implementation OpalFuzzyFunctionMoreorLess
++
++-(void) moreorlessf
++{
++	return sqrt(x);
++}
++
++-(id) new 
++{
++	[self new:@selector(moreorlessf)];
++}
++
++@end
++
++@implementation OpalFuzzyFunctionIndeed
++
++-(void) indeedf
++{
++	return 2 * x * x;
++}
++
++-(id) new 
++{
++	[self new:@selector(indeedf)];
++}
++
++@end
++
++
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyDB.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyDB.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyDB.m	2014-12-15 09:30:07.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyDB.m	2014-12-12 16:47:28.000000000 +0100
+@@ -1,49 +1,45 @@
+- /*
+-    OpalFuzzyDB.m
+- 
+-    Copyright (C) 2014 Free Software Foundation, Inc.
+- 
+-    Author: Johan Ceuppens <johan@yellowcouch.org> 
+-    Date: Dec 2014
+- 
+-    This file is part of GNUstep.
+- 
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Lesser General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+- 
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-    Lesser General Public License for more details.
+- 
+-    You should have received a copy of the GNU Lesser General Public
+-    License along with this library; see the file COPYING.LIB.
+-    If not, see <http://www.gnu.org/licenses/> or write to the
+-    Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-    Boston, MA 02110-1301, USA.
+- */
+- 
+- @implementation OpalFuzzyDB {
+- 
+- -(id)new {
+- 	[[super alloc] init];
+- }
+- 
+- - (void)addToDict:(NSString*)key :(SEL)pif
+- {
+- 	[self setObject:pif forKey:key];
+- }
+- 
+- 
+- - (SEL)getWithKey:(NSString*)key
+- {
+- 	return [self objectForKey:key];	
+- }
+- 
+-- (void)reinitCapacity
++/*
++   OpalFuzzyDB.m
++
++   Copyright (C) 2014 Free Software Foundation, Inc.
++
++   Author: Johan Ceuppens <johan@yellowcouch.org> 
++   Date: Dec 2014
++
++   This file is part of GNUstep.
++
++   This library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2 of the License, or (at your option) any later version.
++
++   This library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with this library; see the file COPYING.LIB.
++   If not, see <http://www.gnu.org/licenses/> or write to the
++   Free Software Foundation, 51 Franklin Street, Fifth Floor,
++   Boston, MA 02110-1301, USA.
++*/
++
++@implementation OpalFuzzyDB {
++
++-(id)new {
++	[[super alloc] init];
++}
++
++- (void)addToDict:(NSString*)key :(SEL)pif
++{
++	[self setObject:pif forKey:key];
++}
++
++
++- (SEL)getWithKey:(NSString*)key
+ {
++	return [self objectForKey:key];	
+ }
+ 
+- @end
++@end
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyManipulator.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyManipulator.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyManipulator.m	2014-12-15 11:00:44.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyManipulator.m	1970-01-01 01:00:00.000000000 +0100
+@@ -1,55 +0,0 @@
+-/*
+-   OpalFuzzyManipulator.m
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org>
+-   Date: Dec 2014 
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#import "opal/fuzzy/OpalFuzzyManipulator.h"
+-
+-
+-@implementation OpalFuzzyPaintManipulator
+-
+-- (id) new:(id)painter
+-{
+-	[super new];
+-	_o = painter
+-	return self;
+-}
+-
+-@end
+-
+-@implementation OpalFuzzyManipulator
+-
+-- (id) new:(id)o
+-{
+-	[[super alloc] init];
+-	_o = o;
+-	return self;
+-}
+-
+-- (id)o
+-{
+-	return _o;
+-}
+-@end
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyMatrix.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyMatrix.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyMatrix.m	2014-12-15 08:44:38.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyMatrix.m	1970-01-01 01:00:00.000000000 +0100
+@@ -1,96 +0,0 @@
+-/*
+-   OpalFuzzyMatrix.m
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org>
+-   Date: Dec 2014 
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#import "opal/fuzzy/OpalFuzzyMatrix.h"
+-
+-@implementation OpalFuzzyMatrix
+-
+-- (id) new
+-{
+-	[[super alloc] init];
+-
+-	_w = 1;
+-	_h = 1;
+-
+-	MAKEMatrix(1,1);
+-	[_matrix alloc];
+-
+-	return self;
+-}
+-
+-- (id) setWidth:(long int)w height:(long int)h
+-{
+-       _w = w;
+-       _h = h;
+-
+-	if (w > 0 && h > 0) {
+-		MAKEMatrix(_w,_h);
+-		[_matrix alloc];
+-	} else {
+-		NSLog(@"Could not typedef matrix structure as width or height is <= 0, _matrix width==1  and height==1 from new, returning nil");
+-		return nil;
+-	}
+-	
+-	return self;	
+-}
+-
+-- (BOOL)hasDimensionsBeenSet:(BOOL)b
+-{
+-       if (!b) {
+-               if (_w <= 0 or _h <= 0) {
+-                       [self _calibrateDimensions];
+-                       return NO;
+-               } else {
+-                       return YES;
+-               }
+-       } else {
+-               if (_w <= 0 or _h <= 0) {
+-                       [self _calibrateDimensions];
+-                       return NO;
+-               } else {
+-                       return YES;
+-               }
+-
+-       }
+-}
+-
+-// private methods
+-
+-- (void) calibrateDimensions
+-{
+-       /* FIXME */
+-       /***
+-	_w = 1;
+-       _h = 1;
+-	MAKEMatrix(_w,_h);
+-	[_matrix alloc];
+-
+-	***/
+-
+-}
+-
+-@end
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyNetwork.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyNetwork.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyNetwork.m	2014-12-15 07:09:01.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyNetwork.m	1970-01-01 01:00:00.000000000 +0100
+@@ -1,43 +0,0 @@
+-/*
+-   OpalFuzzyNetwork.m
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org>
+-   Date: Dec 2014 
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#import "opal/fuzzy/OpalFuzzyNetwork.h"
+-
+-
+-@implementation OpalFuzzyNetwork
+-
+-- (id) new
+-{
+-	[[super alloc] init];
+-	return self;
+-}
+-
+-- 
+-
+-@end
+-
+-
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyNode.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyNode.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyNode.m	2014-12-15 10:52:07.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyNode.m	1970-01-01 01:00:00.000000000 +0100
+@@ -1,53 +0,0 @@
+-/*
+-   OpalFuzzyNode.m
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org>
+-   Date: Dec 2014 
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#import "opal/fuzzy/OpalFuzzyNode.h"
+-
+-
+-@implementation OpalFuzzyPaintNode
+-
+-- (id) new
+-{
+-	[[super alloc] init];
+-
+-	_rules = [OpalFuzzyPaintRuleSystem new];
+-	return self;
+-}
+-
+-@end
+-
+-@implementation OpalFuzzyNode
+-
+-- (id) new
+-{
+-	[[super alloc] init];
+-
+-	_rules = [OpalFuzzyRuleSystem new];
+-	return self;
+-}
+-
+-@end
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyPaintRuleSystem.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyPaintRuleSystem.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyPaintRuleSystem.m	2014-12-15 10:44:48.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyPaintRuleSystem.m	1970-01-01 01:00:00.000000000 +0100
+@@ -1,64 +0,0 @@
+-/*
+-   OpalFuzzyPaintRuleSystem.m
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org>
+-   Date: Dec 2014 
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#import "opal/fuzzy/OpalFuzzyPaintRuleSystem.h"
+-
+-
+-@implementation OpalFuzzyPaintRuleSystem
+-
+-- (id) new
+-{
+-	[super new];
+-	return self;
+-}
+-
+-- (void) setPaintSystem:(id)paintsystem
+-{
+-	_painter = paintsystem;
+-}
+-
+--(void)painter
+-{
+-	return _painter;
+-}
+-
+-- (void) paintOn
+-{
+-	/* NOTE : painting procedures without dispatch, use a pattern */
+-}
+-
+-- (void) paintOn:(id)painter
+-{
+-	/* NOTE : painting procedures without dispatch, use a pattern */
+-}
+-
+-- (id) createManipulator
+-{
+-	return [OpalFuzzyPaintManipulator new:self];
+-}
+-
+-@end
+diff -Naur gnustep-back-work/Source/opal/fuzzy/OpalFuzzyRuleSystem.m gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyRuleSystem.m
+--- gnustep-back-work/Source/opal/fuzzy/OpalFuzzyRuleSystem.m	2014-12-15 11:05:19.000000000 +0100
++++ gnustep-back-todiffdir/Source/opal/fuzzy/OpalFuzzyRuleSystem.m	1970-01-01 01:00:00.000000000 +0100
+@@ -1,74 +0,0 @@
+-/*
+-   OpalFuzzyRuleSystem.m
+-
+-   Copyright (C) 2014 Free Software Foundation, Inc.
+-
+-   Author: Johan Ceuppens <johan@yellowcouch.org>
+-   Date: Dec 2014 
+-
+-   This file is part of GNUstep.
+-
+-   This library is free software; you can redistribute it and/or
+-   modify it under the terms of the GNU Lesser General Public
+-   License as published by the Free Software Foundation; either
+-   version 2 of the License, or (at your option) any later version.
+-
+-   This library is distributed in the hope that it will be useful,
+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+-   Lesser General Public License for more details.
+-
+-   You should have received a copy of the GNU Lesser General Public
+-   License along with this library; see the file COPYING.LIB.
+-   If not, see <http://www.gnu.org/licenses/> or write to the
+-   Free Software Foundation, 51 Franklin Street, Fifth Floor,
+-   Boston, MA 02110-1301, USA.
+-*/
+-
+-#import "opal/fuzzy/OpalFuzzyDB.h"
+-#import "opal/fuzzy/OpalFuzzyRuleSystem.h"
+-
+-
+-@implementation OpalFuzzyRuleSystem
+-
+-- (id) new
+-{
+-	[[super alloc] init];
+-	_rules = [[NSMutableArray alloc] initWithCapacity:0];
+-	return self;
+-}
+-
+-- (void) addRule:(NSString*)r with:(SEL)s
+-{
+-	[_rules reinitCapacity];	
+-	[_rules addToDict:r :s];
+-}
+-
+--(void) parseFor:(NSString*)predicate On:o
+-{
+-	key = [self match:predicate On:o];
+-	SEL s = [_rules objectForKey:key];	
+-}
+-
+-- (id) match:(NSString*)predicate On:o
+-{
+-	/* FIXME better rule matching eg more rules than first found */
+-    NSEnumerator *enumerator = [_rules keyEnumerator];
+-    id key;
+-    while ((key = [enumerator nextObject])) {
+-	if ([predicate rangeOfString:key]->length == 0)
+-			continue;
+-		else {
+-			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];
+-			return key;
+-		}	
+-	}	
+-
+-}	
+-
+-- (id) createManipulator
+-{
+-	return [OpalFuzzyManipulator new:self];
+-}
+-
+-@end
