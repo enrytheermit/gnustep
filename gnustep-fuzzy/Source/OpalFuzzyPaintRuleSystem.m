@@ -25,6 +25,7 @@
    Boston, MA 02110-1301, USA.
 */
 
+#import "../Headers/OpalFuzzy.h"
 #import "../Headers/OpalFuzzyDB.h"
 #import "../Headers/OpalFuzzyManipulator.h"
 #import "../Headers/OpalFuzzyPaintRuleSystem.h"
@@ -87,10 +88,11 @@
 	else if ([[predicate compareWithParser:[self parser] and: key] length] > 0) {
 		/* if key found, perform fuzzy action and set arg with x:
 		 before */
-		//if ([[[_functions objectForKey:key] perform] x] < _threshold) { 
+		if ([(OpalFuzzyFunction*)[[_functions objectForKey:key] perform] x] < _threshold) { 
+		//if ([[_functions objectForKey:key] perform] != nil) { 
 			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];
 			return key;
-		//}
+		}
 	} else {
 		return nil;
 	}	

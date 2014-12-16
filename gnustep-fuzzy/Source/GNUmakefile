@@ -28,7 +28,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 # Two libraries
-LIBRARY_NAME = libgnustepfuzzy libgnustepai
+LIBRARY_NAME = libgnustepfuzzy
 
 #
 libgnustepfuzzy_INCLUDE_DIRS = ../Headers
