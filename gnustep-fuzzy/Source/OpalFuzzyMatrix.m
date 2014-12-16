@@ -35,21 +35,26 @@
 
 	_w = 1;
 	_h = 1;
-
-	MAKEMatrix(1,1);
-	[_matrix alloc];
+	typedef struct {
+		EVAL(REPEAT(1,MAKEMatrixElement,1))
+	} _OpalMatrix;
+	_matrix = (_OpalMatrix*)[_matrix alloc];
 
 	return self;
 }
 
-- (id) setWidth:(long int)w height:(long int)h
+/* FIXME broken */
+- (id) setWidth:(int)w height:(int)h
 {
        _w = w;
        _h = h;
 
 	if (w > 0 && h > 0) {
-		MAKEMatrix(_w,_h);
-		[_matrix alloc];
+	typedef struct {
+		/* FIXME EVAL(REPEAT(w,MAKEMatrixElement,h)) */
+		EVAL(REPEAT(1,MAKEMatrixElement,1))
+	} _OpalMatrix;
+	_matrix = (_OpalMatrix*)[_matrix alloc];
 	} else {
 		NSLog(@"Could not typedef matrix structure as width or height is <= 0, _matrix width==1  and height==1 from new, returning nil");
 		return nil;
@@ -61,15 +66,15 @@
 - (BOOL)hasDimensionsBeenSet:(BOOL)b
 {
        if (!b) {
-               if (_w <= 0 or _h <= 0) {
-                       [self _calibrateDimensions];
+               if (_w <= 0 || _h <= 0) {
+                       [self calibrateDimensions];
                        return NO;
                } else {
                        return YES;
                }
        } else {
-               if (_w <= 0 or _h <= 0) {
-                       [self _calibrateDimensions];
+               if (_w <= 0 || _h <= 0) {
+                       [self calibrateDimensions];
                        return NO;
                } else {
                        return YES;
@@ -84,10 +89,12 @@
 {
        /* FIXME */
        /***
-	_w = 1;
+       _w = 1;
        _h = 1;
-	MAKEMatrix(_w,_h);
-	[_matrix alloc];
+	typedef struct {
+		EVAL(REPEAT(1,MAKEMatrixElement,1))
+	} _OpalMatrix;
+	_matrix = (_OpalMatrix*)[_matrix alloc];
 
 	***/
 
