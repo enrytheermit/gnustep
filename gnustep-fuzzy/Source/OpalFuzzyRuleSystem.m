@@ -70,10 +70,10 @@
 			continue;
 	else if ([predicate rangeOfString: key].length > 0) {
 		/* if key found, perform fuzzy action on f(x) with x = 0 */
-		/*if ([[_functions objectForKey:key] perform] < _threshold) { 
+		if ([[[_functions objectForKey:key] perform] x] < _threshold) { 
 			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];
-		*/	return key;
-		//}
+			return key;
+		}
 	} else {
 		return nil;
 	}	

@@ -87,10 +87,10 @@
 	else if ([[predicate compareWithParser:[self parser] and: key] length] > 0) {
 		/* if key found, perform fuzzy action and set arg with x:
 		 before */
-		/*if ([[_functions objectForKey:key] perform] < _threshold) { 
+		//if ([[[_functions objectForKey:key] perform] x] < _threshold) { 
 			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];
 			return key;
-		}*/
+		//}
 	} else {
 		return nil;
 	}	
