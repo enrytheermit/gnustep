@@ -1,0 +1,35 @@
+This is gnustep-make 2.6.6. Type 'make print-gnustep-make-help' for help.
+Making all for library libgnustepfuzzy...
+ Compiling file OpalFuzzyRuleSystem.m ...
+OpalFuzzyRuleSystem.m: In function ‘-[OpalFuzzyRuleSystem new]’:
+OpalFuzzyRuleSystem.m:39:2: warning: ‘NSObject’ may not respond to ‘-alloc’ [enabled by default]
+  [[super alloc] init];
+  ^
+OpalFuzzyRuleSystem.m:39:2: warning: (Messages without a matching method signature [enabled by default]
+OpalFuzzyRuleSystem.m:39:2: warning: will be assumed to return ‘id’ and accept [enabled by default]
+OpalFuzzyRuleSystem.m:39:2: warning: ‘...’ as arguments.) [enabled by default]
+OpalFuzzyRuleSystem.m: In function ‘-[OpalFuzzyRuleSystem parseFor:On:]’:
+OpalFuzzyRuleSystem.m:60:12: warning: unused variable ‘key’ [-Wunused-variable]
+  NSString *key = [self match:predicate On:o];
+            ^
+OpalFuzzyRuleSystem.m: In function ‘-[OpalFuzzyRuleSystem createManipulator]’:
+OpalFuzzyRuleSystem.m:85:2: warning: ‘OpalFuzzyManipulator’ may not respond to ‘+new:’ [enabled by default]
+  return [OpalFuzzyManipulator new:self];
+  ^
+OpalFuzzyRuleSystem.m: In function ‘-[OpalFuzzyRuleSystem createArgumentManipulator]’:
+OpalFuzzyRuleSystem.m:90:2: warning: ‘OpalFuzzyArgumentManipulator’ may not respond to ‘+new:’ [enabled by default]
+  return [OpalFuzzyArgumentManipulator new:self];
+  ^
+OpalFuzzyRuleSystem.m: At top level:
+OpalFuzzyRuleSystem.m:93:1: warning: incomplete implementation of class ‘OpalFuzzyRuleSystem’ [enabled by default]
+ @end
+ ^
+OpalFuzzyRuleSystem.m:93:1: warning: method definition for ‘-createParserManipulator’ not found [enabled by default]
+OpalFuzzyRuleSystem.m: In function ‘-[OpalFuzzyRuleSystem match:On:]’:
+OpalFuzzyRuleSystem.m:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ } 
+ ^
+gcc: warning: ../Headers: linker input file unused because linking not done
+ Linking library libgnustepfuzzy ...
+Making all for library libgnustepai...
+make[3]: Nothing to be done for `internal-library-compile'.
