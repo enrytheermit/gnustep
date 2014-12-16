@@ -47,7 +47,9 @@ libgnustepfuzzy_OBJC_FILES = OpalFuzzyDB.m \
  OpalFuzzyPaintRuleSystem.m \
  OpalFuzzyParser.m \
  OpalFuzzyPredicate.m \
- OpalFuzzyRuleSystem.m
+ OpalFuzzyRuleSystem.m \
+ OpalFuzzyDTree.m \
+
 ### OpalFuzzyMatrix.m \
 
 # The C source files to be compiled
@@ -68,7 +70,9 @@ libgnustepfuzzy_HEADER_FILES = OpalFuzzyDB.h \
  OpalFuzzyPaintRules.h \
  OpalFuzzyPaintRuleSystem.h \
  OpalFuzzyParser.h \
- OpalFuzzyPredicate.h
+ OpalFuzzyPredicate.h \
+ OpalFuzzyDTree.h \
+ 
 ### OpalFuzzyMatrix.h \
 
 # Option include to set any additional variables

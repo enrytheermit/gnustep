@@ -1,10 +1,10 @@
  /*
-    OpalFuzzyDecisionTree.h
+    OpalFuzzyDecisionTree.m
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
-    Author: Johan Ceuppens <johan@yellowcouch.org> 
-    Date: Dec 2014
+    Author: Johan Ceuppens <johan@yellowcouch.org>
+    Date: Dec 2014 
  
     This file is part of GNUstep.
  
@@ -22,24 +22,34 @@
     License along with this library; see the file COPYING.LIB.
     If not, see <http://www.gnu.org/licenses/> or write to the
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
-    Boston, MA 021101301, USA.
+    Boston, MA 02110-1301, USA.
  */
  
-#ifndef OpalFuzzyDecisionTree_h_defined
-#define OpalFuzzyDecisionTree_h_defined
+#import "../Headers/OpalFuzzyDTree.h"
+ 
+@implementation OpalFuzzyDTreeRoot
 
-#import <Foundation/Foundation.h>
+- (id) new
+{
+	[[super alloc] init]; 
+}
 
-@interface OpalFuzzyDecisionTreeRoot : NSObject {
-}
-- (id) new; 
 @end
-@interface OpalFuzzyDecisionTreeNode : NSObject {
+
+@implementation OpalFuzzyDTreeNode
+
+- (id) new
+{
+	[[super alloc] init]; 
 }
-- (id) new; 
+
 @end
-@interface OpalFuzzyDecisionTree : NSObject {
+
+@implementation OpalFuzzyDTree
+
+- (id) new
+{
+	[[super alloc] init]; 
 }
-- (id) new; 
+
 @end
-#endif
