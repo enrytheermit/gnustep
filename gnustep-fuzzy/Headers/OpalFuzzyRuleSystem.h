@@ -40,6 +40,7 @@
 	OpalFuzzyDB *_functions;
 }
 
+-(void) parseFor:(OpalFuzzyPredicate*)predicate On:(id)o;
 - (id) match:(OpalFuzzyPredicate*)predicate On:(id)o;
 /*
  * NOTE :
