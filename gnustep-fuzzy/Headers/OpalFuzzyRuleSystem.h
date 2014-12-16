@@ -50,7 +50,7 @@
  * and paints on the _painter of the dispatched class due to a call
  * of e.g. parseFor:"paint extremely". 
  *
- * The super class parseFor:On: method can also be used as a rule (rules have
+ * A super class parseFor: method can also be used as a rule (rules have
  * a NSString key and a SEL in the form of performSelector:withObject:, so
  * only a single argument.
  */ 
