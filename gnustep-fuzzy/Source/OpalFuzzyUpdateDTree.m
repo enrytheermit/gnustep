@@ -37,10 +37,15 @@
 - (id)makeUpdateDTreeWithFactory:(OpalFuzzyDTreeFactory*)fact
 {
 	OpalFuzzyDTree *dtree = [fact makeDTree];
+
+	//make predicates which is an NSString
 	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] init];
-	[pred initWithString:@"update full window";	
+	//initialize it with a string which in this case is multi-worded
+	[pred initWithString:@"update full window";
+	
+	//so it becomes a compound
+	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
 	InferenceCompound *comp = [fact makeCompound:pred];
-	[dtree addCompound:comp];	
 }
 
 @end

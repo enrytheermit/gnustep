@@ -94,14 +94,13 @@
 @end
 
 @implementation OpalFuzzyDTree
-
-- (id) new
+- (id)init:(OpalFuzzyDTreeFactory*)factory
 {
-	[[super alloc] init]; 
-}
-
+	_inference = [factory createInferenceManipulator];
+	return [factory makeDTree];
+} 
 - (void) addCompound:(InferenceCompound*)comp
 {
-	[comp parse:[OpalFuzzyInference new]];	
+	[comp parse:_inference]; //NOTE adds compound to _compounds DB
 }
 @end

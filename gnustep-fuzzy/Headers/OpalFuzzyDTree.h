@@ -38,6 +38,7 @@
 	OpalFuzzyDTreeFactory *_factory;
 }
 - (id)new:(OpalFuzzyDTreeFactory*)fact;
+
 @end
 
 @interface OpalFuzzyDTreeFactory
@@ -62,8 +63,8 @@
 - (id) new; 
 @end
 @interface OpalFuzzyDTree : NSObject {
+	OpalFuzzyInference *_inference;		
 }
-- (id) new;
-- (id)make:(OpalFuzzyDTreeFactory*)factory; 
+- (id)init:(OpalFuzzyDTreeFactory*)factory; 
 @end
 #endif
