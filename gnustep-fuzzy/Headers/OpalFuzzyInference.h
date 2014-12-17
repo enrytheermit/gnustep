@@ -32,6 +32,7 @@
 @class OpalFuzzyDB;
 @class OpalFuzzyPredicate;
 @class OpalFuzzyInference;
+@class OpalFuzzyDTree;
 
 @interface InferenceNode
 {
@@ -80,11 +81,13 @@
 	OpalFuzzyDB *_vars;	
 	OpalFuzzyDB *_numbers;	
 	OpalFuzzyDB *_compounds;	
- }
-- (id)new;
-
--(id) parse:(InferenceADT*)adt;
  
+	OpalFuzzyDTree *_tree;
+}
+- (id) new;
+- (id) init:(OpalFuzzyDTree*)dt;
+- (id) parse:(InferenceADT*)adt;
+- (id) compileToTree:(InferenceADT*)adt; 
 @end
  
  #endif

@@ -32,6 +32,7 @@
 @class OpalFuzzyPredicate;
 @class OpalFuzzyDTreeFactory;
 @class OpalFuzzyInference;
+@class InferenceADT;
 
 @interface InferenceManipulator
 {
@@ -51,6 +52,8 @@
 - (id) makeVar:(OpalFuzzyPredicate*)p; 
 - (id) makeNumber:(OpalFuzzyPredicate*)p; 
 - (id) makeCompound:(OpalFuzzyPredicate*)p; 
+- (id) compileToTree:(InferenceADT*)adt;
+//_inference wrapper
 - (id)createInferenceManipulator;
 @end
 

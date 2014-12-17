@@ -71,6 +71,7 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addAtom:_nodeid withId:[_node predicate]];	
+	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -87,6 +88,7 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addVar:_nodeid withId:[_node predicate]];	
+	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -103,6 +105,7 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addNumber:_nodeid withId:[_node predicate]];	
+	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -122,7 +125,10 @@
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
 	}
-	[inf addCompound:_nodeid withId:[_node predicate]];	
+	//adds compound to (cache) DB
+	[inf addCompound:_nodeid withId:[_node predicate]];
+
+	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -137,6 +143,12 @@
 	_numbers = [OpalFuzzyDB new];	
 	_compounds = [OpalFuzzyDB new];	
 	return self; 
+}
+
+-(id) init:(OpalFuzzyDTree*)dt
+{
+	_tree = dt;
+	return self;
 }
 
 -(id) parse:(InferenceADT*)adt
