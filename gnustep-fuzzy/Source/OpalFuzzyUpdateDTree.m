@@ -34,8 +34,14 @@
 	[[super alloc] init]; 
 }
 
-- (id)makeUpdateDTree
-{}
+- (id)makeUpdateDTreeWithFactory:(OpalFuzzyDTreeFactory*)fact
+{
+	OpalFuzzyDTree *dtree = [fact makeDTree];
+	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] init];
+	[pred initWithString:@"update full window";	
+	InferenceCompound *comp = [fact makeCompound:pred];
+	[dtree addCompound:comp];	
+}
 
 @end
 

@@ -28,6 +28,13 @@
 #import "../Headers/OpalFuzzyDTree.h"
 #import "../Headers/OpalFuzzyInference.h"
  
+@implementation InferenceManipulator
+- (id)new:(OpalFuzzyDTreeFactory*)fact
+{
+	_factory = fact;
+}
+@end
+
 @implementation OpalFuzzyDTreeFactory
 - (id) makeDTree
 {
@@ -61,9 +68,9 @@
 	return [self makeADT:p with:@encode(InferenceCompound)];
 }
 
-- (id) createManipulator
+- (id) createInferenceManipulator
 {
-	return [OpalFuzzyInference new];
+	return [InferenceManipulator new:self];
 }
 
 @end
@@ -93,4 +100,8 @@
 	[[super alloc] init]; 
 }
 
+- (void) addCompound:(InferenceCompound*)comp
+{
+	[comp parse:[OpalFuzzyInference new]];	
+}
 @end

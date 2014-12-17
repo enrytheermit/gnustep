@@ -30,10 +30,19 @@
 
 #import <Foundation/Foundation.h>
 @class OpalFuzzyPredicate;
+@class OpalFuzzyDTreeFactory;
+@class OpalFuzzyInference;
+
+@interface InferenceManipulator
+{
+	OpalFuzzyDTreeFactory *_factory;
+}
+- (id)new:(OpalFuzzyDTreeFactory*)fact;
+@end
 
 @interface OpalFuzzyDTreeFactory
 {
-		
+	OpalFuzzyInference *_inference;		
 }
 - (id) makeDTree;
 - (id) makeADT:(OpalFuzzyPredicate*)p with:(Class)adt; 
@@ -41,7 +50,7 @@
 - (id) makeVar:(OpalFuzzyPredicate*)p; 
 - (id) makeNumber:(OpalFuzzyPredicate*)p; 
 - (id) makeCompound:(OpalFuzzyPredicate*)p; 
-- (id)createManipulator;
+- (id)createInferenceManipulator;
 @end
 
 @interface OpalFuzzyDTreeRoot : NSObject {
