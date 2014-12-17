@@ -36,11 +36,19 @@
 	return self; 
 }
 
+//another example :
+	//OpalFuzzyInference *inf = [OpalFuzzyInference new];
+	//OpalFuzzyDTree *dtree = [_factory makeDTree];
 - (id)makeUpdateDTree
 {
 	OpalFuzzyInference *inf = [OpalFuzzyInference new];
-	OpalFuzzyDTree *dtree = [_factory makeDTree];
-	[inf setTree:dtree];
+	OpalFuzzyDTree *dtree = [OpalFuzzyDTree new];
+	OpalFuzzyConstructVisitor *visi = [OpalFuzzyConstructVisitor new];
+	inf = [inf accept:visi];
+	dtree = [dtree accept:visi];
+	OpalFuzzySetVisitor *visiset = [OpalFuzzySetVisitor new];
+	inf = [inf accept:visiset];
+	dtree = [dtree accept:visiset];
 	//make predicates which is an NSString
 	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] init];
 	//initialize it with a string which in this case is multi-worded

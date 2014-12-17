@@ -145,6 +145,11 @@
 	return self; 
 }
 
+- (void)accept:(OpalFuzzyVisitor*)v
+{
+	[v visitDTree: self];
+}
+
 -(id) setTree:(OpalFuzzyDTree*)dt
 {
 	_tree = dt;

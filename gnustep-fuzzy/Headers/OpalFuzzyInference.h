@@ -33,6 +33,7 @@
 @class OpalFuzzyPredicate;
 @class OpalFuzzyInference;
 @class OpalFuzzyDTree;
+@class OpalFuzzyVisitor;
 
 @interface InferenceNode
 {
@@ -85,6 +86,9 @@
 	OpalFuzzyDTree *_tree;
 }
 - (id) new;
+
+- (void)accept:(OpalFuzzyVisitor*)v;
+
 - (id) setTree:(OpalFuzzyDTree*)dt;
 - (id) parse:(InferenceADT*)adt;
 - (id) compileToTree:(InferenceADT*)adt; 

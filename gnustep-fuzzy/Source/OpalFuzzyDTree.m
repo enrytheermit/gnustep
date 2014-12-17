@@ -106,6 +106,12 @@
 	_inference = [factory createInferenceManipulator];
 	return [factory makeDTree];
 } 
+
+- (void)accept:(OpalFuzzyVisitor*)v
+{
+	[v visitInference: self];
+}
+
 - (void) addCompound:(InferenceCompound*)comp
 {
 	[comp parse:_inference]; //NOTE adds compound to _compounds DB
