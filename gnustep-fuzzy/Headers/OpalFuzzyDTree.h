@@ -31,6 +31,7 @@
 #import <Foundation/Foundation.h>
 @class OpalFuzzyPredicate;
 @class OpalFuzzyDTreeFactory;
+@class OpalFuzzyDTreeNode;
 @class OpalFuzzyInference;
 @class InferenceADT;
 
@@ -58,14 +59,25 @@
 @end
 
 @interface OpalFuzzyDTreeRoot : NSObject {
+	OpalFuzzyDTreeNode *_nodes;
 }
 - (id) new; 
 @end
 @interface OpalFuzzyDTreeNode : NSObject {
+	InferenceADT *_adt;
+	NSMutableArray *_cons;
 }
-- (id) new; 
+- (id) new:(InferenceADT*)adt;
+- (id) adt;
+@end
+@interface OpalFuzzyDTreeNodeCon : NSObject {
+	OpalFuzzyDTreeNode *_node;	
+}
+- (id) new:(OpalFuzzyDTreeNode*)node;
+- (id)node;
 @end
 @interface OpalFuzzyDTree : NSObject {
+	OpalFuzzyDTreeRoot *_root;		
 	OpalFuzzyInference *_inference;		
 }
 - (id)init:(OpalFuzzyDTreeFactory*)factory; 

@@ -1,5 +1,5 @@
  /*
-    OpalFuzzyVisitor.h
+    OpalFuzzyMACROS.h
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
@@ -25,37 +25,19 @@
     Boston, MA 02110-1301, USA.
  */
  
- #ifndef OpalFuzzyVisitor_h_defined
- #define OpalFuzzyVisitor_h_defined
+ #ifndef OpalFuzzyMACROS_h_defined
+ #define OpalFuzzyMACROS_h_defined
 
 #import <Foundation/Foundation.h>
-@class OpalFuzzyDTree;
-@class OpalFuzzyInference;
  
-@interface OpalFuzzyVisitor : NSObject {
-}
-- (id)new;
+#define NOTS @"not"
+#define ANDS @"and"
+#define ORS @"or"
+#define XORS @"xor"
+#define SHIFTL(x,y) \
+	 x << y
 
-- (void) visitDTree:(OpalFuzzyDTree *)dtree; 
-- (void) visitInference:(OpalFuzzyInference *)inf;
-@end
- 
-@interface OpalFuzzyConstructVisitor : OpalFuzzyVisitor {
+#define SHIFTR(x,y) \
+	 x >> y
 
-}
-- (id)new;
-
-- (void) visitDTree:(OpalFuzzyDTree *)dtree; 
-- (void) visitInference:(OpalFuzzyInference *)inf;
-@end
- 
-@interface OpalFuzzySetVisitor : OpalFuzzyVisitor {
-	OpalFuzzyDTree *_dtree;
-}
-- (id)new;
-
-- (void) visitDTree:(OpalFuzzyDTree *)dtree; 
-- (void) visitInference:(OpalFuzzyInference *)inf;
-@end
- 
- #endif
+#endif
