@@ -31,6 +31,7 @@
 #import <Foundation/Foundation.h>
 @class OpalFuzzyDB;
 @class OpalFuzzyPredicate;
+@class OpalFuzzyInference;
 
 @interface InferenceNode
 {
@@ -44,36 +45,37 @@
 -(void)predicate:(OpalFuzzyPredicate*)d;
 @end
 
-@interface InferenceAtom
+@interface InferenceADT
 {
-	InferenceNode* _atom;
-	int _atomid;
+	InferenceNode* _node;
+	int _nodeid;
 }
 -(id)node;
+-(id)nodeid;
 @end
-@interface InferenceVariable
+
+@interface InferenceAtom : InferenceADT
 {
-	InferenceNode* _var;
-	int _varid;
 }
--(id)node;
+-(void) parse:(OpalFuzzyInference*)inf;
 @end
-@interface InferenceNumber
+@interface InferenceVariable : InferenceADT
 {
-	InferenceNode* _number;
-	int _numberid;
 }
--(id)node;
+-(void) parse:(OpalFuzzyInference*)inf;
 @end
-@interface InferenceCompound
+@interface InferenceNumber : InferenceADT
 {
-	InferenceNode* _compound;
-	int _compoundid;
 }
--(id)node;
+-(void) parse:(OpalFuzzyInference*)inf;
+@end
+@interface InferenceCompound : InferenceADT
+{
+}
+-(void) parse:(OpalFuzzyInference*)inf;
 @end
  
- @interface OpalFuzzyInference : NSObject {
+@interface OpalFuzzyInference : NSObject {
 	OpalFuzzyDB *_atoms;	
 	OpalFuzzyDB *_vars;	
 	OpalFuzzyDB *_numbers;	
