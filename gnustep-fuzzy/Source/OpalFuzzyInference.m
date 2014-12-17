@@ -66,12 +66,12 @@
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* node predicates get squeezed from "blue 0" to "blue0" */	
 		[_node predicate:[[_node data] UTF8String]];	
+		[inf addAtom:_nodeid withId:[_node predicate]];	
+		[inf compileAtomToTree:self];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
 	}
-	[inf addAtom:_nodeid withId:[_node predicate]];	
-	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -83,12 +83,12 @@
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
 		[_node predicate:[[_node data] UTF8string]];	
+		[inf addVar:_nodeid withId:[_node predicate]];	
+		[inf compileVariableToTree:self];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
 	}
-	[inf addVar:_nodeid withId:[_node predicate]];	
-	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -100,12 +100,12 @@
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
 		[_node predicate:[[_node data] UTF8string]];	
+		[inf addNumber:_nodeid withId:[_node predicate]];	
+		[inf compileNumberToTree:self];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
 	}
-	[inf addNumber:_nodeid withId:[_node predicate]];	
-	[inf compileToTree:self];	
 	return self;
 }
 @end
@@ -116,19 +116,21 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] UTF8String] intValue];
 		[_node predicate:[[_node data] UTF8String]];	
+		//adds compound to (cache) DB
+		[inf addCompound:_nodeid withId:[_node predicate]];
+		[inf compileCompoundToTree:self];	
 			
 	} else if ([[_node data] isKindOfClass:[OpalFuzzyPredicate class]]) {
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] UTF8String] intValue];
 		[_node predicate:[[_node data] UTF8String]];	
+		//adds compound to (cache) DB
+		[inf addCompound:_nodeid withId:[_node predicate]];
+		[inf compileCompoundToTree:self];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
 	}
-	//adds compound to (cache) DB
-	[inf addCompound:_nodeid withId:[_node predicate]];
-
-	[inf compileToTree:self];	
 	return self;
 }
 @end

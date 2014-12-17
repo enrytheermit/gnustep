@@ -171,7 +171,8 @@
 }
 
 /*
- * NOTE : the Tree construction mechanism after all addX: have been done.
+ * NOTE : a Tree construction mechanism after all addX: have been done.
+ *        The inference engine uses compileCompoundToTree and friends.
  */
 -(id) compileToTree:(InferenceADT*)adt
 {
@@ -205,18 +206,21 @@
 
 -(id) compileCompoundToTree:(InferenceCompound*)comp
 {
-	NSString *ds = [[comp data] stringByReplacingOccurrencesOfString:@" " withString:@""];
-	if ([ds rangeOfString:(0,[NOTS length])].length == [NOTS length]) {
-		/* fer speed */
+	/* 
+	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
+	*/
+	OpalFuzzyPredicate *ps = [[comp node] predicate]; 
+	[ps stringByReplacingOccurrencesOfString:@" " withString:@""];
+	if ([ps rangeOfString:(0,[NOTS length])].length == [NOTS length]) {
+		/* for speed */
 		unsigned int len = [[comp data] length];
 		char buffer[len];
 
-		[ds getCharacters:buffer range:NSMakeRange(3, [ds length])];
+		[ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
 		OpalFuzzyDTreeNode *n = [self searchTreeFor:[NSString initWithCharacters:buffer length:len]];
 		if (n) {
-			OpalFuzzyPredicate *p = [OpalFuzzyPredicate initWithString:ds];
 			/* FIXME kludge, old not nodes are doubled */ 
-			[n splitForNot:p];	
+			[n splitForNot:ps];	
 		}	
 	}	
 /***	if ([[comp data] rangeOfString:ORS] == [ORS length]) {
