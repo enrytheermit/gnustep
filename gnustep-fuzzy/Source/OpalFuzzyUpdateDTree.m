@@ -40,7 +40,7 @@
 {
 	OpalFuzzyInference *inf = [OpalFuzzyInference new];
 	OpalFuzzyDTree *dtree = [_factory makeDTree];
-	[inf init:dtree];
+	[inf setTree:dtree];
 	//make predicates which is an NSString
 	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] init];
 	//initialize it with a string which in this case is multi-worded

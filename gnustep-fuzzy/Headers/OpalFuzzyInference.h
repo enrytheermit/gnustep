@@ -85,7 +85,7 @@
 	OpalFuzzyDTree *_tree;
 }
 - (id) new;
-- (id) init:(OpalFuzzyDTree*)dt;
+- (id) setTree:(OpalFuzzyDTree*)dt;
 - (id) parse:(InferenceADT*)adt;
 - (id) compileToTree:(InferenceADT*)adt; 
 @end

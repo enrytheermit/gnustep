@@ -145,7 +145,7 @@
 	return self; 
 }
 
--(id) init:(OpalFuzzyDTree*)dt
+-(id) setTree:(OpalFuzzyDTree*)dt
 {
 	_tree = dt;
 	return self;
