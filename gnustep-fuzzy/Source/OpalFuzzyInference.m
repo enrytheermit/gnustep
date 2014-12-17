@@ -54,6 +54,7 @@
 - (id) new:(InferenceNode*)d
 {
 	_atom = d;
+	_atomid = -1; // FIXME #define
 }
 -(id)node
 {
@@ -61,7 +62,14 @@
 }
 -(void) parse:(OpalFuzzyInference*)inf
 {
-	[inf addAtom:_atom with:[_atom predicate]];	
+	if ([_atom isKindOfClass:[NSString class]]) {
+		/* FIXME ? this should make a string an integer, always */
+		_atomid = [[_atom stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+		/* atom predicates get squeezed from "blue 0" to "blue0" */	
+		[_atom predicate:[[_atom stringByReplacingOccurrencesOfString:@" " withString:@""] intValue]];	
+			
+	}
+	[inf addAtom:_atomid withId:[_atomid predicate]];	
 }
 @end
 @implementation InferenceVariable
@@ -73,6 +81,17 @@
 {
 	return _var;
 }
+-(void) parse:(OpalFuzzyInference*)inf
+{
+	if ([_var isKindOfClass:[NSString class]]) {
+		/* FIXME ? this should make a string an integer, always */
+		_varid = [[_var stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+		/* atom predicates get squeezed from "blue 0" to "blue0" */	
+		[_var predicate:[[_var stringByReplacingOccurrencesOfString:@" " withString:@""] intValue]];	
+			
+	}
+	[inf addVar:_varid withId:[_varid predicate]];	
+}
 @end
 @implementation InferenceNumber
 - (id) new:(InferenceNode*)d
@@ -83,6 +102,17 @@
 {
 	return _number;
 }
+-(void) parse:(OpalFuzzyInference*)inf
+{
+	if ([_number isKindOfClass:[NSString class]]) {
+		/* FIXME ? this should make a string an integer, always */
+		_numberid = [[_number stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+		/* atom predicates get squeezed from "blue 0" to "blue0" */	
+		[_number predicate:[[_number stringByReplacingOccurrencesOfString:@" " withString:@""] intValue]];	
+			
+	}
+	[inf addNumber:_numberid withId:[_numberid predicate]];	
+}
 @end
 @implementation InferenceCompound
 - (id) new:(InferenceNode*)d
@@ -92,6 +122,17 @@
 -(id)node
 {
 	return _compound;
+}
+-(void) parse:(OpalFuzzyInference*)inf
+{
+	if ([_compound isKindOfClass:[NSString class]]) {
+		/* FIXME ? this should make a string an integer, always */
+		_compoundid = [[_compound UTF8String] intValue];
+		/* atom predicates get squeezed from "blue 0" to "blue0" */	
+		[_compound predicate:[[_compound UTF8String] intValue]];	
+			
+	}
+	[inf addCompound:_compoundid withId:[_compoundid predicate]];	
 }
 @end
  
@@ -117,14 +158,14 @@
 }
 -(void)addVar:(InferenceVariable*)a with:(OpalFuzzyPredicate*)p
 {
-	[_atoms setObject:p forKey:a];		
+	[_vars setObject:p forKey:a];		
 }
 -(void)addNumber:(InferenceNumber*)a with:(OpalFuzzyPredicate*)p
 {
-	[_atoms setObject:p forKey:a];		
+	[_numbers setObject:p forKey:a];		
 }
 -(void)addCompound:(InferenceCompound*)a with:(OpalFuzzyPredicate*)p
 {
-	[_atoms setObject:p forKey:a];		
+	[_compounds setObject:p forKey:a];		
 }
 @end

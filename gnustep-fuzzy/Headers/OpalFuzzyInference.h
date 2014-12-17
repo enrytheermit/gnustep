@@ -41,30 +41,34 @@
 -(id)data;
 -(void)data:(id)d;
 -(id)predicate;
--(void)predicte:(OpalFuzzyPredicate*)d;
+-(void)predicate:(OpalFuzzyPredicate*)d;
 @end
 
 @interface InferenceAtom
 {
 	InferenceNode* _atom;
+	int _atomid;
 }
 -(id)node;
 @end
 @interface InferenceVariable
 {
 	InferenceNode* _var;
+	int _varid;
 }
 -(id)node;
 @end
 @interface InferenceNumber
 {
 	InferenceNode* _number;
+	int _numberid;
 }
 -(id)node;
 @end
 @interface InferenceCompound
 {
 	InferenceNode* _compound;
+	int _compoundid;
 }
 -(id)node;
 @end
