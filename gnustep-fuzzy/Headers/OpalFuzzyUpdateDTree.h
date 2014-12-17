@@ -30,10 +30,13 @@
 
 #import <Foundation/Foundation.h>
 @class OpalFuzzyPredicate;
+@class OpalFuzzyDTreeFactory;
 
 @interface OpalFuzzyUpdateUpdateDTree
-{}
-- (id) new;
+{
+	OpalFuzzyDTreeFactory *_factory;
+}
+- (id) new:(OpalFuzzyDTreeFactory*)fact;
 - (id) makeUpdateDTree;
 @end
 #enfif

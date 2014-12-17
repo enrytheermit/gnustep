@@ -29,14 +29,16 @@
  
 @implementation OpalFuzzyUpdateDTree
 
-- (id) new
+- (id) new:(OpalFuzzyDTreeFactory*)fact
 {
-	[[super alloc] init]; 
+	[[super alloc] init];
+	_factory = fact;
+	return self; 
 }
 
-- (id)makeUpdateDTreeWithFactory:(OpalFuzzyDTreeFactory*)fact
+- (id)makeUpdateDTree
 {
-	OpalFuzzyDTree *dtree = [fact makeDTree];
+	OpalFuzzyDTree *dtree = [_factory makeDTree];
 
 	//make predicates which is an NSString
 	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] init];
