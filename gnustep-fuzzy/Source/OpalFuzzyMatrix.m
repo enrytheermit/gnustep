@@ -52,7 +52,7 @@
 	if (w > 0 && h > 0) {
 	typedef struct {
 		/* FIXME EVAL(REPEAT(w,MAKEMatrixElement,h)) */
-		EVAL(REPEAT(1,MAKEMatrixElement,1))
+		EVAL(REPEAT(4,MAKEMatrixElement,4))
 	} _OpalMatrix;
 	_matrix = (_OpalMatrix*)[_matrix alloc];
 	} else {
