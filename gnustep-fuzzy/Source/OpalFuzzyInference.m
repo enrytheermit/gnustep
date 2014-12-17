@@ -27,10 +27,13 @@
 #import "../Headers/OpalFuzzyPredicate.h"
 #import "../Headers/OpalFuzzyDB.h"
 #import "../Headers/OpalFuzzyInference.h"
+#import "../Headers/OpalFuzzyManipulator.h"
+#import "../Headers/OpalFuzzyVisitor.h"
  
 @implementation InferenceNode
 -(id)new:(id)d{
 	_data = d;
+	return self;
 }
 -(id)data
 {
@@ -55,6 +58,15 @@
 {
 	_node = n;
 	_nodeid = -1; // FIXME #define this constant
+	return self;
+}
+-(id)node
+{
+	return _node;
+}
+-(int)nodeid
+{
+	return _nodeid;
 }
 @end
 
@@ -65,9 +77,8 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* node predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[[_node data] UTF8String]];	
-		[inf addAtom:_nodeid withId:[_node predicate]];	
-		[inf compileAtomToTree:self];	
+		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[inf addAtom:self with:[_node predicate]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -82,9 +93,8 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[[_node data] UTF8string]];	
-		[inf addVar:_nodeid withId:[_node predicate]];	
-		[inf compileVariableToTree:self];	
+		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[inf addVariable:self with:[_node predicate]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -99,9 +109,8 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[[_node data] UTF8string]];	
-		[inf addNumber:_nodeid withId:[_node predicate]];	
-		[inf compileNumberToTree:self];	
+		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[inf addNumber:self with:[_node predicate]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -114,19 +123,17 @@
 {
 	if ([[_node data] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node data] UTF8String] intValue];
-		[_node predicate:[[_node data] UTF8String]];	
+		//_nodeid = [[[_node data] UTF8String] intValue];
 		//adds compound to (cache) DB
-		[inf addCompound:_nodeid withId:[_node predicate]];
-		[inf compileCompoundToTree:self];	
+		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[inf addCompound:self with:[_node predicate]];
 			
 	} else if ([[_node data] isKindOfClass:[OpalFuzzyPredicate class]]) {
 		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node data] UTF8String] intValue];
+		//_nodeid = [[[_node data] UTF8String] intValue];
 		[_node predicate:[[_node data] UTF8String]];	
 		//adds compound to (cache) DB
-		[inf addCompound:_nodeid withId:[_node predicate]];
-		[inf compileCompoundToTree:self];	
+		[inf addCompound:self with:[_node predicate]];
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -139,7 +146,6 @@
  
 -(id) new 
 {
- 	[[super alloc] init];
 	_atoms = [OpalFuzzyDB new];	
 	_vars = [OpalFuzzyDB new];	
 	_numbers = [OpalFuzzyDB new];	
@@ -147,9 +153,14 @@
 	return self; 
 }
 
+-(OpalFuzzyDTree*)tree
+{
+	return _tree;
+}
+
 - (void)accept:(OpalFuzzyVisitor*)v
 {
-	[v visitDTree: self];
+	[v visitInference: self];
 }
 
 -(id) setTree:(OpalFuzzyDTree*)dt
@@ -166,17 +177,21 @@
 -(void)addAtom:(InferenceAtom*)a with:(OpalFuzzyPredicate*)p
 {
 	[_atoms setObject:p forKey:a];		
+	[_tree compileAtomToTree:a];	
 }
--(void)addVar:(InferenceVariable*)a with:(OpalFuzzyPredicate*)p
+-(void)addVariable:(InferenceVariable*)a with:(OpalFuzzyPredicate*)p
 {
 	[_vars setObject:p forKey:a];		
+	[_tree compileVariableToTree:a];	
 }
 -(void)addNumber:(InferenceNumber*)a with:(OpalFuzzyPredicate*)p
 {
 	[_numbers setObject:p forKey:a];		
+	[_tree compileNumberToTree:a];	
 }
 -(void)addCompound:(InferenceCompound*)a with:(OpalFuzzyPredicate*)p
 {
 	[_compounds setObject:p forKey:a];		
+	[_tree compileCompoundToTree:a];	
 }
 @end

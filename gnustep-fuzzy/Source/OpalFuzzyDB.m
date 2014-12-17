@@ -30,13 +30,14 @@
  
 -(id) new 
 {
- 	[[super alloc] init];
+ 	self = [[NSMutableDictionary alloc] init];
 	return self; 
 }
  
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif
  {
- 	[self setObject:pif forKey:key];
+ 
+	[self setObject:[NSValue valueWithPointer:pif] forKey:key];
  }
  
  - (void)addObjectToDict:(NSString*)key :(id)o
@@ -45,7 +46,7 @@
  }
  
  
- - (SEL)getWithKey:(NSString*)key
+ - (NSValue*)getWithKey:(NSString*)key
  {
  	return [self objectForKey:key];	
  }

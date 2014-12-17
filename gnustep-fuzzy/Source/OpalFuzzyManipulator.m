@@ -32,8 +32,7 @@
 
 - (id) new:(id)parser
 {
-	[super new];
-	_o = parser; 
+	[super new:parser];
 	return self;
 }
 
@@ -43,8 +42,7 @@
 
 - (id) new:(id)screen
 {
-	[super new];
-	_o = screen; 
+	[super new:screen];
 	return self;
 }
 
@@ -54,8 +52,7 @@
 
 - (id) new:(id)o
 {
-	[[super alloc] init];
-	_o = o;
+	o = _o;
 	return self;
 }
 
@@ -69,8 +66,7 @@
 
 - (id) new:(id)painter
 {
-	[super new];
-	_o = painter;
+	[super new:painter];
 	return self;
 }
 
@@ -80,7 +76,6 @@
 
 - (id) new:(id)o
 {
-	[[super alloc] init];
 	_o = o;
 	return self;
 }

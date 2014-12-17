@@ -35,7 +35,7 @@
  - (id)new;
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif;
  - (void)addObjectToDict:(NSString*)key :(id)o;
- - (SEL)getWithKey:(NSString*)key;
+ - (NSValue*)getWithKey:(NSString*)key;
  - (void)reinitCapacity;
  
  @end

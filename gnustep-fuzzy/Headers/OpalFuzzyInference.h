@@ -53,7 +53,7 @@
 	int _nodeid;
 }
 -(id)node;
--(id)nodeid;
+-(int)nodeid;
 @end
 
 @interface InferenceAtom : InferenceADT
@@ -86,12 +86,16 @@
 	OpalFuzzyDTree *_tree;
 }
 - (id) new;
-
+- (OpalFuzzyDTree*) tree;
+-(id) parse:(InferenceADT*)adt;
 - (void)accept:(OpalFuzzyVisitor*)v;
 
 - (id) setTree:(OpalFuzzyDTree*)dt;
 - (id) parse:(InferenceADT*)adt;
-- (id) compileToTree:(InferenceADT*)adt; 
+-(void)addAtom:(InferenceAtom*)a with:(OpalFuzzyPredicate*)p;
+-(void)addNumber:(InferenceNumber*)a with:(OpalFuzzyPredicate*)p;
+-(void)addVariable:(InferenceVariable*)a with:(OpalFuzzyPredicate*)p;
+-(void)addCompound:(InferenceCompound*)a with:(OpalFuzzyPredicate*)p;
 @end
  
  #endif

@@ -33,6 +33,11 @@
 @class OpalFuzzyDTreeFactory;
 @class OpalFuzzyDTreeNode;
 @class OpalFuzzyInference;
+@class OpalFuzzyInference;
+@class InferenceAtom;
+@class InferenceVariable;
+@class InferenceNumber;
+@class InferenceCompound;
 @class InferenceADT;
 
 @interface InferenceManipulator
@@ -53,7 +58,6 @@
 - (id) makeVar:(OpalFuzzyPredicate*)p; 
 - (id) makeNumber:(OpalFuzzyPredicate*)p; 
 - (id) makeCompound:(OpalFuzzyPredicate*)p; 
-- (id) compileToTree:(InferenceADT*)adt;
 //_inference wrapper
 - (id)createInferenceManipulator;
 @end
@@ -69,6 +73,7 @@
 }
 - (id) new:(InferenceADT*)adt;
 - (id) adt;
+-(id)searchTreeFor:(NSString*)ds;
 @end
 @interface OpalFuzzyDTreeNodeCon : NSObject {
 	OpalFuzzyDTreeNode *_node;	
@@ -81,5 +86,9 @@
 	OpalFuzzyInference *_inference;		
 }
 - (id)init:(OpalFuzzyDTreeFactory*)factory; 
+-(id) compileCompoundToTree:(InferenceCompound*)comp;
+-(id) compileAtomToTree:(InferenceAtom*)atom;
+-(id) compileNumberToTree:(InferenceNumber*)num;
+-(id) compileVariableToTree:(InferenceVariable*)var;
 @end
 #endif

@@ -27,6 +27,7 @@
  
 #import "../Headers/OpalFuzzyDTree.h"
 #import "../Headers/OpalFuzzyInference.h"
+#import "../Headers/OpalFuzzyVisitor.h"
 
 #import "../Headers/OpalFuzzyMACROS.h"
  
@@ -34,6 +35,7 @@
 - (id)new:(OpalFuzzyDTreeFactory*)fact
 {
 	_factory = fact;
+	return self;
 }
 @end
 
@@ -50,9 +52,8 @@
 
 - (id) makeADT:(OpalFuzzyPredicate*)p with:(Class)adt
 {
-	InferenceADT * iadt = [[adt class] new];
-	[iadt data:(id)p];
-	return [[self createManipulator] parse: iadt];
+	InferenceADT *iadt = [[adt class] new:[InferenceNode new:p]];
+	return [[self createInferenceManipulator] parse: iadt];
 } 
 
 - (id) makeAtom:(OpalFuzzyPredicate*)p
@@ -86,7 +87,6 @@
 
 - (id) new
 {
-	[[super alloc] init]; 
 	_nodes = [OpalFuzzyDTreeNode new];
 	return self;
 }
@@ -102,7 +102,6 @@
 
 - (id) new:(InferenceADT*)adt
 {
-	[[super alloc] init]; 
 	_adt = adt;
 	return self;
 }
@@ -140,7 +139,6 @@
 
 - (id) new:(OpalFuzzyDTreeNode*)node
 {
-	[[super alloc] init]; 
 	_node = node;
 	return self;
 }
@@ -162,42 +160,13 @@
 
 - (void)accept:(OpalFuzzyVisitor*)v
 {
-	[v visitInference: self];
+	[v visitDTree: self];
 }
 
 - (void) addCompound:(InferenceCompound*)comp
 {
 	[comp parse:_inference]; //NOTE adds compound to _compounds DB
 }
-
-/*
- * NOTE : a Tree construction mechanism after all addX: have been done.
- *        The inference engine uses compileCompoundToTree and friends.
- */
--(id) compileToTree:(InferenceADT*)adt
-{
-	if ([adt isKindOfClass:[InferenceCompound class]]) {
-
-		[self compileCompoundToTree:adt];
-
-	}
-	else if ([adt isKindOfClass:[InferenceVariable class]]) {
-
-		[self compileVariableToTree:adt];
-
-	}
-	else if ([adt isKindOfClass:[InferenceNumber class]]) {
-
-		[self compileNumberToTree:adt];
-
-	}
-	else if ([adt isKindOfClass:[InferenceAtom class]]) {
-
-		[self compileAtomToTree:adt];
-
-	}
-	return self;
-}	
 
 -(id)searchTreeFor:(NSString*)ds
 {
@@ -209,14 +178,15 @@
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
 	*/
-	OpalFuzzyPredicate *ps = [[comp node] predicate]; 
+	OpalFuzzyPredicate *ps = (OpalFuzzyPredicate*)[[comp node] predicate]; 
 	[ps stringByReplacingOccurrencesOfString:@" " withString:@""];
-	if ([ps rangeOfString:(0,[NOTS length])].length == [NOTS length]) {
+	if ([ps rangeOfString:NOTS].length == 3) {
 		/* for speed */
-		unsigned int len = [[comp data] length];
+		unsigned int len = [[[comp node] data] length];
 		char buffer[len];
 
-		[ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
+		strncpy(buffer, [ps UTF8String], [ps length]); 
+		//[ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
 		OpalFuzzyDTreeNode *n = [self searchTreeFor:[NSString initWithCharacters:buffer length:len]];
 		if (n) {
 			/* FIXME kludge, old not nodes are doubled */ 
@@ -247,7 +217,7 @@
 
 -(id) compileAtomToTree:(InferenceAtom*)atom
 {
-	if ([atom data] != nil) {
+	if ([[atom node] data] != nil) {
 		
 	}
 	return self;
