@@ -25,36 +25,15 @@
     Boston, MA 021101301, USA.
  */
  
-#ifndef OpalFuzzyDTree_h_defined
-#define OpalFuzzyDTree_h_defined
+#ifndef OpalFuzzyUpdateDTree_h_defined
+#define OpalFuzzyUpdateDTree_h_defined
 
 #import <Foundation/Foundation.h>
 @class OpalFuzzyPredicate;
 
-@interface OpalFuzzyDTreeFactory
-{
-		
-}
-- (id) makeDTree;
-- (id) makeADT:(OpalFuzzyPredicate*)p with:(Class)adt; 
-- (id) makeAtom:(OpalFuzzyPredicate*)p; 
-- (id) makeVar:(OpalFuzzyPredicate*)p; 
-- (id) makeNumber:(OpalFuzzyPredicate*)p; 
-- (id) makeCompound:(OpalFuzzyPredicate*)p; 
-- (id)createManipulator;
-@end
-
-@interface OpalFuzzyDTreeRoot : NSObject {
-}
-- (id) new; 
-@end
-@interface OpalFuzzyDTreeNode : NSObject {
-}
-- (id) new; 
-@end
-@interface OpalFuzzyDTree : NSObject {
-}
+@interface OpalFuzzyUpdateUpdateDTree
+{}
 - (id) new;
-- (id)make:(OpalFuzzyDTreeFactory*)factory; 
+- (id) makeUpdateDTree;
 @end
-#endif
+#enfif

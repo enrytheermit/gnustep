@@ -59,7 +59,7 @@
 @end
 
 @implementation InferenceAtom
--(void) parse:(OpalFuzzyInference*)inf
+-(id) parse:(OpalFuzzyInference*)inf
 {
 	if ([[_node data] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
@@ -71,10 +71,11 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addAtom:_nodeid withId:[_node predicate]];	
+	return self;
 }
 @end
 @implementation InferenceVariable
--(void) parse:(OpalFuzzyInference*)inf
+-(id) parse:(OpalFuzzyInference*)inf
 {
 	if ([[_node data] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
@@ -86,10 +87,11 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addVar:_nodeid withId:[_node predicate]];	
+	return self;
 }
 @end
 @implementation InferenceNumber
--(void) parse:(OpalFuzzyInference*)inf
+-(id) parse:(OpalFuzzyInference*)inf
 {
 	if ([[_node data] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
@@ -101,10 +103,11 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addNumber:_nodeid withId:[_node predicate]];	
+	return self;
 }
 @end
 @implementation InferenceCompound
--(void) parse:(OpalFuzzyInference*)inf
+-(id) parse:(OpalFuzzyInference*)inf
 {
 	if ([[_node data] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
@@ -115,6 +118,7 @@
 		/* FIXME stringify [_node data] int _nodeid */
 	}
 	[inf addCompound:_nodeid withId:[_node predicate]];	
+	return self;
 }
 @end
  
@@ -130,9 +134,10 @@
 	return self; 
 }
 
--(id) parseNode:(InferenceNode*)node
+-(id) parse:(InferenceADT*)adt
 {
-	[node parse:self]; 
+	[adt parse:self]; 
+	return adt;
 }
 -(void)addAtom:(InferenceAtom*)a with:(OpalFuzzyPredicate*)p
 {

@@ -57,22 +57,22 @@
 @interface InferenceAtom : InferenceADT
 {
 }
--(void) parse:(OpalFuzzyInference*)inf;
+-(id) parse:(OpalFuzzyInference*)inf;
 @end
 @interface InferenceVariable : InferenceADT
 {
 }
--(void) parse:(OpalFuzzyInference*)inf;
+-(id) parse:(OpalFuzzyInference*)inf;
 @end
 @interface InferenceNumber : InferenceADT
 {
 }
--(void) parse:(OpalFuzzyInference*)inf;
+-(id) parse:(OpalFuzzyInference*)inf;
 @end
 @interface InferenceCompound : InferenceADT
 {
 }
--(void) parse:(OpalFuzzyInference*)inf;
+-(id) parse:(OpalFuzzyInference*)inf;
 @end
  
 @interface OpalFuzzyInference : NSObject {
@@ -81,7 +81,9 @@
 	OpalFuzzyDB *_numbers;	
 	OpalFuzzyDB *_compounds;	
  }
- - (id)new;
+- (id)new;
+
+-(id) parse:(InferenceADT*)adt;
  
 @end
  

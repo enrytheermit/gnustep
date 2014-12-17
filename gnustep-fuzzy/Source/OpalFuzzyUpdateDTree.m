@@ -25,72 +25,17 @@
     Boston, MA 02110-1301, USA.
  */
  
-#import "../Headers/OpalFuzzyDTree.h"
-#import "../Headers/OpalFuzzyInference.h"
+#import "../Headers/OpalFuzzyUpdateDTree.h"
  
-@implementation OpalFuzzyDTreeFactory
-- (id) makeDTree
-{
-	return [OpalFuzzyDTree new];
-}
-
-- (id) makeADT:(OpalFuzzyPredicate*)p with:(Class)adt
-{
-	InferenceADT * iadt = [[adt class] new];
-	[iadt data:(id)p];
-	return [[self createManipulator] parse: iadt];
-} 
-
-- (id) makeAtom:(OpalFuzzyPredicate*)p
-{
-	return [self makeADT:p with:@encode(InferenceAtom)];
-}
-
-- (id) makeNumber:(OpalFuzzyPredicate*)p
-{
-	return [self makeADT:p with:@encode(InferenceNumber)];
-}
-
-- (id) makeVar:(OpalFuzzyPredicate*)p
-{
-	return [self makeADT:p with:@encode(InferenceVariable)];
-}
-
-- (id) makeCompound:(OpalFuzzyPredicate*)p
-{
-	return [self makeADT:p with:@encode(InferenceCompound)];
-}
-
-- (id) createManipulator
-{
-	return [OpalFuzzyInference new];
-}
-
-@end
-
-@implementation OpalFuzzyDTreeRoot
+@implementation OpalFuzzyUpdateDTree
 
 - (id) new
 {
 	[[super alloc] init]; 
 }
 
-@end
-
-@implementation OpalFuzzyDTreeNode
-
-- (id) new
-{
-	[[super alloc] init]; 
-}
+- (id)makeUpdateDTree
+{}
 
 @end
 
-@implementation OpalFuzzyDTree
-
-- (id) new
-{
-	[[super alloc] init]; 
-}
-
-@end
