@@ -65,7 +65,7 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* node predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[_node UTF8String]];	
+		[_node predicate:[[_node data] UTF8String]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -81,7 +81,7 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[_node UTF8string]];	
+		[_node predicate:[[_node data] UTF8string]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -97,7 +97,7 @@
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[_node UTF8string]];	
+		[_node predicate:[[_node data] UTF8string]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -112,7 +112,12 @@
 	if ([[_node data] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
 		_nodeid = [[[_node data] UTF8String] intValue];
-		[_node predicate:[[_node UTF8String] intValue]];	
+		[_node predicate:[[_node data] UTF8String]];	
+			
+	} else if ([[_node data] isKindOfClass:[OpalFuzzyPredicate class]]) {
+		/* FIXME ? this should make a string an integer, always */
+		_nodeid = [[[_node data] UTF8String] intValue];
+		[_node predicate:[[_node data] UTF8String]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */

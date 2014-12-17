@@ -43,7 +43,7 @@
 	//initialize it with a string which in this case is multi-worded
 	[pred initWithString:@"update full window";
 	
-	//so it becomes a compound
+	//so it becomes a compound, which gets parsed and 
 	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
 	InferenceCompound *comp = [fact makeCompound:pred];
 }
