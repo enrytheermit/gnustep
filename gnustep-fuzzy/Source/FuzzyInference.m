@@ -31,7 +31,7 @@
 #import "../Headers/FuzzyVisitor.h"
  
 @implementation InferenceNode
-+(id)new
+-(id)new
 {
 	return self;
 }
@@ -46,6 +46,7 @@
 }
 -(NSString*)dataToString
 {
+	NSLog(@"dataToString");
 	return [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
 }
 -(void)data:(id)d
@@ -63,10 +64,8 @@
 @end
 
 @implementation InferenceADT
-- (id) new:(InferenceNode*)n
+- (id) new
 {
-	_node = n;
-	_nodeid = -1; // FIXME #define this constant
 	return self;
 }
 -(id)node
@@ -80,6 +79,10 @@
 -(int)nodeid
 {
 	return _nodeid;
+}
+-(void)nodeid:(int)n
+{
+	_nodeid = n;
 }
 @end
 
@@ -132,25 +135,33 @@
 }
 @end
 @implementation InferenceCompound
+- (id) new
+{
+	self = [super new];
+	return self;
+}
 -(id) parse:(FuzzyInference*)inf
 {
+	NSLog(@"BAZ");
+	//[_node predicate:[FuzzyPredicate new:[_node dataToString]]];	
+	NSLog(@"BAZ:%s", [_node predicate]);
+	[inf addCompound:self with:[_node predicate]];
+	NSLog(@"BAZ");
+/****
 	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
-		/* FIXME ? this should make a string an integer, always */
 		//_nodeid = [[[_node dataToString] UTF8String] intValue];
 		//adds compound to (cache) DB
 		[_node predicate:[FuzzyPredicate new:[_node dataToString]]];	
-		[inf addCompound:self with:[_node predicate]];
 			
 	} else if ([[_node data] isKindOfClass:[FuzzyPredicate class]]) {
-		/* FIXME ? this should make a string an integer, always */
 		//_nodeid = [[[_node data] UTF8String] intValue];
 		[_node predicate:[FuzzyPredicate new:[_node data]]];	
 		//adds compound to (cache) DB
 		[inf addCompound:self with:[_node predicate]];
 			
 	} else {
-		/* FIXME stringify [_node data] int _nodeid */
 	}
+****/
 	return self;
 }
 @end

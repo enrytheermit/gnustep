@@ -82,9 +82,10 @@
 
 - (id) makeCompound:(FuzzyPredicate*)p
 {
-	InferenceCompound *iadt = [InferenceCompound alloc];
+	InferenceCompound *iadt = [InferenceCompound new];
 	InferenceNode *n = [InferenceNode new];
-	[n data:p];
+	//[n data:p];
+	[n predicate:p];
 	[iadt node:n];
 	return [_inference parse: iadt];
 }

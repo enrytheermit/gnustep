@@ -35,12 +35,12 @@
 @class FuzzyDTree;
 @class FuzzyVisitor;
 
-@interface InferenceNode
+@interface InferenceNode : NSObject
 {
 	NSData *_data;
 	FuzzyPredicate *_predicate;
 }
-+(id)new;
+-(id)new;
 -(id)init:(NSData*)d;
 -(id)data;
 -(NSString*)dataToString;
@@ -49,14 +49,16 @@
 -(void)predicate:(FuzzyPredicate*)d;
 @end
 
-@interface InferenceADT
+@interface InferenceADT : NSObject
 {
 	InferenceNode* _node;
 	int _nodeid;
 }
+- (id)new;
 -(id)node;
 -(void)node:(InferenceNode*)n;
 -(int)nodeid;
+-(void)nodeid:(int)n;
 @end
 
 @interface InferenceAtom : InferenceADT
@@ -77,6 +79,7 @@
 @interface InferenceCompound : InferenceADT
 {
 }
+- (id)new;
 -(id) parse:(FuzzyInference*)inf;
 @end
  

@@ -30,9 +30,9 @@
  
  @implementation FuzzyPredicate 
 
-+(id)new
+-(id)new
 {
-	[[super alloc]init];
+	[[super alloc] init];
 	return self;
 }
 

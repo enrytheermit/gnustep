@@ -61,8 +61,9 @@
 	//make predicates which is an NSString
 	//initialize it with a string which in this case is multi-worded
 	NSLog(@"FOO\n");
-	FuzzyPredicate *pred = [FuzzyPredicate new]; 
-	pred = @"update window";	
+	FuzzyPredicate *pred = [FuzzyPredicate new];
+	pred = @"not x"; 
+	//[pred appendString: @"update window"];	
 	//so it becomes a compound, which gets parsed and 
 	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
 
