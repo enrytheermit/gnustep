@@ -92,7 +92,7 @@
 	return self;
 }
 
--(id)searchTreeFor:(NSString*)ds
+-(id)searchTreeFor:(OpalFuzzyPredicate*)ds
 {
 	return [_nodes searchTreeFor:ds];
 }
@@ -107,7 +107,7 @@
 	return self;
 }
 
--(id)searchTreeFor:(NSString*)ds
+-(id)searchTreeFor:(OpalFuzzyPredicate*)ds
 {
     //greedy search for node which matches ds
     NSEnumerator *enumerator = [_cons keyEnumerator];
@@ -127,6 +127,10 @@
 }
 
 - (void)splitForNot:(OpalFuzzyPredicate *)p
+{
+	[_cons addObject:[OpalFuzzyDTreeNodeCon new:[OpalFuzzyDTreeNode new:[InferenceCompound new:[InferenceNode new:p]]]]];	
+} 
+- (void)addForNot:(OpalFuzzyPredicate *)p
 {
 	[_cons addObject:[OpalFuzzyDTreeNodeCon new:[OpalFuzzyDTreeNode new:[InferenceCompound new:[InferenceNode new:p]]]]];	
 } 
@@ -169,31 +173,33 @@
 	[comp parse:_inference]; //NOTE adds compound to _compounds DB
 }
 
--(id)searchTreeFor:(NSString*)ds
+-(id)searchTreeFor:(OpalFuzzyPredicate*)ds
 {
 	return [_root searchTreeFor:ds];
 }
 
 -(id) compileCompoundToTree:(InferenceCompound*)comp
 {
+	OpalFuzzyPredicate *ps = (OpalFuzzyPredicate*)[[comp node] predicate]; 
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
 	*/
-	OpalFuzzyPredicate *ps = (OpalFuzzyPredicate*)[[comp node] predicate]; 
 	[ps stringByReplacingOccurrencesOfString:@" " withString:@""];
 	if ([ps rangeOfString:NOTS].length == 3) {
-		/* for speed
-		unsigned int len = [[[comp node] data] length];
-		char buffer[len];
-
-		strncpy(buffer, [ps UTF8String], [ps length]); 
-		//[ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
-		OpalFuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
+		/* NOTE : for speed
+			unsigned int len = [[[comp node] data] length];
+			char buffer[len];
+			strncpy(buffer, [ps UTF8String], [ps length]); 
+			//or [ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
+			OpalFuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
 		*/
-		OpalFuzzyDTreeNode *n = [self searchTreeFor:ps];
+		OpalFuzzyPredicate *p = [ps substringWithRange:NSMakeRange(3,[ps length])];
+		OpalFuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			/* FIXME kludge, old not nodes are doubled */ 
-			[n splitForNot:ps];	
+			[n splitForNot:p];	
+		} else {
+			[n addForNot:p];	
 		}	
 	}	
 /***	if ([[comp data] rangeOfString:ORS] == [ORS length]) {

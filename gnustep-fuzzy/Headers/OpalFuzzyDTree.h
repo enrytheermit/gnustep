@@ -73,7 +73,7 @@
 }
 - (id) new:(InferenceADT*)adt;
 - (id) adt;
--(id)searchTreeFor:(NSString*)ds;
+-(id)searchTreeFor:(OpalFuzzyPredicate*)ds;
 @end
 @interface OpalFuzzyDTreeNodeCon : NSObject {
 	OpalFuzzyDTreeNode *_node;	
