@@ -1,1 +1,3 @@
 run make in the Source directory. Installation does not work (yet.)
+
+you can also run make in the Tests directory.

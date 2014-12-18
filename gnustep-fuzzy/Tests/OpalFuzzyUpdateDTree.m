@@ -1,5 +1,5 @@
  /*
-    OpalFuzzyDecisionTree.m
+    OpalFuzzyUpdateDecisionTree.m
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
@@ -25,13 +25,16 @@
     Boston, MA 02110-1301, USA.
  */
  
-#import "../Headers/OpalFuzzyUpdateDTree.h"
+#import "OpalFuzzyUpdateDTree.h"
+#import "../Headers/OpalFuzzyPredicate.h"
+#import "../Headers/OpalFuzzyDTree.h"
+#import "../Headers/OpalFuzzyVisitor.h"
+#import "../Headers/OpalFuzzyInference.h"
  
 @implementation OpalFuzzyUpdateDTree
 
 - (id) new:(OpalFuzzyDTreeFactory*)fact
 {
-	[[super alloc] init];
 	_factory = fact;
 	return self; 
 }
@@ -44,19 +47,20 @@
 	OpalFuzzyInference *inf = [OpalFuzzyInference new];
 	OpalFuzzyDTree *dtree = [OpalFuzzyDTree new];
 	OpalFuzzyConstructVisitor *visi = [OpalFuzzyConstructVisitor new];
-	inf = [inf accept:visi];
-	dtree = [dtree accept:visi];
+	[inf accept:visi];
+	[dtree accept:visi];
 	OpalFuzzySetVisitor *visiset = [OpalFuzzySetVisitor new];
-	inf = [inf accept:visiset];
-	dtree = [dtree accept:visiset];
+	[inf accept:visiset];
+	[dtree accept:visiset];
 	//make predicates which is an NSString
-	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] init];
 	//initialize it with a string which in this case is multi-worded
-	[pred initWithString:@"update full window";
+	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] initWithString:@"update full window"];
 	
 	//so it becomes a compound, which gets parsed and 
 	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
-	InferenceCompound *comp = [fact makeCompound:pred];
+	[_factory makeCompound:pred];
+
+	return dtree;
 }
 
 @end

@@ -1,10 +1,10 @@
  /*
-    OpalFuzzyDecisionTree.h
+    OpalFuzzy.m
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
-    Author: Johan Ceuppens <johan@yellowcouch.org> 
-    Date: Dec 2014
+    Author: Johan Ceuppens <johan@yellowcouch.org>
+    Date: Dec 2014 
  
     This file is part of GNUstep.
  
@@ -22,21 +22,23 @@
     License along with this library; see the file COPYING.LIB.
     If not, see <http://www.gnu.org/licenses/> or write to the
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
-    Boston, MA 021101301, USA.
+    Boston, MA 02110-1301, USA.
  */
  
-#ifndef OpalFuzzyUpdateDTree_h_defined
-#define OpalFuzzyUpdateDTree_h_defined
+#import "../Headers/OpalFuzzyPaintRuleSystem.h"
+#import "../Headers/OpalFuzzy.h"
 
-#import <Foundation/Foundation.h>
-@class OpalFuzzyPredicate;
-@class OpalFuzzyDTreeFactory;
-
-@interface OpalFuzzyUpdateUpdateDTree
+void makePaintRules(OpalFuzzyPaintRuleSystem* sys)
 {
-	OpalFuzzyDTreeFactory *_factory;
+	[sys addRule:@"paint extremely" with: @selector(paintOn:)];
+	OpalFuzzyFunction *f = [OpalFuzzyFunctionExtremely new];
+	[f x:.0];
+	[sys addFunction:@"paint extremely" with: f];
+/***
+	[sys addRule:"paint not for 1 second" : paintIdle1SecondOn:];
+	f = [OpalFuzzyFunctionIdle new];
+	[f x:.0];
+	[sys addFunction:"paint not for 1 second" : f];
+***/
 }
-- (id) new:(OpalFuzzyDTreeFactory*)fact;
-- (id) makeUpdateDTree;
-@end
-#enfif
+
