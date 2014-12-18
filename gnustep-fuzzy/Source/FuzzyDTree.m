@@ -32,7 +32,7 @@
 #import "../Headers/FuzzyMACROS.h"
  
 @implementation InferenceManipulator
-- (id)new:(FuzzyDTreeFactory*)fact
++(id)new:(FuzzyDTreeFactory*)fact
 {
 	_factory = fact;
 	return self;
@@ -40,7 +40,7 @@
 @end
 
 @implementation FuzzyDTreeFactory
-- (id)new:(FuzzyInference*)inf
++ (id)new:(FuzzyInference*)inf
 {
 	_inference = inf;
 	return self;
@@ -59,22 +59,26 @@
 
 - (id) makeAtom:(FuzzyPredicate*)p
 {
-	return [self makeADT:p with:@encode(InferenceAtom)];
+	InferenceAtom *iadt = [InferenceAtom new:[InferenceNode new:p]];
+	return [_inference parse: iadt];
 }
 
 - (id) makeNumber:(FuzzyPredicate*)p
 {
-	return [self makeADT:p with:@encode(InferenceNumber)];
+	InferenceNumber *iadt = [InferenceNumber new:[InferenceNode new:p]];
+	return [_inference parse: iadt];
 }
 
 - (id) makeVar:(FuzzyPredicate*)p
 {
-	return [self makeADT:p with:@encode(InferenceVariable)];
+	InferenceVariable *iadt = [InferenceVariable new:[InferenceNode new:p]];
+	return [_inference parse: iadt];
 }
 
 - (id) makeCompound:(FuzzyPredicate*)p
 {
-	return [self makeADT:p with:@encode(InferenceCompound)];
+	InferenceCompound *iadt = [InferenceCompound new:[InferenceNode new:p]];
+	return [_inference parse: iadt];
 }
 
 - (id) createInferenceManipulator
@@ -106,7 +110,7 @@
 
 @implementation FuzzyDTreeNode
 
-- (id) new:(InferenceADT*)adt
++ (id) new:(InferenceADT*)adt
 {
 	_adt = adt;
 	return self;
@@ -169,7 +173,7 @@
 @end
 @implementation FuzzyDTreeNodeCon
 
-- (id) new:(FuzzyDTreeNode*)node
++ (id) new:(FuzzyDTreeNode*)node
 {
 	_node = node;
 	return self;

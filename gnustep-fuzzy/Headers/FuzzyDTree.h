@@ -44,11 +44,11 @@
 {
 	FuzzyDTreeFactory *_factory;
 }
-- (id)new:(FuzzyDTreeFactory*)fact;
++ (id)new:(FuzzyDTreeFactory*)fact;
 
 @end
 
-@interface FuzzyDTreeFactory
+@interface FuzzyDTreeFactory : NSObject
 {
 	FuzzyInference *_inference;		
 }
@@ -72,7 +72,7 @@
 	InferenceADT *_adt;
 	NSMutableArray *_cons;
 }
-- (id) new:(InferenceADT*)adt;
++ (id) new:(InferenceADT*)adt;
 - (id) adt;
 -(id)searchTreeFor:(FuzzyPredicate*)ds;
 -(void)printTree;
@@ -81,7 +81,7 @@
 @interface FuzzyDTreeNodeCon : NSObject {
 	FuzzyDTreeNode *_node;	
 }
-- (id) new:(FuzzyDTreeNode*)node;
++ (id) new:(FuzzyDTreeNode*)node;
 - (id)node;
 @end
 @interface FuzzyDTree : NSObject {

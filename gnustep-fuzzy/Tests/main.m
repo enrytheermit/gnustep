@@ -28,7 +28,70 @@
 #import "FuzzyUpdateTestDTree.h"
 #import "FuzzyPaintTestRules.h"
 
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
+
 int main(int argc, const char **argv, char **env)
 {
 
+NSAutoreleasePool *pool;
+   NSApplication *app;
+   NSMenu *mainMenu;
+   NSMenu *menu;
+   NSMenuItem *menuItem;
+
+   pool = [NSAutoreleasePool new];
+   app = [NSApplication sharedApplication];
+
+   //
+   // Create the Menu
+   //
+
+   // Main Menu
+   //mainMenu = AUTORELEASE ([NSMenu new]);
+   mainMenu = [NSMenu new];
+
+   // Info SubMenu
+   menuItem = (NSMenuItem *)[mainMenu addItemWithTitle: @"Info"
+                        action: NULL
+                        keyEquivalent: @""];
+   //menu = AUTORELEASE ([NSMenu new]);
+   menu = [NSMenu new];
+   [mainMenu setSubmenu: menu forItem: menuItem];
+   [menu addItemWithTitle: @"Info Panel..."
+         action: @selector (orderFrontStandardInfoPanel:)
+         keyEquivalent: @""];
+   [menu addItemWithTitle: @"Preferences..."
+         action: @selector (runPreferencesPanel:)
+         keyEquivalent: @""];
+   [menu addItemWithTitle: @"Help..."
+         action: @selector (orderFrontHelpPanel:)
+         keyEquivalent: @"?"];
+
+   // Game MenuItem.
+   menuItem = (NSMenuItem *)[mainMenu addItemWithTitle: @"New game"
+                        action: @selector(newGame:)
+                        keyEquivalent: @""];
+
+   // Hide MenuItem
+   [mainMenu addItemWithTitle: @"Hide"
+             action: @selector (hide:)
+             keyEquivalent: @"h"];
+
+   // Quit MenuItem
+   [mainMenu addItemWithTitle: @"Quit"
+             action: @selector (terminate:)
+             keyEquivalent: @"q"];
+
+   [app setMainMenu: mainMenu];
+
+   FuzzyUpdateDTree *dtree = [FuzzyUpdateDTree new:[FuzzyDTreeFactory new:[FuzzyInference new]]];
+   [dtree makeUpdateDTree];
+
+   NSApplicationMain(argc, argv);
+
+   [[NSUserDefaults standardUserDefaults] synchronize];
+
+   [pool release]; /* actually useless */
+   return 0;
 } 

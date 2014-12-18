@@ -29,14 +29,15 @@
 #define FuzzyUpdateDTree_h_defined
 
 #import <Foundation/Foundation.h>
+@class FuzzyInference;
 @class FuzzyPredicate;
 @class FuzzyDTreeFactory;
 
-@interface FuzzyUpdateDTree
+@interface FuzzyUpdateDTree : NSObject
 {
 	FuzzyDTreeFactory *_factory;
 }
-- (id) new:(FuzzyDTreeFactory*)fact;
++ (id) new:(FuzzyDTreeFactory*)fact;
 - (id) makeUpdateDTree;
 @end
 #endif

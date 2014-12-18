@@ -30,7 +30,7 @@
 
 @implementation FuzzyParserManipulator
 
-- (id) new:(id)parser
++ (id) new:(id)parser
 {
 	[super new:parser];
 	return self;
@@ -40,7 +40,7 @@
 
 @implementation FuzzyScreenManipulator
 
-- (id) new:(id)screen
++ (id) new:(id)screen
 {
 	[super new:screen];
 	return self;
@@ -50,7 +50,7 @@
 
 @implementation FuzzyArgumentManipulator
 
-- (id) new:(id)o
++ (id) new:(id)o
 {
 	o = _o;
 	return self;
@@ -64,7 +64,7 @@
 
 @implementation FuzzyPaintManipulator
 
-- (id) new:(id)painter
++ (id) new:(id)painter
 {
 	[super new:painter];
 	return self;
@@ -74,7 +74,7 @@
 
 @implementation FuzzyManipulator
 
-- (id) new:(id)o
++ (id) new:(id)o
 {
 	_o = o;
 	return self;

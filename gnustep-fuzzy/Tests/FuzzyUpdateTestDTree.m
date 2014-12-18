@@ -33,15 +33,12 @@
  
 @implementation FuzzyUpdateDTree
 
-- (id) new:(FuzzyDTreeFactory*)fact
++ (id) new:(FuzzyDTreeFactory*)fact
 {
 	_factory = fact;
 	return self; 
 }
 
-//another example :
-	//FuzzyInference *inf = [FuzzyInference new];
-	//FuzzyDTree *dtree = [_factory makeDTree];
 - (id)makeUpdateDTree
 {
 	FuzzyInference *inf = [FuzzyInference new];
@@ -59,7 +56,7 @@
 	//so it becomes a compound, which gets parsed and 
 	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
 	[_factory makeCompound:pred];
-
+	[dtree printTree];
 	return dtree;
 }
 

@@ -37,7 +37,7 @@
  	SEL pf;
  	CGFloat x;
  }
-- (id) new:(SEL) pif; 
++ (id) new:(SEL) pif; 
 - (id)perform:(CGFloat)c;
 - (id)perform;
 - (CGFloat)x;

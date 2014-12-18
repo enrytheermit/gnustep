@@ -34,7 +34,7 @@
  
  @interface FuzzyPredicate : NSString {
  }
-- (id)new:(NSString*)s;
++ (id)new:(NSString*)s;
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule;
  
  @end

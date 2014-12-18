@@ -30,7 +30,7 @@
  
  @implementation FuzzyPredicate 
 
--(id)new:(NSString*)s
++(id)new:(NSString*)s
 {
 	[super initWithString:s];
 	return self;

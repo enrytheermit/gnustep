@@ -29,7 +29,7 @@
  
  @implementation FuzzyFunction
  
- - (id)new:(SEL)pif
+ + (id)new:(SEL)pif
  {
  	pf = pif;
  	x = .0;	

@@ -40,7 +40,7 @@
 	NSData *_data;
 	FuzzyPredicate *_predicate;
 }
--(id)new:(id)d;
++(id)new:(id)d;
 -(id)data;
 -(NSString*)dataToString;
 -(void)data:(id)d;

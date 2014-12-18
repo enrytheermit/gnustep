@@ -34,7 +34,7 @@
 {
 	id _o;
 }
-- (id) new:(id)o;
++ (id) new:(id)o;
 - (id) o;
 @end
 
@@ -42,7 +42,7 @@
 {
 	id _o;
 }
-- (id) new:(id)o;
++ (id) new:(id)o;
 - (id) o;
 @end
 
@@ -50,21 +50,21 @@
 {
 }
 
-- (id) new:(id)parser;
++ (id) new:(id)parser;
 @end
 
 @interface FuzzyScreenManipulator : FuzzyArgumentManipulator
 {
 }
 
-- (id) new:(id)screen;
++ (id) new:(id)screen;
 @end
 
 @interface FuzzyPaintManipulator : FuzzyManipulator
 {
 }
 
-- (id) new:(id)painter;
++ (id) new:(id)painter;
 @end
 
 
