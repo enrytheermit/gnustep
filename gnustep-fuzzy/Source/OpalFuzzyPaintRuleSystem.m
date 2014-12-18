@@ -34,9 +34,8 @@
 
 @implementation OpalFuzzyPaintRuleSystem
 
-- (id) new:(id)painter andParser:(id)parser
+- (id) new:(id)painter withParser:(id)parser
 {
-	[super new];
 	_painter = painter;
 	_parser = parser;
 	return self;
@@ -97,7 +96,7 @@
 		return nil;
 	}	
      }	
-
+	return nil;
 }	
 
 - (id) createManipulator

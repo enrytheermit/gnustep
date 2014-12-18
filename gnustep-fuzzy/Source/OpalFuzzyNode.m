@@ -33,8 +33,6 @@
 
 - (id) new
 {
-	[[super alloc] init];
-
 	_rules = [OpalFuzzyPaintRuleSystem new];
 	return self;
 }
@@ -45,8 +43,6 @@
 
 - (id) new
 {
-	[[super alloc] init];
-
 	_rules = [OpalFuzzyRuleSystem new];
 	return self;
 }

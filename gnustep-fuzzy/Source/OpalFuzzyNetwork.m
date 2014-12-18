@@ -32,7 +32,6 @@
 
 - (id) new
 {
-	[[super alloc] init];
 	return self;
 }
 

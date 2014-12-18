@@ -39,7 +39,7 @@
 	OpalFuzzyDB *_rules;
 	OpalFuzzyDB *_functions;
 }
-
+- (id) new;
 -(void) parseFor:(OpalFuzzyPredicate*)predicate On:(id)o;
 - (id) match:(OpalFuzzyPredicate*)predicate On:(id)o;
 /*
@@ -55,6 +55,9 @@
  * a NSString key and a SEL in the form of performSelector:withObject:, so
  * only a single argument.
  */ 
+ /*
+  * These should be overriden for proper behaviour 
+  */
 - (id) createManipulator;
 - (id) createArgumentManipulator;
 - (id) createParserManipulator;

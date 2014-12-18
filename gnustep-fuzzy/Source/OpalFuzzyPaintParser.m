@@ -30,7 +30,6 @@
 @implementation OpalFuzzyPaintParser
  
  -(id)new {
- 	[[super alloc] init];
 	return self; 
 }
 
@@ -47,9 +46,9 @@
 		return rule;
 	}
 	/* parse non-fuzzy predicate stuff */
-	if ([predicate rangeOfString:"paint"].length == 5) {
+	if ([predicate rangeOfString:@"paint"].length == 5) {
 		return rule;
-	} else if ([predicate rangeOfString:"second"].length == 6) {
+	} else if ([predicate rangeOfString:@"second"].length == 6) {
 		//[self parseSeconds:]:
 		return rule;
 	} else {

@@ -26,6 +26,7 @@
  */
 
 #import "../Headers/OpalFuzzyPredicate.h"
+#import "../Headers/OpalFuzzyParser.h"
  
  @implementation OpalFuzzyPredicate 
 

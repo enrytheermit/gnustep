@@ -31,7 +31,6 @@
  
  - (id)new:(SEL)pif
  {
- 	[super alloc];
  	pf = pif;
  	x = .0;	
  	return self;
@@ -74,7 +73,8 @@
  -(id) new 
  {
  	[self new:@selector(littlef)];
- }
+	return self; 
+}
  
  @end
  
@@ -88,6 +88,7 @@
  -(id) new 
  {
  	[self new:@selector(slightlyf)];
+	return self; 
  }
  
  @end
@@ -102,6 +103,7 @@
  -(id) new 
  {
  	[self new:@selector(veryf)];
+	return self; 
  }
  
  @end
@@ -116,6 +118,7 @@
  -(id) new 
  {
  	[self new:@selector(extremelyf)];
+	return self; 
  }
  
  @end
@@ -130,6 +133,7 @@
  -(id) new 
  {
  	[self new:@selector(veryveryf)];
+	return self; 
  }
  
  @end
@@ -144,6 +148,7 @@
  -(id) new 
  {
  	[self new:@selector(moreorlessf)];
+	return self; 
  }
  
  @end
@@ -158,6 +163,7 @@
  -(id) new 
  {
  	[self new:@selector(indeedf)];
+	return self; 
  }
  
  @end
@@ -172,6 +178,7 @@
  -(id) new 
  {
  	[self new:@selector(idlef)];
+	return self; 
  }
  
  @end

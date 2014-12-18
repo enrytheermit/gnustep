@@ -37,23 +37,23 @@ libgnustepfuzzy_ADDITONAL_INCLUDE_DIRS =
 # The files for the libgnustepfuzzy library
 #
 # The Objective-C files to compile
-libgnustepfuzzy_OBJC_FILES = OpalFuzzyDB.m \
+libgnustepfuzzy_OBJC_FILES = \
+ OpalFuzzyPaintParser.m \
+ OpalFuzzyParser.m \
+ OpalFuzzyPredicate.m \
+ OpalFuzzyVisitor.m \
+ OpalFuzzyNetwork.m \
+ OpalFuzzyNode.m \
+ OpalFuzzy.m \
+ OpalFuzzyDB.m \
+ OpalFuzzyManipulator.m \
+ OpalFuzzyPaintRuleSystem.m \
+ OpalFuzzyRuleSystem.m \
  OpalFuzzyDTree.m \
  OpalFuzzyInference.m \
- OpalFuzzyManipulator.m \
 
 
-# OpalFuzzy.m \
-# OpalFuzzyNetwork.m \
-# OpalFuzzyNode.m \
-# OpalFuzzyPaintParser.m \
 # OpalFuzzyPaintRules.m \
-# OpalFuzzyPaintRuleSystem.m \
-# OpalFuzzyParser.m \
-# OpalFuzzyPredicate.m \
-# OpalFuzzyRuleSystem.m \
-# OpalFuzzyVisitor.m \
-# OpalFuzzyMatrix.m \
 
 # The C source files to be compiled
 libgnustepfuzzy_C_FILES =
@@ -77,7 +77,6 @@ libgnustepfuzzy_HEADER_FILES = OpalFuzzyDB.h \
  OpalFuzzyDTree.h \
  OpalFuzzyInference.h \
  OpalFuzzyVisitor.h \
- OpalFuzzyMatrix.h \
 
 # Option include to set any additional variables
 -include GNUmakefile.preamble

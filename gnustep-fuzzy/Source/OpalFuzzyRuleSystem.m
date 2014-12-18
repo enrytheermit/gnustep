@@ -36,7 +36,6 @@
 
 - (id) new
 {
-	[[super alloc] init];
 	_threshold = 0.001;
 	_rules = [OpalFuzzyDB new]; 
 	_functions = [OpalFuzzyDB new]; 
@@ -57,7 +56,7 @@
 
 -(void) parseFor:(OpalFuzzyPredicate*)predicate On:(id)o
 {
-	NSString *key = [self match:predicate On:o];
+	[self match:predicate On:o];
 }
 
 - (id) match:(OpalFuzzyPredicate*)predicate On:(id)o
@@ -78,7 +77,7 @@
 		return nil;
 	}	
      }	
-
+	return nil;
 }	
 - (id) createManipulator
 {
@@ -90,4 +89,8 @@
 	return [OpalFuzzyArgumentManipulator new:self];
 }
 
+- (id) createParserManipulator
+{
+	return [OpalFuzzyManipulator new:self];
+}
 @end

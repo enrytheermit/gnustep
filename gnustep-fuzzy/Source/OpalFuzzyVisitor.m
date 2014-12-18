@@ -25,12 +25,13 @@
     Boston, MA 02110-1301, USA.
  */
 #import "../Headers/OpalFuzzyVisitor.h"
+#import "../Headers/OpalFuzzyDTree.h"
+#import "../Headers/OpalFuzzyInference.h"
  
 @implementation OpalFuzzyVisitor 
  
 -(id) new 
 {
- 	[[super alloc] init];
 	return self; 
 }
  
@@ -45,7 +46,6 @@
  
 -(id) new 
 {
- 	[[super alloc] init];
 	return self; 
 }
 - (void) visitDTree:(OpalFuzzyDTree *)dtree
@@ -63,7 +63,6 @@
  
 -(id) new 
 {
- 	[[super alloc] init];
 	return self; 
 }
 - (void) visitDTree:(OpalFuzzyDTree *)dtree
