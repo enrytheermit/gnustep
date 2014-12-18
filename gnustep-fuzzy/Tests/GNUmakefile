@@ -32,15 +32,15 @@ PACKAGE_NAME = GSFuzzyTest
 APP_NAME = GSFuzzyTest 
 #
 GSFuzzyTest_INCLUDE_DIRS = ../Headers
-GSFuzzyTest_LDFLAGS = -L../Source/obj -lgnustepfuzzy
+GSFuzzyTest_LDFLAGS = -L../obj -lgnustepfuzzy
 GSFuzzyTest_ADDITONAL_INCLUDE_DIRS = 
 #
 # The files for the GSFuzzyTest
 #
 # The Objective-C files to compile
 GSFuzzyTest_OBJC_FILES = \
- OpalFuzzyPaintTestRules.m \
- OpalFuzzyUpdateTestDTree.m \
+ FuzzyPaintTestRules.m \
+ FuzzyUpdateTestDTree.m \
 
 # The C source files to be compiled
 GSFuzzyTest_C_FILES = 
@@ -52,8 +52,8 @@ GSFuzzyTest_PSWRAP_FILES =
 GSFuzzyTest_HEADER_FILES_DIR = ../Headers
 GSFuzzyTest_HEADER_FILES_INSTALL_DIR = fuzzytests 
 GSFuzzyTest_HEADER_FILES = \
- OpalFuzzyPaintTestRules.h \
- OpalFuzzyUpdateTestDTree.h \
+ FuzzyPaintTestRules.h \
+ FuzzyUpdateTestDTree.h \
 
 GSFuzzyTest_OBJC_FILES += \
 main.m

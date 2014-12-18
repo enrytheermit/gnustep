@@ -1,5 +1,5 @@
  /*
-    GSFuzzy Tests main.m 
+    FuzzyUpdateDecisionTree.h
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
@@ -24,11 +24,19 @@
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
     Boston, MA 021101301, USA.
  */
+ 
+#ifndef FuzzyUpdateDTree_h_defined
+#define FuzzyUpdateDTree_h_defined
 
-#import "FuzzyUpdateTestDTree.h"
-#import "FuzzyPaintTestRules.h"
+#import <Foundation/Foundation.h>
+@class FuzzyPredicate;
+@class FuzzyDTreeFactory;
 
-int main(int argc, const char **argv, char **env)
+@interface FuzzyUpdateDTree
 {
-
-} 
+	FuzzyDTreeFactory *_factory;
+}
+- (id) new:(FuzzyDTreeFactory*)fact;
+- (id) makeUpdateDTree;
+@end
+#endif

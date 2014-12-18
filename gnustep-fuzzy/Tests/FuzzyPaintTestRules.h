@@ -1,5 +1,5 @@
  /*
-    GSFuzzy Tests main.m 
+    FuzzyPaintTestRules.h
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
@@ -24,11 +24,15 @@
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
     Boston, MA 021101301, USA.
  */
+ 
+#ifndef FuzzyPaintTestRules_h_defined
+#define FuzzyPaintTestRules_h_defined
+@class FuzzyPaintRuleSystem;
 
-#import "FuzzyUpdateTestDTree.h"
-#import "FuzzyPaintTestRules.h"
-
-int main(int argc, const char **argv, char **env)
+@interface FuzzyPaintTestRules
 {
+}
+- (void) makePaintTestRules:(FuzzyPaintRuleSystem*)sys;
+@end
 
-} 
+#endif 

@@ -1,10 +1,10 @@
  /*
-    GSFuzzy Tests main.m 
+    GSFuzzy Test Update Tree
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
-    Author: Johan Ceuppens <johan@yellowcouch.org> 
-    Date: Dec 2014
+    Author: Johan Ceuppens <johan@yellowcouch.org>
+    Date: Dec 2014 
  
     This file is part of GNUstep.
  
@@ -22,13 +22,25 @@
     License along with this library; see the file COPYING.LIB.
     If not, see <http://www.gnu.org/licenses/> or write to the
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
-    Boston, MA 021101301, USA.
+    Boston, MA 02110-1301, USA.
  */
-
-#import "FuzzyUpdateTestDTree.h"
+ 
 #import "FuzzyPaintTestRules.h"
+#import "../Headers/Fuzzy.h"
+#import "../Headers/FuzzyPaintRuleSystem.h"
 
-int main(int argc, const char **argv, char **env)
+@implementation FuzzyPaintTestRules
+- (void) makePaintTestRules:(FuzzyPaintRuleSystem*)sys
 {
-
-} 
+	[sys addRule:@"paint extremely" with: @selector(paintOn:)];
+	FuzzyFunction *f = [FuzzyFunctionExtremely new];
+	[f x:.0];
+	[sys addFunction:@"paint extremely" with: f];
+/***
+	[sys addRule:"paint not for 1 second" : paintIdle1SecondOn:];
+	f = [FuzzyFunctionIdle new];
+	[f x:.0];
+	[sys addFunction:"paint not for 1 second" : f];
+***/
+}
+@end
