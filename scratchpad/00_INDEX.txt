@@ -1,0 +1,1 @@
+. This scratchpad contains code which compiles mostly but has been abandoned.
