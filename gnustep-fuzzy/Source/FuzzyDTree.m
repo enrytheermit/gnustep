@@ -227,6 +227,7 @@
 
 -(id) compileCompoundToTree:(InferenceCompound*)comp
 {
+	NSLog(@"Compiling compound to tree.");
 	FuzzyPredicate *ps = (FuzzyPredicate*)[[comp node] predicate]; 
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
@@ -243,8 +244,10 @@
 		FuzzyPredicate *p = [ps substringWithRange:NSMakeRange(3,[ps length])];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
+			NSLog(@"splitting node for not clause");
 			[n splitForNot:p];	
 		} else {
+			NSLog(@"adding node for not clause");
 			[n addForNot:p];	
 		}	
 	}	

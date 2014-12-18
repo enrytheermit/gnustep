@@ -142,26 +142,17 @@
 }
 -(id) parse:(FuzzyInference*)inf
 {
-	NSLog(@"BAZ");
-	//[_node predicate:[FuzzyPredicate new:[_node dataToString]]];	
-	NSLog(@"BAZ:%s", [_node predicate]);
-	[inf addCompound:self with:[_node predicate]];
-	NSLog(@"BAZ");
-/****
-	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
-		//_nodeid = [[[_node dataToString] UTF8String] intValue];
+	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
 		//adds compound to (cache) DB
-		[_node predicate:[FuzzyPredicate new:[_node dataToString]]];	
-			
-	} else if ([[_node data] isKindOfClass:[FuzzyPredicate class]]) {
-		//_nodeid = [[[_node data] UTF8String] intValue];
-		[_node predicate:[FuzzyPredicate new:[_node data]]];	
-		//adds compound to (cache) DB
+		NSLog(@"Parsing InferenceCompound as MutableString: %s", [[[_node predicate] string] UTF8String]);
 		[inf addCompound:self with:[_node predicate]];
-			
+	} else if ([[_node data] isKindOfClass:[FuzzyPredicate class]]) {
+		//adds compound to (cache) DB
+		NSLog(@"Parsing InferenceCompound as Predicate: %s", [[[_node predicate] string] UTF8String]);
+		[inf addCompound:self with:[_node predicate]];
 	} else {
 	}
-****/
+
 	return self;
 }
 @end

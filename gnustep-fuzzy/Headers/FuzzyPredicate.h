@@ -32,10 +32,13 @@
 
 @class FuzzyParser;
  
- @interface FuzzyPredicate : NSMutableString {
+ @interface FuzzyPredicate : NSObject {
+	NSMutableString *_string;
  }
 - (id)new;
-- (id)init:(NSString*)s;
+- (id)string;
+-(id)appendString:(NSMutableString*)s;
+- (id)init:(NSMutableString*)s;
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule;
  
  @end

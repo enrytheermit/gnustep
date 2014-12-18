@@ -32,16 +32,26 @@
 
 -(id)new
 {
-	[[super alloc] init];
+	NSLog(@"QUUX");
 	return self;
 }
 
--(id)init:(NSString*)s
+-(id)string
 {
-	[self stringByAppendingString:s];
+	return _string;
+}
+
+-(id)init:(NSMutableString*)s
+{
+	_string = [[NSMutableString alloc] initWithString:s];
 	return self;
 }
 
+-(id)appendString:(NSMutableString*)s
+{
+	[_string appendString:s];
+	return _string;
+}
 
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule
 {

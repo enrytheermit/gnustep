@@ -65,9 +65,9 @@
     id key;
     while ((key = [enumerator nextObject])) {
 	/* greedy full match rule search */
-	if ([predicate rangeOfString:key].length == 0)
+	if ([[predicate string] rangeOfString:key].length == 0)
 			continue;
-	else if ([predicate rangeOfString: key].length > 0) {
+	else if ([[predicate string] rangeOfString: key].length > 0) {
 		/* if key found, perform fuzzy action on f(x) with x = 0 */
 		if ([[[_functions objectForKey:key] perform] x] < _threshold) { 
 			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];

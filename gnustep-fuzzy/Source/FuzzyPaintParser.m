@@ -42,13 +42,13 @@
 - (id) compare:(FuzzyPredicate*)predicate with:(NSString*)rule
 {
 	/* perfect match */
-	if ([predicate rangeOfString:rule].length == [rule length]) {
+	if ([[predicate string] rangeOfString:rule].length == [rule length]) {
 		return rule;
 	}
 	/* parse non-fuzzy predicate stuff */
-	if ([predicate rangeOfString:@"paint"].length == 5) {
+	if ([[predicate string] rangeOfString:@"paint"].length == 5) {
 		return rule;
-	} else if ([predicate rangeOfString:@"second"].length == 6) {
+	} else if ([[predicate string] rangeOfString:@"second"].length == 6) {
 		//[self parseSeconds:]:
 		return rule;
 	} else {

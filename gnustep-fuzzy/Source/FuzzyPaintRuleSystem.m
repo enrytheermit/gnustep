@@ -82,7 +82,7 @@
     id key;
     while ((key = [enumerator nextObject])) {
 	/* greedy full match rule search */
-	if ([predicate rangeOfString:key].length == 0)
+	if ([[predicate string] rangeOfString:key].length == 0)
 			continue;
 	else if ([[predicate compareWithParser:[self parser] and: key] length] > 0) {
 		/* if key found, perform fuzzy action and set arg with x:
