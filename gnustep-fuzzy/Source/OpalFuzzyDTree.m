@@ -43,6 +43,7 @@
 - (id)new:(OpalFuzzyInference*)inf
 {
 	_inference = inf;
+	return self;
 }
 
 - (id) makeDTree
@@ -53,7 +54,7 @@
 - (id) makeADT:(OpalFuzzyPredicate*)p with:(Class)adt
 {
 	InferenceADT *iadt = [[adt class] new:[InferenceNode new:p]];
-	return [[self createInferenceManipulator] parse: iadt];
+	return [_inference parse: iadt];
 } 
 
 - (id) makeAtom:(OpalFuzzyPredicate*)p
@@ -112,7 +113,7 @@
     NSEnumerator *enumerator = [_cons keyEnumerator];
     id val;
     while ((val = [enumerator nextObject])) {
-	NSString *dds = [[[val node] adt] data];
+	NSString *dds = [[[val node] adt] dataToString];
 	if (dds == ds) {
 		return [val node];
 	}
@@ -181,13 +182,15 @@
 	OpalFuzzyPredicate *ps = (OpalFuzzyPredicate*)[[comp node] predicate]; 
 	[ps stringByReplacingOccurrencesOfString:@" " withString:@""];
 	if ([ps rangeOfString:NOTS].length == 3) {
-		/* for speed */
+		/* for speed
 		unsigned int len = [[[comp node] data] length];
 		char buffer[len];
 
 		strncpy(buffer, [ps UTF8String], [ps length]); 
 		//[ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
-		OpalFuzzyDTreeNode *n = [self searchTreeFor:[NSString initWithCharacters:buffer length:len]];
+		OpalFuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
+		*/
+		OpalFuzzyDTreeNode *n = [self searchTreeFor:ps];
 		if (n) {
 			/* FIXME kludge, old not nodes are doubled */ 
 			[n splitForNot:ps];	

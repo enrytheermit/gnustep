@@ -37,11 +37,12 @@
 
 @interface InferenceNode
 {
-	id _data;
+	NSData *_data;
 	OpalFuzzyPredicate *_predicate;
 }
 -(id)new:(id)d;
 -(id)data;
+-(NSString*)dataToString;
 -(void)data:(id)d;
 -(id)predicate;
 -(void)predicate:(OpalFuzzyPredicate*)d;

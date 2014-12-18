@@ -34,6 +34,7 @@
  
  @interface OpalFuzzyPredicate : NSString {
  }
+- (id)new:(NSString*)s;
 - (id)compareWithParser:(OpalFuzzyParser*)parser and:(NSString*)rule;
  
  @end

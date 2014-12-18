@@ -30,6 +30,12 @@
  
  @implementation OpalFuzzyPredicate 
 
+-(id)new:(NSString*)s
+{
+	[super initWithString:s];
+	return self;
+}
+
 - (id)compareWithParser:(OpalFuzzyParser*)parser and:(NSString*)rule
 {
 	return [parser compare:self with:rule];

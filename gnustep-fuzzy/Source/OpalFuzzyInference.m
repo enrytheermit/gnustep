@@ -39,6 +39,10 @@
 {
 	return _data;
 }
+-(NSString*)dataToString
+{
+	return [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+}
 -(void)data:(id)d
 {
 	_data = d;
@@ -73,11 +77,11 @@
 @implementation InferenceAtom
 -(id) parse:(OpalFuzzyInference*)inf
 {
-	if ([[_node data] isKindOfClass:[NSString class]]) {
+	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+		_nodeid = [[[_node dataToString] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* node predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[_node predicate:[[OpalFuzzyPredicate alloc] initWithString:[_node dataToString]]];	
 		[inf addAtom:self with:[_node predicate]];	
 			
 	} else {
@@ -89,11 +93,11 @@
 @implementation InferenceVariable
 -(id) parse:(OpalFuzzyInference*)inf
 {
-	if ([[_node data] isKindOfClass:[NSString class]]) {
+	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+		_nodeid = [[[_node dataToString] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[_node predicate:[OpalFuzzyPredicate new:[_node dataToString]]];	
 		[inf addVariable:self with:[_node predicate]];	
 			
 	} else {
@@ -105,11 +109,11 @@
 @implementation InferenceNumber
 -(id) parse:(OpalFuzzyInference*)inf
 {
-	if ([[_node data] isKindOfClass:[NSString class]]) {
+	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node data] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+		_nodeid = [[[_node dataToString] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[_node predicate:[OpalFuzzyPredicate new:[_node dataToString]]];	
 		[inf addNumber:self with:[_node predicate]];	
 			
 	} else {
@@ -121,17 +125,17 @@
 @implementation InferenceCompound
 -(id) parse:(OpalFuzzyInference*)inf
 {
-	if ([[_node data] isKindOfClass:[NSString class]]) {
+	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
 		/* FIXME ? this should make a string an integer, always */
-		//_nodeid = [[[_node data] UTF8String] intValue];
+		//_nodeid = [[[_node dataToString] UTF8String] intValue];
 		//adds compound to (cache) DB
-		[_node predicate:[OpalFuzzyPredicate initWithString:[_node data]]];	
+		[_node predicate:[OpalFuzzyPredicate new:[_node dataToString]]];	
 		[inf addCompound:self with:[_node predicate]];
 			
 	} else if ([[_node data] isKindOfClass:[OpalFuzzyPredicate class]]) {
 		/* FIXME ? this should make a string an integer, always */
 		//_nodeid = [[[_node data] UTF8String] intValue];
-		[_node predicate:[[_node data] UTF8String]];	
+		[_node predicate:[OpalFuzzyPredicate new:[_node data]]];	
 		//adds compound to (cache) DB
 		[inf addCompound:self with:[_node predicate]];
 			

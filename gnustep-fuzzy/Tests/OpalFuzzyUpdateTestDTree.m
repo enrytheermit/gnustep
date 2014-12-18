@@ -47,11 +47,11 @@
 	OpalFuzzyInference *inf = [OpalFuzzyInference new];
 	OpalFuzzyDTree *dtree = [OpalFuzzyDTree new];
 	OpalFuzzyConstructVisitor *visi = [OpalFuzzyConstructVisitor new];
-	[inf accept:visi];
 	[dtree accept:visi];
+	[inf accept:visi];
 	OpalFuzzySetVisitor *visiset = [OpalFuzzySetVisitor new];
-	[inf accept:visiset];
 	[dtree accept:visiset];
+	[inf accept:visiset];
 	//make predicates which is an NSString
 	//initialize it with a string which in this case is multi-worded
 	OpalFuzzyPredicate *pred = [[OpalFuzzyPredicate alloc] initWithString:@"update full window"];
