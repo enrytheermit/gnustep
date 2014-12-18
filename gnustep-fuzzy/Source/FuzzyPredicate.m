@@ -30,11 +30,18 @@
  
  @implementation FuzzyPredicate 
 
-+(id)new:(NSString*)s
++(id)new
 {
-	[super initWithString:s];
+	[[super alloc]init];
 	return self;
 }
+
+-(id)init:(NSString*)s
+{
+	[self stringByAppendingString:s];
+	return self;
+}
+
 
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule
 {

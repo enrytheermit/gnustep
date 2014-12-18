@@ -88,7 +88,8 @@
 	FuzzyDTreeRoot *_root;		
 	FuzzyInference *_inference;		
 }
-- (id)init:(FuzzyDTreeFactory*)factory; 
++ (id)new;
+- (id)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf; 
 - (void)accept:(FuzzyVisitor*)v;
 -(id) compileCompoundToTree:(InferenceCompound*)comp;
 -(id) compileAtomToTree:(InferenceAtom*)atom;

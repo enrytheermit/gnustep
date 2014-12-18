@@ -31,7 +31,12 @@
 #import "../Headers/FuzzyVisitor.h"
  
 @implementation InferenceNode
--(id)new:(id)d{
++(id)new
+{
+	return self;
+}
+
+-(id)init:(NSData*)d{
 	_data = d;
 	return self;
 }
@@ -67,6 +72,10 @@
 -(id)node
 {
 	return _node;
+}
+-(void)node:(InferenceNode*)n
+{
+	_node = n;
 }
 -(int)nodeid
 {

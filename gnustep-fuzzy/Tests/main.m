@@ -85,7 +85,7 @@ NSAutoreleasePool *pool;
 
    [app setMainMenu: mainMenu];
 
-   FuzzyUpdateDTree *dtree = [FuzzyUpdateDTree new:[FuzzyDTreeFactory new:[FuzzyInference new]]];
+   FuzzyUpdateDTree *dtree = [[FuzzyUpdateDTree new] init:[[FuzzyDTreeFactory new] init:[FuzzyInference new]]];
    [dtree makeUpdateDTree];
 
    NSApplicationMain(argc, argv);

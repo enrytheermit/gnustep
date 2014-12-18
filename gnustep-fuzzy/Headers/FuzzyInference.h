@@ -40,7 +40,8 @@
 	NSData *_data;
 	FuzzyPredicate *_predicate;
 }
-+(id)new:(id)d;
++(id)new;
+-(id)init:(NSData*)d;
 -(id)data;
 -(NSString*)dataToString;
 -(void)data:(id)d;
@@ -54,6 +55,7 @@
 	int _nodeid;
 }
 -(id)node;
+-(void)node:(InferenceNode*)n;
 -(int)nodeid;
 @end
 

@@ -37,7 +37,8 @@
 {
 	FuzzyDTreeFactory *_factory;
 }
-+ (id) new:(FuzzyDTreeFactory*)fact;
+- (id) new;
+-(id)init:(FuzzyDTreeFactory*)fact;
 - (id) makeUpdateDTree;
 @end
 #endif

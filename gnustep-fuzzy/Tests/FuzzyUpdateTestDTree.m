@@ -33,28 +33,41 @@
  
 @implementation FuzzyUpdateDTree
 
-+ (id) new:(FuzzyDTreeFactory*)fact
+- (id) new
 {
-	_factory = fact;
 	return self; 
 }
 
+-(id)init:(FuzzyDTreeFactory*)fact
+{
+	_factory = fact;
+	return self;
+}
 - (id)makeUpdateDTree
 {
+	NSLog(@"FOO\n");
 	FuzzyInference *inf = [FuzzyInference new];
-	FuzzyDTree *dtree = [FuzzyDTree new];
-	FuzzyConstructVisitor *visi = [FuzzyConstructVisitor new];
-	[dtree accept:visi];
-	[inf accept:visi];
-	FuzzySetVisitor *visiset = [FuzzySetVisitor new];
-	[dtree accept:visiset];
-	[inf accept:visiset];
+	FuzzyDTree *dtree = [[FuzzyDTree alloc] init:[[FuzzyDTreeFactory new] init:inf] with:inf];
+	//FuzzyConstructVisitor *visi = [FuzzyConstructVisitor new];
+	NSLog(@"FOO\n");
+	//[dtree accept:visi];
+	NSLog(@"FOO\n");
+	//[inf accept:visi];
+	NSLog(@"FOO\n");
+	//FuzzySetVisitor *visiset = [FuzzySetVisitor new];
+	//[dtree accept:visiset];
+	//[inf accept:visiset];
+	[inf setTree:dtree];
 	//make predicates which is an NSString
 	//initialize it with a string which in this case is multi-worded
-	FuzzyPredicate *pred = [[FuzzyPredicate alloc] initWithString:@"update full window"];
-	
+	NSLog(@"FOO\n");
+	FuzzyPredicate *pred = [FuzzyPredicate new]; 
+	pred = @"update window";	
 	//so it becomes a compound, which gets parsed and 
 	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
+
+	NSLog(@"FOO\n");
+
 	[_factory makeCompound:pred];
 	[dtree printTree];
 	return dtree;

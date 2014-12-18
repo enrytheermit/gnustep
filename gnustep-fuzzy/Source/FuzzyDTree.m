@@ -40,7 +40,12 @@
 @end
 
 @implementation FuzzyDTreeFactory
-+ (id)new:(FuzzyInference*)inf
+- (id)new
+{
+	return self;
+}
+
+- (id)init:(FuzzyInference*)inf
 {
 	_inference = inf;
 	return self;
@@ -77,7 +82,10 @@
 
 - (id) makeCompound:(FuzzyPredicate*)p
 {
-	InferenceCompound *iadt = [InferenceCompound new:[InferenceNode new:p]];
+	InferenceCompound *iadt = [InferenceCompound alloc];
+	InferenceNode *n = [InferenceNode new];
+	[n data:p];
+	[iadt node:n];
 	return [_inference parse: iadt];
 }
 
@@ -187,11 +195,18 @@
 @end
 
 @implementation FuzzyDTree
-- (id)init:(FuzzyDTreeFactory*)factory
+
++(id)new
 {
-	_inference = [factory createInferenceManipulator];
+	return self;
+}
+
+- (id)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf
+{
+	_inference = inf; 
 	_root = [FuzzyDTreeRoot new];
-	return [factory makeDTree];
+	//return [factory makeDTree];
+	return self;
 } 
 
 - (void)accept:(FuzzyVisitor*)v
