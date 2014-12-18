@@ -225,7 +225,7 @@
 	return [_root searchTreeFor:ds];
 }
 
--(id) compileCompoundToTree:(InferenceCompound*)comp
+-(void) compileCompoundToTree:(InferenceCompound*)comp
 {
 	NSLog(@"Compiling compound to tree.");
 	FuzzyPredicate *ps = (FuzzyPredicate*)[[comp node] predicate]; 
@@ -258,7 +258,6 @@
 	if ([[comp data] rangeOfString:ANDS] == [ANDS length]) {
 	}	
 ***/
-	return self;
 }
 
 -(id) compileVariableToTree:(InferenceVariable*)var

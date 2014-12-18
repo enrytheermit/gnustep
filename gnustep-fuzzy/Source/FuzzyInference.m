@@ -144,7 +144,7 @@
 {
 	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
 		//adds compound to (cache) DB
-		NSLog(@"Parsing InferenceCompound as MutableString: %s", [[[_node predicate] string] UTF8String]);
+		NSLog(@"Parsing InferenceCompound as FuzzyPredicate: %s", [[[_node predicate] string] UTF8String]);
 		[inf addCompound:self with:[_node predicate]];
 	} else if ([[_node data] isKindOfClass:[FuzzyPredicate class]]) {
 		//adds compound to (cache) DB
@@ -165,6 +165,7 @@
 	_vars = [FuzzyDB new];	
 	_numbers = [FuzzyDB new];	
 	_compounds = [FuzzyDB new];	
+	_tree = nil;
 	return self; 
 }
 
