@@ -52,9 +52,6 @@ libgnustepfuzzy_OBJC_FILES = \
  OpalFuzzyDTree.m \
  OpalFuzzyInference.m \
 
-
-# OpalFuzzyPaintRules.m \
-
 # The C source files to be compiled
 libgnustepfuzzy_C_FILES =
 
@@ -70,7 +67,6 @@ libgnustepfuzzy_HEADER_FILES = OpalFuzzyDB.h \
  OpalFuzzyNetwork.h \
  OpalFuzzyNode.h \
  OpalFuzzyPaintParser.h \
- OpalFuzzyPaintRules.h \
  OpalFuzzyPaintRuleSystem.h \
  OpalFuzzyParser.h \
  OpalFuzzyPredicate.h \

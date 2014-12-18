@@ -1,5 +1,5 @@
 # 
-#    GNUmakefile gnustep-fuzzy
+#    GNUmakefile gnustep-fuzzy tests
 # 
 #    Copyright (C) 2014 Free Software Foundation, Inc.
 # 
@@ -28,37 +28,37 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 # Two libraries
-LIBRARY_NAME = libgnustepfuzzytests
-
+PACKAGE_NAME = GSFuzzyTest
+APP_NAME = GSFuzzyTest 
 #
-libgnustepfuzzytests_INCLUDE_DIRS = ../Headers
-libgnustepfuzzytests_ADDITONAL_INCLUDE_DIRS = 
+GSFuzzyTest_INCLUDE_DIRS = ../Headers
+GSFuzzyTest_LDFLAGS = -L../Source/obj -lgnustepfuzzy
+GSFuzzyTest_ADDITONAL_INCLUDE_DIRS = 
 #
-# The files for the libgnustepfuzzytests library
+# The files for the GSFuzzyTest
 #
 # The Objective-C files to compile
-libgnustepfuzzytests_OBJC_FILES = \
+GSFuzzyTest_OBJC_FILES = \
  OpalFuzzyPaintRules.m \
  OpalFuzzyUpdateDTree.m \
 
 # The C source files to be compiled
-libgnustepfuzzytests_C_FILES =
+GSFuzzyTest_C_FILES =
 
 # The PostScript wrap source files to be compiled
-libgnustepfuzzytests_PSWRAP_FILES = 
+GSFuzzyTest_PSWRAP_FILES = 
 
 # The header files for the library
-libgnustepfuzzytests_HEADER_FILES_DIR = ../Headers
-libgnustepfuzzytests_HEADER_FILES_INSTALL_DIR = fuzzytests 
-libgnustepfuzzytests_HEADER_FILES = \
+GSFuzzyTest_HEADER_FILES_DIR = ../Headers
+GSFuzzyTest_HEADER_FILES_INSTALL_DIR = fuzzytests 
+GSFuzzyTest_HEADER_FILES = \
  OpalFuzzyPaintRules.h \
  OpalFuzzyUpdateDTree.h \
 
-# Option include to set any additional variables
+GSFuzzyTest_OBJC_FILES += \
+main.m
+
 -include GNUmakefile.preamble
-
-# Include in the rules for making libraries
-include $(GNUSTEP_MAKEFILES)/library.make
-
-# Option include to define any additional rules
+include $(GNUSTEP_MAKEFILES)/aggregate.make
+include $(GNUSTEP_MAKEFILES)/application.make
 -include GNUmakefile.postamble

@@ -51,6 +51,7 @@
 - (void)paintOn:(id)painter;
 - (void)paintIdle1SecondOn:(id)painter;
 
+
 - (id) match:(OpalFuzzyPredicate*)predicate On:(id)o;
 /*
  * NOTE :

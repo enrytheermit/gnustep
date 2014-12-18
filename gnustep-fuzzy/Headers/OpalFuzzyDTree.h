@@ -33,7 +33,7 @@
 @class OpalFuzzyDTreeFactory;
 @class OpalFuzzyDTreeNode;
 @class OpalFuzzyInference;
-@class OpalFuzzyInference;
+@class OpalFuzzyVisitor;
 @class InferenceAtom;
 @class InferenceVariable;
 @class InferenceNumber;
@@ -86,6 +86,7 @@
 	OpalFuzzyInference *_inference;		
 }
 - (id)init:(OpalFuzzyDTreeFactory*)factory; 
+- (void)accept:(OpalFuzzyVisitor*)v;
 -(id) compileCompoundToTree:(InferenceCompound*)comp;
 -(id) compileAtomToTree:(InferenceAtom*)atom;
 -(id) compileNumberToTree:(InferenceNumber*)num;

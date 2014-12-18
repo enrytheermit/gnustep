@@ -30,6 +30,7 @@
 
 #import <Foundation/Foundation.h>
 @class OpalFuzzyDB;
+@class OpalFuzzyFunction;
 @class OpalFuzzyParser;
 @class OpalFuzzyPredicate;
 
@@ -40,6 +41,8 @@
 	OpalFuzzyDB *_functions;
 }
 - (id) new;
+- (void) addRule:(NSString*)r with:(SEL)s;
+- (void) addFunction:(NSString*)r with:(OpalFuzzyFunction*)f;
 -(void) parseFor:(OpalFuzzyPredicate*)predicate On:(id)o;
 - (id) match:(OpalFuzzyPredicate*)predicate On:(id)o;
 /*
