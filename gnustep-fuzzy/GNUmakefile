@@ -31,26 +31,26 @@ include $(GNUSTEP_MAKEFILES)/common.make
 LIBRARY_NAME = libgnustepfuzzy
 
 #
-libgnustepfuzzy_INCLUDE_DIRS = ../Headers
+libgnustepfuzzy_INCLUDE_DIRS = Headers
 libgnustepfuzzy_ADDITONAL_INCLUDE_DIRS = 
 #
 # The files for the libgnustepfuzzy library
 #
 # The Objective-C files to compile
 libgnustepfuzzy_OBJC_FILES = \
- FuzzyPaintParser.m \
- FuzzyParser.m \
- FuzzyPredicate.m \
- FuzzyVisitor.m \
- FuzzyNetwork.m \
- FuzzyNode.m \
- Fuzzy.m \
- FuzzyDB.m \
- FuzzyManipulator.m \
- FuzzyPaintRuleSystem.m \
- FuzzyRuleSystem.m \
- FuzzyDTree.m \
- FuzzyInference.m \
+ Source/FuzzyPaintParser.m \
+ Source/FuzzyParser.m \
+ Source/FuzzyPredicate.m \
+ Source/FuzzyVisitor.m \
+ Source/FuzzyNetwork.m \
+ Source/FuzzyNode.m \
+ Source/Fuzzy.m \
+ Source/FuzzyDB.m \
+ Source/FuzzyManipulator.m \
+ Source/FuzzyPaintRuleSystem.m \
+ Source/FuzzyRuleSystem.m \
+ Source/FuzzyDTree.m \
+ Source/FuzzyInference.m \
 
 # The C source files to be compiled
 libgnustepfuzzy_C_FILES =
@@ -59,7 +59,7 @@ libgnustepfuzzy_C_FILES =
 libgnustepfuzzy_PSWRAP_FILES = 
 
 # The header files for the library
-libgnustepfuzzy_HEADER_FILES_DIR = ../Headers
+libgnustepfuzzy_HEADER_FILES_DIR = Headers
 libgnustepfuzzy_HEADER_FILES_INSTALL_DIR = fuzzy 
 libgnustepfuzzy_HEADER_FILES = FuzzyDB.h \
  Fuzzy.h \
