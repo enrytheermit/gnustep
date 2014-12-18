@@ -97,6 +97,11 @@
 	return [_nodes searchTreeFor:ds];
 }
 
+-(void)printTree
+{
+	[_nodes printTree];
+}
+
 @end
 
 @implementation FuzzyDTreeNode
@@ -137,6 +142,28 @@
 - (id)adt
 {
 	return _adt;
+}
+
+-(void)printTree
+{
+	[self printTreeRec];
+}
+
+-(void)printTreeRec
+{
+    //greedy search for node which matches ds
+    NSEnumerator *enumerator = [_cons keyEnumerator];
+    id val;
+    while ((val = [enumerator nextObject])) {
+	NSString *dds = [[[val node] adt] dataToString];
+    	NSLog(dds);
+    }
+    //descend recursively through all connections towards their linked node
+    enumerator = [_cons keyEnumerator];
+    while ((val = [enumerator nextObject])) {
+   	[[val node] printTreeRec];
+    } 
+    return nil;
 }
 
 @end
@@ -196,7 +223,6 @@
 		FuzzyPredicate *p = [ps substringWithRange:NSMakeRange(3,[ps length])];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
-			/* FIXME kludge, old not nodes are doubled */ 
 			[n splitForNot:p];	
 		} else {
 			[n addForNot:p];	
@@ -232,41 +258,8 @@
 	return self;
 }
 
-/* other method for compiling tree */
-/******
-
--(id) compileDTree000
+-(void)printTree 
 {
-    NSEnumerator *enumerator = [_compounds keyEnumerator];
-    id key;
-    while ((key = [enumerator nextObject])) {
-	InferenceCompound *comp = key;
-	FuzzyPredicate *pred = [_compounds objectForKey:key];
-	[self compileCompound:pred];
-    }	
-}	
-
-- (void) compileCompound:(FuzzyPredicate*)pred
-{
-	//class check
-	if ([pred isKindOfClass:[FuzzyPredicate class]]) {
-		unsigned int len = [pred length];
-		char buffer[len];
-
-		strncpy(buffer, [pred UTF8String]);
-
-		if ([pred getCharacters:buffer range:NSMakeRange(0, 3)] == @"not") {
-			if ([pred getCharacters:buffer range:NSMakeRange(0, 4)] == @"not ") {
-			//if ([self nodeAlreadyInTree:[pred getCharacters:buffer range:NSMakeRange(4, len)]]) 
-    			NSEnumerator *enumerator = [_numbers keyEnumerator];
-    			id key;
-    			while ((key = [enumerator nextObject])) {
-				FuzzyPredicate *p = [_numbers objectForKey:key];
-					
-			}		
-		}	
-	}	
+	[_root printTree];	
 }
-*********/
-
 @end

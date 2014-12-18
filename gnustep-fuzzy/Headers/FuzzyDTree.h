@@ -66,6 +66,7 @@
 	FuzzyDTreeNode *_nodes;
 }
 - (id) new; 
+-(void)printTree;
 @end
 @interface FuzzyDTreeNode : NSObject {
 	InferenceADT *_adt;
@@ -74,6 +75,8 @@
 - (id) new:(InferenceADT*)adt;
 - (id) adt;
 -(id)searchTreeFor:(FuzzyPredicate*)ds;
+-(void)printTree;
+-(void)printTreeRec;
 @end
 @interface FuzzyDTreeNodeCon : NSObject {
 	FuzzyDTreeNode *_node;	
@@ -91,5 +94,6 @@
 -(id) compileAtomToTree:(InferenceAtom*)atom;
 -(id) compileNumberToTree:(InferenceNumber*)num;
 -(id) compileVariableToTree:(InferenceVariable*)var;
+-(void)printTree;
 @end
 #endif
