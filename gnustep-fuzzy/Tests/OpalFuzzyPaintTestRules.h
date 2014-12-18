@@ -1,5 +1,5 @@
  /*
-    GSFuzzy Tests main.m 
+    OpalFuzzyPaintTestRules.h
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
@@ -24,11 +24,15 @@
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
     Boston, MA 021101301, USA.
  */
+ 
+#ifndef OpalFuzzyPaintTestRules_h_defined
+#define OpalFuzzyPaintTestRules_h_defined
+@class OpalFuzzyPaintRuleSystem;
 
-#import "OpalFuzzyUpdateTestDTree.h"
-#import "OpalFuzzyPaintTestRules.h"
-
-int main(int argc, const char **argv, char **env)
+@interface OpalFuzzyPaintTestRules
 {
+}
+- (void) makePaintTestRules:(OpalFuzzyPaintRuleSystem*)sys;
+@end
 
-} 
+#endif 

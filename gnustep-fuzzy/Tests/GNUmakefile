@@ -39,11 +39,11 @@ GSFuzzyTest_ADDITONAL_INCLUDE_DIRS =
 #
 # The Objective-C files to compile
 GSFuzzyTest_OBJC_FILES = \
- OpalFuzzyPaintRules.m \
- OpalFuzzyUpdateDTree.m \
+ OpalFuzzyPaintTestRules.m \
+ OpalFuzzyUpdateTestDTree.m \
 
 # The C source files to be compiled
-GSFuzzyTest_C_FILES =
+GSFuzzyTest_C_FILES = 
 
 # The PostScript wrap source files to be compiled
 GSFuzzyTest_PSWRAP_FILES = 
@@ -52,8 +52,8 @@ GSFuzzyTest_PSWRAP_FILES =
 GSFuzzyTest_HEADER_FILES_DIR = ../Headers
 GSFuzzyTest_HEADER_FILES_INSTALL_DIR = fuzzytests 
 GSFuzzyTest_HEADER_FILES = \
- OpalFuzzyPaintRules.h \
- OpalFuzzyUpdateDTree.h \
+ OpalFuzzyPaintTestRules.h \
+ OpalFuzzyUpdateTestDTree.h \
 
 GSFuzzyTest_OBJC_FILES += \
 main.m

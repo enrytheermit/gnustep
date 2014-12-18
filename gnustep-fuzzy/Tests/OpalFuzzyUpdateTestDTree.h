@@ -1,5 +1,5 @@
  /*
-    GSFuzzy Tests main.m 
+    OpalFuzzyUpdateDecisionTree.h
  
     Copyright (C) 2014 Free Software Foundation, Inc.
  
@@ -24,11 +24,19 @@
     Free Software Foundation, 51 Franklin Street, Fifth Floor,
     Boston, MA 021101301, USA.
  */
+ 
+#ifndef OpalFuzzyUpdateDTree_h_defined
+#define OpalFuzzyUpdateDTree_h_defined
 
-#import "OpalFuzzyUpdateTestDTree.h"
-#import "OpalFuzzyPaintTestRules.h"
+#import <Foundation/Foundation.h>
+@class OpalFuzzyPredicate;
+@class OpalFuzzyDTreeFactory;
 
-int main(int argc, const char **argv, char **env)
+@interface OpalFuzzyUpdateDTree
 {
-
-} 
+	OpalFuzzyDTreeFactory *_factory;
+}
+- (id) new:(OpalFuzzyDTreeFactory*)fact;
+- (id) makeUpdateDTree;
+@end
+#endif
