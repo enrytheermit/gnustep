@@ -1,0 +1,1 @@
+. use visitor pattern for setTree: method in OpalFuzzyInference.m/.h
