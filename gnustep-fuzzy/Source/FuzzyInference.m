@@ -209,8 +209,7 @@
 -(void)addCompound:(InferenceCompound*)a with:(FuzzyPredicate*)p
 {
 	[_compounds setObject:p forKey:a];		
-	NSLog(@"FOOtree:%s",_tree);
 	[_tree compileCompoundToTree:a];	
-	NSLog(@"FOO");
+	NSLog(@"Compiling compound done.");
 }
 @end

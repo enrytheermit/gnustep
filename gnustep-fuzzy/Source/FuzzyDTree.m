@@ -131,6 +131,7 @@
 
 - (id) new
 {
+	_cons = [[NSMutableArray alloc] init];
 	return self;
 }
 
@@ -165,7 +166,11 @@
 } 
 - (void)addForNot:(FuzzyPredicate *)p
 {
-	[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
+	NSLog(@"_cons has length %d in node %@", [_cons count], self); 
+	//[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
+	[_cons addObject:[[FuzzyDTreeNodeCon new] init:self]];	
+	NSLog(@"_cons has length %d in node %@", [_cons count], self); 
+
 } 
 - (id)adt
 {
@@ -242,6 +247,12 @@
 	return [_root searchTreeFor:ds];
 }
 
+- (void)addNode:(FuzzyDTreeNode*)n
+{
+	NSLog(@"adding node");
+	//[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
+
+} 
 -(void) compileCompoundToTree:(InferenceCompound*)comp
 {
 	NSLog(@"Compiling compound to tree.");
@@ -249,7 +260,7 @@
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
 	*/
-	[ps unspacify];
+	//[ps unspacify];
 	if ([ps rangeOfString:NOTS].length == 3) {
 		/* NOTE : for speed
 			unsigned int len = [[[comp node] data] length];
@@ -258,14 +269,15 @@
 			//or [ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
 			FuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
 		*/
-		FuzzyPredicate *p = [[FuzzyPredicate new] init:[[ps string] substringWithRange:NSMakeRange(3,[ps length])]];
+		FuzzyPredicate *p = [[FuzzyPredicate new] init:[[ps string] substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			NSLog(@"splitting node for not clause");
-			[n splitForNot:p];	
+			[n splitForNot:ps];	
 		} else {
-			NSLog(@"adding node for not clause");
-			[n addForNot:p];	
+			NSLog(@"adding node for not clause = %@", [ps string]);
+			FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] init:comp]; 
+			[self addNode:nn];	
 		}	
 	}	
 /***	if ([[comp data] rangeOfString:ORS] == [ORS length]) {

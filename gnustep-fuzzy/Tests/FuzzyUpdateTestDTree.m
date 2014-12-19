@@ -46,17 +46,18 @@
 - (id)makeUpdateDTree
 {
 	FuzzyInference *inf = [FuzzyInference new];
-	FuzzyDTree *dtree = [[FuzzyDTree alloc] init:[[FuzzyDTreeFactory new] init:inf] with:inf];
-	[inf setTree:dtree];
+	//FuzzyDTree *dtree = [[FuzzyDTree new] init:[[FuzzyDTreeFactory new] init:inf] with:inf];
+	[inf setTree:self];
+
 	//make predicates which is an NSString
 	//initialize it with a string which in this case is multi-worded
 	FuzzyPredicate *pred = [[FuzzyPredicate new] init:@"not x"];
 	//so it becomes a compound, which gets parsed and 
 	//adds comp to _compound DB in _inference ([fact createInferenceManipulator])
-
+	[_factory init:inf];
 	[_factory makeCompound:pred];
-	[dtree printTree];
-	return dtree;
+	[self printTree];
+	return self;
 }
 
 @end

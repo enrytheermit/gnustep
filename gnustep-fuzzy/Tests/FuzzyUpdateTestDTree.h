@@ -31,9 +31,10 @@
 #import <Foundation/Foundation.h>
 @class FuzzyInference;
 @class FuzzyPredicate;
-@class FuzzyDTreeFactory;
+@class FuzzyDTree;
+#import "../Headers/FuzzyDTree.h"
 
-@interface FuzzyUpdateDTree : NSObject
+@interface FuzzyUpdateDTree : FuzzyDTree 
 {
 	FuzzyDTreeFactory *_factory;
 }
