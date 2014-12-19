@@ -30,23 +30,24 @@
  
 -(id) new 
 {
- 	self = [[NSMutableDictionary alloc] init];
+	if( (self = [super new]) ) {
+	}	
 	return self; 
 }
- 
+
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif
  {
  
 	[self setObject:[NSValue valueWithPointer:pif] forKey:key];
  }
  
- - (void)addObjectToDict:(NSString*)key :(id)o
+ - (void)addValue:(id)val forKey:(NSString*)key
  {
- 	[self setObject:o forKey:key];
- }
+	NSLog(@"dict addition"); 
+ 	[super setObject:val forKey:key];
+}
  
- 
- - (NSValue*)getWithKey:(NSString*)key
+ - (NSObject*)getWithKey:(NSString*)key
  {
  	return [self objectForKey:key];	
  }

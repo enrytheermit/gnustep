@@ -90,28 +90,18 @@
 @implementation InferenceAtom
 -(id) parse:(FuzzyInference*)inf
 {
-	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
-		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node dataToString] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
-		/* node predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[[FuzzyPredicate alloc] initWithString:[_node dataToString]]];	
-		[inf addAtom:self with:[_node predicate]];	
-			
-	} else {
-		/* FIXME stringify [_node data] int _nodeid */
-	}
+	//////if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
+	NSLog(@"BARAtom");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
+	[inf addAtom:self with:[[self node] predicate]];
 	return self;
 }
 @end
 @implementation InferenceVariable
 -(id) parse:(FuzzyInference*)inf
 {
-	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
-		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node dataToString] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
-		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[FuzzyPredicate new:[_node dataToString]]];	
-		[inf addVariable:self with:[_node predicate]];	
+	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
+		NSLog(@"Parsing InferenceVariable as FuzzyPredicate: %@", [[_node predicate] UTF8String]);
+		[inf addVariable:self with:[[self node] predicate]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -122,12 +112,9 @@
 @implementation InferenceNumber
 -(id) parse:(FuzzyInference*)inf
 {
-	if ([[_node dataToString] isKindOfClass:[NSString class]]) {
-		/* FIXME ? this should make a string an integer, always */
-		_nodeid = [[[_node dataToString] stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
-		/* atom predicates get squeezed from "blue 0" to "blue0" */	
-		[_node predicate:[FuzzyPredicate new:[_node dataToString]]];	
-		[inf addNumber:self with:[_node predicate]];	
+	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
+		NSLog(@"Parsing InferenceNumber as FuzzyPredicate: %@", [[_node predicate] UTF8String]);
+		[inf addNumber:self with:[[self node] predicate]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -143,17 +130,9 @@
 }
 -(id) parse:(FuzzyInference*)inf
 {
-	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
-		//adds compound to (cache) DB
-		NSLog(@"Parsing InferenceCompound as FuzzyPredicate: %s", [[[_node predicate] string] UTF8String]);
-		[inf addCompound:self with:[[self node] predicate]];
-	} else if ([[_node data] isKindOfClass:[FuzzyPredicate class]]) {
-		//adds compound to (cache) DB
-		NSLog(@"Parsing InferenceCompound as Predicate: %s", [[[_node predicate] string] UTF8String]);
-		[inf addCompound:self with:[[self node] predicate]];
-	} else {
-	}
-
+	/////if ([[_node predicate] isKindOfClass:[NSString class]]) {
+	NSLog(@"BAR");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
+	[inf addCompound:self with:[[self node] predicate]];
 	return self;
 }
 @end
@@ -162,12 +141,18 @@
  
 -(id) new 
 {
+	return self; 
+}
+
+-(id) init:(int)caps
+{
 	_atoms = [FuzzyDB new];	
 	_vars = [FuzzyDB new];	
 	_numbers = [FuzzyDB new];	
 	_compounds = [FuzzyDB new];	
-	_tree = nil;
-	return self; 
+	//_tree = nil;
+	NSLog(@"Constructed inference engine");
+	return self;
 }
 
 -(FuzzyDTree*)tree
@@ -188,28 +173,43 @@
 
 -(id) parse:(InferenceADT*)adt
 {
+	NSLog(@"Parsing ADT..");
 	[adt parse:self]; 
 	return adt;
 }
--(void)addAtom:(InferenceAtom*)a with:(FuzzyPredicate*)p
+-(void)addAtom:(id)a with:(FuzzyPredicate*)p
 {
-	[_atoms setObject:p forKey:a];		
-	[_tree compileAtomToTree:a];	
+	[_atoms addValue:a forKey:[p nsstring]];		
+	NSLog(@"Added atom to rules DB");
+	//[_tree compileAtomToTree:a];	
 }
 -(void)addVariable:(InferenceVariable*)a with:(FuzzyPredicate*)p
 {
-	[_vars setObject:p forKey:a];		
-	[_tree compileVariableToTree:a];	
+	[_vars addObjectToDict:[p UTF8String] : a];		
+	//[_tree compileVariableToTree:a];	
 }
 -(void)addNumber:(InferenceNumber*)a with:(FuzzyPredicate*)p
 {
-	[_numbers setObject:p forKey:a];		
-	[_tree compileNumberToTree:a];	
+	[_numbers addObjectToDict:[p UTF8String] : a];		
+	//[_tree compileNumberToTree:a];	
 }
--(void)addCompound:(InferenceCompound*)a with:(FuzzyPredicate*)p
+-(void)addCompound:(id)a with:(FuzzyPredicate*)p
 {
-	[_compounds setObject:p forKey:a];		
-	[_tree compileCompoundToTree:a];	
-	NSLog(@"Compiling compound done.");
+	NSLog(@"Init Added compound to rules DB");
+	[_compounds addValue:a forKey:[p nsstring]];		
+	//[_tree compileCompoundToTree:a];	
+	NSLog(@"Added compound to rules DB");
 }
+
+-(void)compileTree
+{
+    NSLog(@"Compiling Tree...");
+    NSEnumerator *enumerator = [_atoms keyEnumerator];
+    id key;
+    while ((key = [enumerator nextObject])) {
+	NSLog(@"FOO enum");
+	[_tree addNode:[_atoms objectForKey:key]];	
+    }	
+}
+
 @end

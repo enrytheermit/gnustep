@@ -31,11 +31,11 @@
 #import <Foundation/Foundation.h>
  
  @interface FuzzyDB : NSMutableDictionary {
- }
+}
  - (id)new;
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif;
- - (void)addObjectToDict:(NSString*)key :(id)o;
- - (NSValue*)getWithKey:(NSString*)key;
+ - (void)addValue:(id)val forKey:(NSString*)key;
+ - (NSObject*)getWithKey:(NSString*)key;
  - (void)reinitCapacity;
  
  @end

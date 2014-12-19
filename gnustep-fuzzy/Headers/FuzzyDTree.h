@@ -56,7 +56,7 @@
 @end
 
 @interface FuzzyDTreeRoot : NSObject {
-	FuzzyDTreeNode *_nodes;
+	FuzzyDTreeNode *_rootnode;
 }
 - (id) new; 
 -(void)printTree;

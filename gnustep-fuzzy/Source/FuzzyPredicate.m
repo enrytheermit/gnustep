@@ -32,43 +32,49 @@
 
 -(id)new
 {
+	if( (self = [super init]) ) {
+    		[self initWithFormat:@""];	
+	}	
 	return self;
-}
-
--(id)string
-{
-	return _string;
 }
 
 -(int)length
 {
-	return [_string length];
+	return [self length];
 }
 
--(id)init:(NSMutableString*)s
+-(id)init:(NSString*)s
 {
-	_string = [[NSMutableString alloc] initWithString:s];
+	//self = [[NSMutableString alloc] initWithString:s];
+	//[self initWithFormat:s arguments:nil];	
+	self = s;
 	return self;
 }
 
 -(id)appendString:(NSMutableString*)s
 {
-	[_string appendString:s];
-	return _string;
+	[self appendString:s];
+	return self;
 }
 
 -(void)unspacify
 {
-	[_string stringByReplacingOccurencesOfString:@" " withString:@""];
+	[self stringByReplacingOccurencesOfString:@" " withString:@""];
 }
 
 - (NSRange)rangeOfString:(NSString*)s
 {
-	return [_string rangeOfString:s];
+	return [self rangeOfString:s];
 }
 
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule
 {
 	return [parser compare:self with:rule];
 } 
+
+-(NSString*)nsstring
+{
+	return self;
+}	
+
  @end

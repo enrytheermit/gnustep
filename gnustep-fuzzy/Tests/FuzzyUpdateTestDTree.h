@@ -33,6 +33,7 @@
 @class FuzzyPredicate;
 @class FuzzyDTree;
 #import "../Headers/FuzzyDTree.h"
+#import "../Headers/FuzzyInference.h"
 
 @interface FuzzyUpdateDTree : FuzzyDTree 
 {

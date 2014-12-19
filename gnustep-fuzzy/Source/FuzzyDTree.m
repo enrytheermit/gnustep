@@ -67,6 +67,7 @@
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
+	NSLog(@"Factory made atom");
 	return [_inference parse: iadt];
 }
 
@@ -97,6 +98,7 @@
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
+	NSLog(@"Factory made compound");
 	return [_inference parse: iadt];
 }
 
@@ -111,20 +113,24 @@
 
 - (id) new
 {
-	_nodes = [FuzzyDTreeNode new];
+	_rootnode = [FuzzyDTreeNode new];
 	return self;
 }
 
 -(id)searchTreeFor:(FuzzyPredicate*)ds
 {
-	return [_nodes searchTreeFor:ds];
+	return [_rootnode searchTreeFor:ds];
 }
 
 -(void)printTree
 {
-	[_nodes printTree];
+	[_rootnode printTree];
 }
 
+-(void)addNode:(FuzzyDTreeNode*)n
+{
+	[_rootnode addNode:n];
+}
 @end
 
 @implementation FuzzyDTreeNode
@@ -140,6 +146,12 @@
 	_adt = adt;
 	return self;
 }
+
+- (void)addNode:(FuzzyDTreeNode*)n
+{
+	NSLog(@"adding node");
+	[_cons addObject:[[FuzzyDTreeNodeCon new] init:n]];	
+} 
 
 -(id)searchTreeFor:(FuzzyPredicate*)ds
 {
@@ -247,12 +259,6 @@
 	return [_root searchTreeFor:ds];
 }
 
-- (void)addNode:(FuzzyDTreeNode*)n
-{
-	NSLog(@"adding node");
-	//[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
-
-} 
 -(void) compileCompoundToTree:(InferenceCompound*)comp
 {
 	NSLog(@"Compiling compound to tree.");
@@ -269,15 +275,15 @@
 			//or [ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
 			FuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
 		*/
-		FuzzyPredicate *p = [[FuzzyPredicate new] init:[[ps string] substringWithRange:NSMakeRange(3,[ps length]-3)]];
+		FuzzyPredicate *p = [[FuzzyPredicate new] init:[[ps UTF8String] substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			NSLog(@"splitting node for not clause");
 			[n splitForNot:ps];	
 		} else {
-			NSLog(@"adding node for not clause = %@", [ps string]);
+			NSLog(@"adding node for not clause = %@", [ps UTF8String]);
 			FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] init:comp]; 
-			[self addNode:nn];	
+			[_root addNode:nn];	
 		}	
 	}	
 /***	if ([[comp data] rangeOfString:ORS] == [ORS length]) {

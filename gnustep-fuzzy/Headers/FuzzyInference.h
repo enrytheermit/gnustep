@@ -92,16 +92,17 @@
 	FuzzyDTree *_tree;
 }
 - (id) new;
+- (id) init:(int)caps;
 - (FuzzyDTree*) tree;
 -(id) parse:(InferenceADT*)adt;
 - (void)accept:(FuzzyVisitor*)v;
 
 - (id) setTree:(FuzzyDTree*)dt;
 - (id) parse:(InferenceADT*)adt;
--(void)addAtom:(InferenceAtom*)a with:(FuzzyPredicate*)p;
+-(void)addAtom:(id)a with:(FuzzyPredicate*)p;
 -(void)addNumber:(InferenceNumber*)a with:(FuzzyPredicate*)p;
 -(void)addVariable:(InferenceVariable*)a with:(FuzzyPredicate*)p;
--(void)addCompound:(InferenceCompound*)a with:(FuzzyPredicate*)p;
+-(void)addCompound:(id)a with:(FuzzyPredicate*)p;
 @end
  
  #endif
