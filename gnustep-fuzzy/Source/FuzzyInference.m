@@ -146,10 +146,10 @@
 
 -(id) init:(int)caps
 {
-	_atoms = [FuzzyDB new];	
-	_vars = [FuzzyDB new];	
-	_numbers = [FuzzyDB new];	
-	_compounds = [FuzzyDB new];	
+	_atoms = [FuzzyDB allocDB];	
+	_vars = [FuzzyDB allocDB];	
+	_numbers = [FuzzyDB allocDB];	
+	_compounds = [FuzzyDB allocDB];	
 	//_tree = nil;
 	NSLog(@"Constructed inference engine");
 	return self;
@@ -179,24 +179,24 @@
 }
 -(void)addAtom:(id)a with:(FuzzyPredicate*)p
 {
-	[_atoms addValue:a forKey:[p nsstring]];		
+	[_atoms setObject:a forKey:[p nsstring]];		
 	NSLog(@"Added atom to rules DB");
 	//[_tree compileAtomToTree:a];	
 }
 -(void)addVariable:(InferenceVariable*)a with:(FuzzyPredicate*)p
 {
-	[_vars addObjectToDict:[p UTF8String] : a];		
+	[_vars setObject:a forKey:[p nsstring]];		
 	//[_tree compileVariableToTree:a];	
 }
 -(void)addNumber:(InferenceNumber*)a with:(FuzzyPredicate*)p
 {
-	[_numbers addObjectToDict:[p UTF8String] : a];		
+	[_numbers setObject:a forKey:[p nsstring]];		
 	//[_tree compileNumberToTree:a];	
 }
 -(void)addCompound:(id)a with:(FuzzyPredicate*)p
 {
 	NSLog(@"Init Added compound to rules DB");
-	[_compounds addValue:a forKey:[p nsstring]];		
+	[_compounds setObject:a forKey:[p nsstring]];		
 	//[_tree compileCompoundToTree:a];	
 	NSLog(@"Added compound to rules DB");
 }

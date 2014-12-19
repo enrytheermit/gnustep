@@ -32,9 +32,9 @@
  
  @interface FuzzyDB : NSMutableDictionary {
 }
- - (id)new;
+ + (id)allocDB;
+ - (id)init;
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif;
- - (void)addValue:(id)val forKey:(NSString*)key;
  - (NSObject*)getWithKey:(NSString*)key;
  - (void)reinitCapacity;
  

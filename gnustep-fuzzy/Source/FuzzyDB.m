@@ -27,11 +27,15 @@
 #import "../Headers/FuzzyDB.h"
  
 @implementation FuzzyDB 
- 
--(id) new 
+
++ (id)allocDB
 {
-	if( (self = [super new]) ) {
-	}	
+	return [[self alloc] init];
+}
+
+-(id) init 
+{
+	self = (FuzzyDB *)[[NSMutableDictionary alloc] init];
 	return self; 
 }
 
@@ -40,12 +44,6 @@
  
 	[self setObject:[NSValue valueWithPointer:pif] forKey:key];
  }
- 
- - (void)addValue:(id)val forKey:(NSString*)key
- {
-	NSLog(@"dict addition"); 
- 	[super setObject:val forKey:key];
-}
  
  - (NSObject*)getWithKey:(NSString*)key
  {
