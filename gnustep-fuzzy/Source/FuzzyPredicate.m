@@ -77,4 +77,14 @@
 	return self;
 }	
 
- @end
+-(BOOL)searchFor:(NSString*)key
+{
+	if ([self rangeOfString:key].length == [key length]) {
+		/* FIXME multiple cases count */
+		return YES;
+	} else {
+		return NO;
+	}
+}
+
+@end

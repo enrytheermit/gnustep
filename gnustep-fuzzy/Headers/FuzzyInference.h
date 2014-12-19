@@ -103,6 +103,7 @@
 -(void)addNumber:(InferenceNumber*)a with:(FuzzyPredicate*)p;
 -(void)addVariable:(InferenceVariable*)a with:(FuzzyPredicate*)p;
 -(void)addCompound:(id)a with:(FuzzyPredicate*)p;
+-(NSMutableArray*)weightAtoms;
 @end
  
  #endif

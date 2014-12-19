@@ -204,11 +204,48 @@
 -(void)compileTree
 {
     NSLog(@"Compiling Tree...");
+    NSMutableArray *weights = [self weightAtoms];
+
+    /*
+     * Atoms with the biggest weight in compounds get put at
+     * the fore of the connections in the treeroot node
+     */
     NSEnumerator *enumerator = [_atoms keyEnumerator];
-    id key;
-    while ((key = [enumerator nextObject])) {
-	[_tree addNode:[_atoms objectForKey:key]];	
-    }	
+    id atomp;
+    while ((atomp = [enumerator nextObject])) {
+	    NSEnumerator *enumerator = [weights keyEnumerator];
+	    int max, i, idx, w;
+	    while ((w = [enumerator nextObject])) {
+	     	if (w > max) {
+			max = w;
+			idx = i;
+		}
+		i++;
+	}
+    	[weights removeObjectAtIndex:idx];
+	[_tree addNode:[_atoms objectForKey:atomp]];	
+    }
+    
 }
 
+-(NSMutableArray*)weightAtoms
+{
+	int natoms = [_atoms count];
+	NSMutableArray *weights = [[NSMutableArray alloc] init];
+    	NSEnumerator *enumerator = [_compounds keyEnumerator];
+    	id compoundkey;
+	int idx;
+    	while ((compoundkey = [enumerator nextObject])) {
+    		NSEnumerator *enumerator2 = [_atoms keyEnumerator];
+    		id atomkey;
+		int wn;
+    		while ((atomkey = [enumerator2 nextObject])) {
+			if ([[compoundkey predicate] searchFor:atomkey]) {
+				wn++;	
+			}		
+		}
+		[weights insertObject:wn atIndex:idx++];
+	}
+	return weights;
+}
 @end
