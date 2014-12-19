@@ -28,14 +28,14 @@
  
 @implementation FuzzyDB 
 
-+ (id)allocDB
+- (id)new
 {
-	return [[self alloc] init];
+	return self; 
 }
 
 -(id) init 
 {
-	self = (FuzzyDB *)[[NSMutableDictionary alloc] init];
+	_dictionary = [[NSMutableDictionary alloc] init];
 	return self; 
 }
 
@@ -44,10 +44,15 @@
  
 	[self setObject:[NSValue valueWithPointer:pif] forKey:key];
  }
+
+-(void)setObject:(id)value forKey:(NSString*)s
+{
+	[_dictionary setObject:value forKey:s];
+}	
  
  - (NSObject*)getWithKey:(NSString*)key
  {
- 	return [self objectForKey:key];	
+ 	return [_dictionary objectForKey:key];	
  }
  
 - (void)reinitCapacity
