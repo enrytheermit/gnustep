@@ -29,7 +29,7 @@
 #import "FuzzyPaintTestRules.h"
 
 #import <Foundation/Foundation.h>
-#import <AppKit/AppKit.h>
+///#import <AppKit/AppKit.h>
 
 int main(int argc, const char **argv, char **env)
 {
@@ -37,12 +37,14 @@ int main(int argc, const char **argv, char **env)
    NSAutoreleasePool *pool;
 
    pool = [NSAutoreleasePool new];
+
+	fprintf(stdout, "FOO");
 	NSLog(@"FOO");
    FuzzyInference *inf = [FuzzyInference new];
    [inf init:0];
    FuzzyUpdateDTree *dtree = [[FuzzyUpdateDTree new] init:[FuzzyDTreeFactory new] with:inf]; 
    [dtree makeUpdateDTree];
 
-   [pool release]; /* actually useless */
+   [pool release];
    return 0;
 } 

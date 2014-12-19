@@ -32,21 +32,17 @@
 
 @class FuzzyDTreeFactory;
 //FIXME super class
-@interface InferenceManipulator
-{
-	FuzzyDTreeFactory *_factory;
-}
-- (id)new;
-- (id)init:(FuzzyDTreeFactory*)fact;
-
-@end
-
 @interface FuzzyManipulator : NSObject
 {
 	id _o;
 }
 - (id)new;
 - (id)init:(id)o;
+@end
+
+@interface InferenceManipulator : FuzzyManipulator
+{
+}
 @end
 
 @interface FuzzyArgumentManipulator : NSObject 

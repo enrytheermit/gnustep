@@ -29,15 +29,6 @@
 #import "../Headers/FuzzyDTree.h"
 
 @implementation InferenceManipulator
-- (id)new
-{
-	return self;
-}
-- (id)init:(FuzzyDTreeFactory*)fact
-{
-	_factory = fact;
-}
-
 @end
 @implementation FuzzyParserManipulator
 

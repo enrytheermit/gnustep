@@ -39,9 +39,9 @@ GSFuzzyTest_ADDITONAL_INCLUDE_DIRS =
 #
 # The Objective-C files to compile
 GSFuzzyTest_OBJC_FILES = \
- FuzzyPaintTestRules.m \
  FuzzyUpdateTestDTree.m \
 
+# FuzzyPaintTestRules.m \
 # The C source files to be compiled
 GSFuzzyTest_C_FILES = 
 

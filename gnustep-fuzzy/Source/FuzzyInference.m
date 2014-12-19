@@ -91,7 +91,7 @@
 -(id) parse:(FuzzyInference*)inf
 {
 	//////if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
-	NSLog(@"BARAtom");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
+	NSLog(@"Atom");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
 	[inf addAtom:self with:[[self node] predicate]];
 	return self;
 }
@@ -207,7 +207,6 @@
     NSEnumerator *enumerator = [_atoms keyEnumerator];
     id key;
     while ((key = [enumerator nextObject])) {
-	NSLog(@"FOO enum");
 	[_tree addNode:[_atoms objectForKey:key]];	
     }	
 }

@@ -1,4 +1,4 @@
- /*
+/*
     FuzzyDecisionTree.m
  
     Copyright (C) 2014 Free Software Foundation, Inc.
@@ -102,9 +102,9 @@
 	return [_inference parse: iadt];
 }
 
-- (id) createInferenceManipulator
+- (InferenceManipulator*) createInferenceManipulator
 {
-	return [[InferenceManipulator new] init:self];
+	return [[InferenceManipulator new] init:_inference];
 }
 
 @end
@@ -141,7 +141,7 @@
 	return self;
 }
 
-- (id) init:(InferenceADT*)adt
+- (FuzzyDTreeNode*) init:(InferenceADT*)adt
 {
 	_adt = adt;
 	return self;
@@ -174,14 +174,13 @@
 
 - (void)splitForNot:(FuzzyPredicate *)p
 {
-	[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
+	[_cons addObject:[[FuzzyDTreeNodeCon new] init:self]];	
 } 
 - (void)addForNot:(FuzzyPredicate *)p
 {
-	NSLog(@"_cons has length %d in node %@", [_cons count], self); 
-	//[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
+	//NSLog(@"_cons has length %d in node %@", [_cons count], self); 
 	[_cons addObject:[[FuzzyDTreeNodeCon new] init:self]];	
-	NSLog(@"_cons has length %d in node %@", [_cons count], self); 
+	//NSLog(@"_cons has length %d in node %@", [_cons count], self); 
 
 } 
 - (id)adt
@@ -253,6 +252,10 @@
 {
 	[comp parse:_inference]; //NOTE adds compound to _compounds DB
 }
+-(void)addNode:(FuzzyDTreeNode*)n
+{
+	[_root addNode:n];
+}
 
 -(id)searchTreeFor:(FuzzyPredicate*)ds
 {
@@ -308,7 +311,6 @@
 	if ([[atom node] data] != nil) {
 		
 	}
-	return self;
 }
 
 -(void)printTree 

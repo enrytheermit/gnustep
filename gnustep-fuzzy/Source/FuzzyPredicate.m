@@ -46,8 +46,8 @@
 -(id)init:(NSString*)s
 {
 	//self = [[NSMutableString alloc] initWithString:s];
-	[self initWithFormat:s arguments:nil];	
-	//self = s;
+	//[self initWithFormat:s arguments:nil];	
+	self = s;
 	return self;
 }
 
