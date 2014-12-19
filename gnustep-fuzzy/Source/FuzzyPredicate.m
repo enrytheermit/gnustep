@@ -46,12 +46,12 @@
 -(id)init:(NSString*)s
 {
 	//self = [[NSMutableString alloc] initWithString:s];
-	//[self initWithFormat:s arguments:nil];	
-	self = s;
+	[self initWithFormat:s arguments:nil];	
+	//self = s;
 	return self;
 }
 
--(id)appendString:(NSMutableString*)s
+-(id)appendString:(NSString*)s
 {
 	[self appendString:s];
 	return self;
@@ -59,7 +59,7 @@
 
 -(void)unspacify
 {
-	[self stringByReplacingOccurencesOfString:@" " withString:@""];
+	/////[self stringByReplacingOccurencesOfString:@" " withString:@""];
 }
 
 - (NSRange)rangeOfString:(NSString*)s

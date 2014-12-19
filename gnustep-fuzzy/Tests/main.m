@@ -33,13 +33,13 @@
 
 int main(int argc, const char **argv, char **env)
 {
-
+  
    NSAutoreleasePool *pool;
 
    pool = [NSAutoreleasePool new];
-
-	FuzzyInference *inf = [FuzzyInference new];
-	[inf init:0];
+	NSLog(@"FOO");
+   FuzzyInference *inf = [FuzzyInference new];
+   [inf init:0];
    FuzzyUpdateDTree *dtree = [[FuzzyUpdateDTree new] init:[FuzzyDTreeFactory new] with:inf]; 
    [dtree makeUpdateDTree];
 
