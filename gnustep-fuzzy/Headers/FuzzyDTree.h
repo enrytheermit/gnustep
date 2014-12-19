@@ -40,13 +40,6 @@
 @class InferenceCompound;
 @class InferenceADT;
 
-@interface InferenceManipulator
-{
-	FuzzyDTreeFactory *_factory;
-}
-+ (id)new:(FuzzyDTreeFactory*)fact;
-
-@end
 
 @interface FuzzyDTreeFactory : NSObject
 {
@@ -72,7 +65,8 @@
 	InferenceADT *_adt;
 	NSMutableArray *_cons;
 }
-+ (id) new:(InferenceADT*)adt;
+- (id) new;
+-(id) init:(InferenceADT*)adt;
 - (id) adt;
 -(id)searchTreeFor:(FuzzyPredicate*)ds;
 -(void)printTree;
@@ -81,20 +75,19 @@
 @interface FuzzyDTreeNodeCon : NSObject {
 	FuzzyDTreeNode *_node;	
 }
-+ (id) new:(FuzzyDTreeNode*)node;
 - (id)node;
 @end
 @interface FuzzyDTree : NSObject {
 	FuzzyDTreeRoot *_root;		
 	FuzzyInference *_inference;		
 }
-+ (id)new;
+- (id)new;
 - (id)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf; 
 - (void)accept:(FuzzyVisitor*)v;
--(id) compileCompoundToTree:(InferenceCompound*)comp;
--(id) compileAtomToTree:(InferenceAtom*)atom;
--(id) compileNumberToTree:(InferenceNumber*)num;
--(id) compileVariableToTree:(InferenceVariable*)var;
+-(void) compileAtomToTree:(InferenceAtom*)atom;
+-(void) compileNumberToTree:(InferenceNumber*)num;
+-(void) compileVariableToTree:(InferenceVariable*)var;
+-(void) compileCompoundToTree:(InferenceCompound*)comp;
 -(void)printTree;
 @end
 #endif

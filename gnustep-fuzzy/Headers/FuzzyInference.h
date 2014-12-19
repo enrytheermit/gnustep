@@ -41,11 +41,11 @@
 	FuzzyPredicate *_predicate;
 }
 -(id)new;
--(id)init:(NSData*)d;
+-(id)init:(FuzzyPredicate*)p;
 -(id)data;
 -(NSString*)dataToString;
 -(void)data:(id)d;
--(id)predicate;
+-(FuzzyPredicate*)predicate;
 -(void)predicate:(FuzzyPredicate*)d;
 @end
 

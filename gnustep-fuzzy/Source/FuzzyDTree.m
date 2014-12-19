@@ -26,19 +26,13 @@
  */
  
 #import "../Headers/FuzzyDTree.h"
+#import "../Headers/FuzzyPredicate.h"
 #import "../Headers/FuzzyInference.h"
 #import "../Headers/FuzzyVisitor.h"
+#import "../Headers/FuzzyManipulator.h"
 
 #import "../Headers/FuzzyMACROS.h"
  
-@implementation InferenceManipulator
-+(id)new:(FuzzyDTreeFactory*)fact
-{
-	_factory = fact;
-	return self;
-}
-@end
-
 @implementation FuzzyDTreeFactory
 - (id)new
 {
@@ -58,25 +52,41 @@
 
 - (id) makeADT:(FuzzyPredicate*)p with:(Class)adt
 {
-	InferenceADT *iadt = [[adt class] new:[InferenceNode new:p]];
+	InferenceADT *iadt = [[adt class] new];
+	InferenceNode *n = [InferenceNode new];
+	//[n data:p];
+	[n predicate:p];
+	[iadt node:n];
 	return [_inference parse: iadt];
 } 
 
 - (id) makeAtom:(FuzzyPredicate*)p
 {
-	InferenceAtom *iadt = [InferenceAtom new:[InferenceNode new:p]];
+	InferenceAtom *iadt = [InferenceAtom new];
+	InferenceNode *n = [InferenceNode new];
+	//[n data:p];
+	[n predicate:p];
+	[iadt node:n];
 	return [_inference parse: iadt];
 }
 
 - (id) makeNumber:(FuzzyPredicate*)p
 {
-	InferenceNumber *iadt = [InferenceNumber new:[InferenceNode new:p]];
+	InferenceNumber *iadt = [InferenceNumber new];
+	InferenceNode *n = [InferenceNode new];
+	//[n data:p];
+	[n predicate:p];
+	[iadt node:n];
 	return [_inference parse: iadt];
 }
 
 - (id) makeVar:(FuzzyPredicate*)p
 {
-	InferenceVariable *iadt = [InferenceVariable new:[InferenceNode new:p]];
+	InferenceVariable *iadt = [InferenceVariable new];
+	InferenceNode *n = [InferenceNode new];
+	//[n data:p];
+	[n predicate:p];
+	[iadt node:n];
 	return [_inference parse: iadt];
 }
 
@@ -92,7 +102,7 @@
 
 - (id) createInferenceManipulator
 {
-	return [InferenceManipulator new:self];
+	return [[InferenceManipulator new] init:self];
 }
 
 @end
@@ -119,7 +129,12 @@
 
 @implementation FuzzyDTreeNode
 
-+ (id) new:(InferenceADT*)adt
+- (id) new
+{
+	return self;
+}
+
+- (id) init:(InferenceADT*)adt
 {
 	_adt = adt;
 	return self;
@@ -132,7 +147,7 @@
     id val;
     while ((val = [enumerator nextObject])) {
 	NSString *dds = [[[val node] adt] dataToString];
-	if (dds == ds) {
+	if ([dds UTF8String] == [ds UTF8String]) {
 		return [val node];
 	}
     }
@@ -146,11 +161,11 @@
 
 - (void)splitForNot:(FuzzyPredicate *)p
 {
-	[_cons addObject:[FuzzyDTreeNodeCon new:[FuzzyDTreeNode new:[InferenceCompound new:[InferenceNode new:p]]]]];	
+	[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
 } 
 - (void)addForNot:(FuzzyPredicate *)p
 {
-	[_cons addObject:[FuzzyDTreeNodeCon new:[FuzzyDTreeNode new:[InferenceCompound new:[InferenceNode new:p]]]]];	
+	[_cons addObject:[[FuzzyDTreeNodeCon new] init:[[FuzzyDTreeNode new] init:[[InferenceCompound new] init:[[InferenceNode new] init:p]]]]];	
 } 
 - (id)adt
 {
@@ -169,20 +184,23 @@
     id val;
     while ((val = [enumerator nextObject])) {
 	NSString *dds = [[[val node] adt] dataToString];
-    	NSLog(dds);
     }
     //descend recursively through all connections towards their linked node
     enumerator = [_cons keyEnumerator];
     while ((val = [enumerator nextObject])) {
    	[[val node] printTreeRec];
     } 
-    return nil;
 }
 
 @end
 @implementation FuzzyDTreeNodeCon
 
-+ (id) new:(FuzzyDTreeNode*)node
+- (id) new
+{
+	return self;
+}
+
+- (id) init:(FuzzyDTreeNode*)node
 {
 	_node = node;
 	return self;
@@ -197,7 +215,7 @@
 
 @implementation FuzzyDTree
 
-+(id)new
+-(id)new
 {
 	return self;
 }
@@ -206,7 +224,6 @@
 {
 	_inference = inf; 
 	_root = [FuzzyDTreeRoot new];
-	//return [factory makeDTree];
 	return self;
 } 
 
@@ -228,11 +245,11 @@
 -(void) compileCompoundToTree:(InferenceCompound*)comp
 {
 	NSLog(@"Compiling compound to tree.");
-	FuzzyPredicate *ps = (FuzzyPredicate*)[[comp node] predicate]; 
+	FuzzyPredicate *ps = [[comp node] predicate]; 
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
 	*/
-	[ps stringByReplacingOccurrencesOfString:@" " withString:@""];
+	[ps unspacify];
 	if ([ps rangeOfString:NOTS].length == 3) {
 		/* NOTE : for speed
 			unsigned int len = [[[comp node] data] length];
@@ -241,7 +258,7 @@
 			//or [ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
 			FuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
 		*/
-		FuzzyPredicate *p = [ps substringWithRange:NSMakeRange(3,[ps length])];
+		FuzzyPredicate *p = [[FuzzyPredicate new] init:[[ps string] substringWithRange:NSMakeRange(3,[ps length])]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			NSLog(@"splitting node for not clause");
@@ -260,19 +277,15 @@
 ***/
 }
 
--(id) compileVariableToTree:(InferenceVariable*)var
+-(void) compileVariableToTree:(InferenceVariable*)var
 {
-
-	return self;
 }
 
--(id) compileNumberToTree:(InferenceNumber*)num
+-(void) compileNumberToTree:(InferenceNumber*)num
 {
-
-	return self;
 }
 
--(id) compileAtomToTree:(InferenceAtom*)atom
+-(void) compileAtomToTree:(InferenceAtom*)atom
 {
 	if ([[atom node] data] != nil) {
 		

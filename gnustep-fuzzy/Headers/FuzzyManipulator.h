@@ -30,41 +30,52 @@
 
 #import <Foundation/Foundation.h>
 
+@class FuzzyDTreeFactory;
+//FIXME super class
+@interface InferenceManipulator
+{
+	FuzzyDTreeFactory *_factory;
+}
+- (id)new;
+- (id)init:(FuzzyDTreeFactory*)fact;
+
+@end
+
 @interface FuzzyManipulator : NSObject
 {
 	id _o;
 }
-+ (id) new:(id)o;
-- (id) o;
+- (id)new;
+- (id)init:(id)o;
 @end
 
 @interface FuzzyArgumentManipulator : NSObject 
 {
 	id _o;
 }
-+ (id) new:(id)o;
-- (id) o;
+- (id)new;
+- (id)init:(id)o;
 @end
 
 @interface FuzzyParserManipulator : FuzzyManipulator
 {
 }
-
-+ (id) new:(id)parser;
+- (id)new;
+- (id)init:(id)o;
 @end
 
 @interface FuzzyScreenManipulator : FuzzyArgumentManipulator
 {
 }
-
-+ (id) new:(id)screen;
+- (id)new;
+- (id)init:(id)o;
 @end
 
 @interface FuzzyPaintManipulator : FuzzyManipulator
 {
 }
-
-+ (id) new:(id)painter;
+- (id)new;
+- (id)init:(id)o;
 @end
 
 

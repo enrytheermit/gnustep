@@ -37,9 +37,12 @@
  }
 - (id)new;
 - (id)string;
+- (int)length;
 -(id)appendString:(NSMutableString*)s;
 - (id)init:(NSMutableString*)s;
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule;
+-(void)unspacify;
+- (NSRange)rangeOfString:(NSString*)s;
  
  @end
  

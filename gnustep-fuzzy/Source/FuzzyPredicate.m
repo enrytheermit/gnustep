@@ -32,13 +32,17 @@
 
 -(id)new
 {
-	NSLog(@"QUUX");
 	return self;
 }
 
 -(id)string
 {
 	return _string;
+}
+
+-(int)length
+{
+	return [_string length];
 }
 
 -(id)init:(NSMutableString*)s
@@ -51,6 +55,16 @@
 {
 	[_string appendString:s];
 	return _string;
+}
+
+-(void)unspacify
+{
+	[_string stringByReplacingOccurencesOfString:@" " withString:@""];
+}
+
+- (NSRange)rangeOfString:(NSString*)s
+{
+	return [_string rangeOfString:s];
 }
 
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule

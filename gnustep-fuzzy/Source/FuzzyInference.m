@@ -36,8 +36,9 @@
 	return self;
 }
 
--(id)init:(NSData*)d{
-	_data = d;
+-(id)init:(FuzzyPredicate*)p{
+	_data = nil;
+	_predicate = p;
 	return self;
 }
 -(id)data
@@ -53,7 +54,7 @@
 {
 	_data = d;
 }
--(id)predicate
+-(FuzzyPredicate*)predicate
 {
 	return _predicate;
 }
@@ -145,11 +146,11 @@
 	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
 		//adds compound to (cache) DB
 		NSLog(@"Parsing InferenceCompound as FuzzyPredicate: %s", [[[_node predicate] string] UTF8String]);
-		[inf addCompound:self with:[_node predicate]];
+		[inf addCompound:self with:[[self node] predicate]];
 	} else if ([[_node data] isKindOfClass:[FuzzyPredicate class]]) {
 		//adds compound to (cache) DB
 		NSLog(@"Parsing InferenceCompound as Predicate: %s", [[[_node predicate] string] UTF8String]);
-		[inf addCompound:self with:[_node predicate]];
+		[inf addCompound:self with:[[self node] predicate]];
 	} else {
 	}
 
@@ -208,6 +209,8 @@
 -(void)addCompound:(InferenceCompound*)a with:(FuzzyPredicate*)p
 {
 	[_compounds setObject:p forKey:a];		
+	NSLog(@"FOOtree:%s",_tree);
 	[_tree compileCompoundToTree:a];	
+	NSLog(@"FOO");
 }
 @end

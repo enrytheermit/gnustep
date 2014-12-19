@@ -26,23 +26,41 @@
 */
 
 #import "../Headers/FuzzyManipulator.h"
+#import "../Headers/FuzzyDTree.h"
 
-
-@implementation FuzzyParserManipulator
-
-+ (id) new:(id)parser
+@implementation InferenceManipulator
+- (id)new
 {
-	[super new:parser];
 	return self;
 }
+- (id)init:(FuzzyDTreeFactory*)fact
+{
+	_factory = fact;
+}
 
+@end
+@implementation FuzzyParserManipulator
+
+- (id) new
+{
+	return self;
+}
+- (id) init:(id)o
+{
+	_o = o;
+	return self;
+}
 @end
 
 @implementation FuzzyScreenManipulator
 
-+ (id) new:(id)screen
+- (id) new
 {
-	[super new:screen];
+	return self;
+}
+- (id) init:(id)o
+{
+	_o = o;
 	return self;
 }
 
@@ -50,7 +68,11 @@
 
 @implementation FuzzyArgumentManipulator
 
-+ (id) new:(id)o
+- (id) new
+{
+	return self;
+}
+- (id) init:(id)o
 {
 	o = _o;
 	return self;
@@ -64,17 +86,24 @@
 
 @implementation FuzzyPaintManipulator
 
-+ (id) new:(id)painter
+- (id) new
 {
-	[super new:painter];
 	return self;
 }
-
+- (id) init:(id)o
+{
+	o = _o;
+	return self;
+}
 @end
 
 @implementation FuzzyManipulator
 
-+ (id) new:(id)o
+- (id) new
+{
+	return self;
+}
+- (id) init:(id)o
 {
 	_o = o;
 	return self;
