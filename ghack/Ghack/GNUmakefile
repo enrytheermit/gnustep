@@ -35,6 +35,7 @@ Character.h \
 Xpm.h \
 MonsterInfo.h \
 Monster.h \
+Grue.h \
 Newt.h \
 Views.h
 
@@ -48,6 +49,7 @@ Xpm.m \
 MonsterInfo.m \
 Monster.m \
 Newt.m \
+Grue.m \
 Views.m
 
 #
