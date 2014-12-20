@@ -53,7 +53,7 @@
 - (id) makeNumber:(FuzzyPredicate*)p; 
 - (id) makeCompound:(FuzzyPredicate*)p; 
 //_inference wrapper
-- (InferenceManipulator*)createInferenceManipulator;
+//- (InferenceManipulator*)createInferenceManipulator;
 @end
 
 @interface FuzzyDTreeRoot : NSObject {
@@ -78,6 +78,7 @@
 @interface FuzzyDTreeNodeCon : NSObject {
 	FuzzyDTreeNode *_node;	
 }
+- (FuzzyDTreeNodeCon*) init:(FuzzyDTreeNode*)node;
 - (id)node;
 @end
 @interface FuzzyDTree : NSObject {
@@ -85,7 +86,7 @@
 	FuzzyInference *_inference;		
 }
 - (id)new;
-- (id)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf; 
+- (FuzzyDTree*)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf; 
 - (void)accept:(FuzzyVisitor*)v;
 - (void) addCompound:(InferenceCompound*)comp;
 -(id)searchTreeFor:(FuzzyPredicate*)ds;

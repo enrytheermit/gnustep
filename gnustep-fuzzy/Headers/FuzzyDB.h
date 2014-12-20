@@ -39,7 +39,7 @@
  -(void)setObject:(id)value forKey:(NSString*)s;
  - (NSObject*)getWithKey:(NSString*)key;
  - (void)reinitCapacity;
- 
+-(NSMutableDictionary*)dictionary; 
  @end
  
  #endif

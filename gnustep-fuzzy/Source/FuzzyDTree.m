@@ -39,7 +39,7 @@
 	return self;
 }
 
-- (id)init:(FuzzyInference*)inf
+- (FuzzyDTreeFactory*)init:(FuzzyInference*)inf
 {
 	_inference = inf;
 	return self;
@@ -101,12 +101,12 @@
 	NSLog(@"Factory made compound");
 	return [_inference parse: iadt];
 }
-
+/***
 - (InferenceManipulator*) createInferenceManipulator
 {
 	return [[InferenceManipulator new] init:_inference];
 }
-
+***/
 @end
 
 @implementation FuzzyDTreeRoot
@@ -150,25 +150,27 @@
 - (void)addNode:(FuzzyDTreeNode*)n
 {
 	NSLog(@"adding node");
-	[_cons addObject:[[FuzzyDTreeNodeCon new] init:n]];	
+	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	[c init:n];
+	[_cons addObject:c];	
 } 
 
 -(id)searchTreeFor:(FuzzyPredicate*)ds
 {
     //greedy search for node which matches ds
-    NSEnumerator *enumerator = [_cons keyEnumerator];
-    id val;
-    while ((val = [enumerator nextObject])) {
-	NSString *dds = [[[val node] adt] dataToString];
-	if ([dds UTF8String] == [ds UTF8String]) {
-		return [val node];
-	}
-    }
+
+	for (FuzzyDTreeNodeCon *con in _cons)
+	{
+		NSString *dds = [[[con node] adt] dataToString];
+		if ([dds UTF8String] == [ds UTF8String]) {
+		return [con node];
+		}
+    	}
     //descend recursively through all connections towards their linked node
-    enumerator = [_cons keyEnumerator];
-    while ((val = [enumerator nextObject])) {
-   	return [[val node] searchTreeFor:ds];
-    } 
+	for (FuzzyDTreeNodeCon *con in _cons)
+	{
+   		return [[con node] searchTreeFor:ds];
+    	}	 
     return nil;
 }
 
@@ -196,16 +198,13 @@
 -(void)printTreeRec
 {
     //greedy search for node which matches ds
-    NSEnumerator *enumerator = [_cons keyEnumerator];
-    id val;
-    while ((val = [enumerator nextObject])) {
-	NSString *dds = [[[val node] adt] dataToString];
-    }
+	for (FuzzyDTreeNodeCon* con in _cons) {
+		NSString *dds = [[[con node] adt] dataToString];
+    	}
     //descend recursively through all connections towards their linked node
-    enumerator = [_cons keyEnumerator];
-    while ((val = [enumerator nextObject])) {
-   	[[val node] printTreeRec];
-    } 
+	for (FuzzyDTreeNodeCon* con in _cons) {
+   		[[con node] printTreeRec];
+    	}	 
 }
 
 @end
@@ -216,7 +215,7 @@
 	return self;
 }
 
-- (id) init:(FuzzyDTreeNode*)node
+- (FuzzyDTreeNodeCon*) init:(FuzzyDTreeNode*)node
 {
 	_node = node;
 	return self;
@@ -236,7 +235,7 @@
 	return self;
 }
 
-- (id)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf
+- (FuzzyDTree*)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf
 {
 	_inference = inf; 
 	_root = [FuzzyDTreeRoot new];
@@ -278,7 +277,8 @@
 			//or [ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
 			FuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
 		*/
-		FuzzyPredicate *p = [[FuzzyPredicate new] init:[[ps UTF8String] substringWithRange:NSMakeRange(3,[ps length]-3)]];
+		FuzzyPredicate *p = [FuzzyPredicate new];
+		[p init:[[ps UTF8String] substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			NSLog(@"splitting node for not clause");

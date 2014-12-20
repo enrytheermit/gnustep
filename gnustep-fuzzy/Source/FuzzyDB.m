@@ -59,4 +59,8 @@
 {
 }
 
+-(NSMutableDictionary*)dictionary
+{
+	return _dictionary;
+}
 @end

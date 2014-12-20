@@ -210,33 +210,32 @@
      * Atoms with the biggest weight in compounds get put at
      * the fore of the connections in the treeroot node
      */
-    NSEnumerator *enumerator = [_atoms keyEnumerator];
+    NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
     id atomp;
     while ((atomp = [enumerator nextObject])) {
-	    NSEnumerator *enumerator = [weights keyEnumerator];
-	    int max, i, idx, w;
-	    while ((w = [enumerator nextObject])) {
-	     	if (w > max) {
-			max = w;
+	    int max, i, idx;
+	    for (i = 0; i < [weights count]; i++) {
+	     	if ([[weights objectAtIndex:i] intValue] > max) {
+			max = [[weights objectAtIndex:i] intValue];
 			idx = i;
 		}
 		i++;
 	}
     	[weights removeObjectAtIndex:idx];
-	[_tree addNode:[_atoms objectForKey:atomp]];	
+	[_tree addNode:[[_atoms dictionary] objectForKey:atomp]];	
     }
     
 }
 
 -(NSMutableArray*)weightAtoms
 {
-	int natoms = [_atoms count];
+	int natoms = [[_atoms dictionary] count];
 	NSMutableArray *weights = [[NSMutableArray alloc] init];
-    	NSEnumerator *enumerator = [_compounds keyEnumerator];
+    	NSEnumerator *enumerator = [[_compounds dictionary] keyEnumerator];
     	id compoundkey;
 	int idx;
     	while ((compoundkey = [enumerator nextObject])) {
-    		NSEnumerator *enumerator2 = [_atoms keyEnumerator];
+    		NSEnumerator *enumerator2 = [[_atoms dictionary] keyEnumerator];
     		id atomkey;
 		int wn;
     		while ((atomkey = [enumerator2 nextObject])) {
