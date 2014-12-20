@@ -140,7 +140,7 @@
 	return self;
 }
 
-- (FuzzyDTreeNode*) init:(InferenceADT*)adt
+- (FuzzyDTreeNode*) initADT:(InferenceADT*)adt
 {
 	_cons = [[NSMutableArray alloc] init];
 	_adt = adt;
@@ -151,7 +151,7 @@
 {
 	NSLog(@"adding node");
 	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
-	[c init:n];
+	[c initNode:n];
 	[_cons addObject:c];	
 } 
 
@@ -176,12 +176,16 @@
 
 - (void)splitForNot:(FuzzyPredicate *)p
 {
-	[_cons addObject:[[FuzzyDTreeNodeCon new] init:self]];	
+	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	[c initNode:self];
+	[_cons addObject:c];	
 } 
 - (void)addForNot:(FuzzyPredicate *)p
 {
 	//NSLog(@"_cons has length %d in node %@", [_cons count], self); 
-	[_cons addObject:[[FuzzyDTreeNodeCon new] init:self]];	
+	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	[c initNode:self];
+	[_cons addObject:c];	
 	//NSLog(@"_cons has length %d in node %@", [_cons count], self); 
 
 } 
@@ -199,7 +203,7 @@
 {
     //greedy search for node which matches ds
 	for (FuzzyDTreeNodeCon* con in _cons) {
-		NSString *dds = [[[con node] adt] dataToString];
+		//NSString *dds = [[[con node] adt] dataToString];
     	}
     //descend recursively through all connections towards their linked node
 	for (FuzzyDTreeNodeCon* con in _cons) {
@@ -215,7 +219,7 @@
 	return self;
 }
 
-- (FuzzyDTreeNodeCon*) init:(FuzzyDTreeNode*)node
+- (FuzzyDTreeNodeCon*) initNode:(FuzzyDTreeNode*)node
 {
 	_node = node;
 	return self;
@@ -285,7 +289,7 @@
 			[n splitForNot:ps];	
 		} else {
 			NSLog(@"adding node for not clause = %@", [ps UTF8String]);
-			FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] init:comp]; 
+			FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] initADT:comp]; 
 			[_root addNode:nn];	
 		}	
 	}	

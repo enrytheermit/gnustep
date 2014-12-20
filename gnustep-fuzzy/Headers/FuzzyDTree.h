@@ -68,7 +68,7 @@
 	NSMutableArray *_cons;
 }
 - (id) new;
-- (FuzzyDTreeNode*) init:(InferenceADT*)adt;
+- (FuzzyDTreeNode*) initADT:(InferenceADT*)adt;
 - (id) adt;
 - (void)addNode:(FuzzyDTreeNode*)n;
 -(id)searchTreeFor:(FuzzyPredicate*)ds;
@@ -78,7 +78,7 @@
 @interface FuzzyDTreeNodeCon : NSObject {
 	FuzzyDTreeNode *_node;	
 }
-- (FuzzyDTreeNodeCon*) init:(FuzzyDTreeNode*)node;
+- (FuzzyDTreeNodeCon*) initNode:(FuzzyDTreeNode*)node;
 - (id)node;
 @end
 @interface FuzzyDTree : NSObject {
