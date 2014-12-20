@@ -156,10 +156,14 @@
 
 -(id) init:(int)caps
 {
-	_atoms = [[FuzzyDB new] init];	
-	_vars = [[FuzzyDB new] init];	
-	_numbers = [[FuzzyDB new] init];	
-	_compounds = [[FuzzyDB new] init];	
+	_atoms = [FuzzyDB new];	
+	[_atoms init];	
+	_vars = [FuzzyDB new];	
+	[_vars init];	
+	_numbers = [FuzzyDB new];	
+	[_numbers init];	
+	_compounds = [FuzzyDB new];	
+	[_compounds init];	
 	//_tree = nil;
 	NSLog(@"Constructed inference engine");
 	return self;

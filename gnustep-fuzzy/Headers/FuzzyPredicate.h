@@ -31,13 +31,15 @@
 #import <Foundation/Foundation.h>
 
 @class FuzzyParser;
- 
  @interface FuzzyPredicate : NSString {
+
  }
+
+@property (retain) NSString*stringHolder;
 - (id)new;
 - (int)length;
 -(id)appendString:(NSString*)s;
-- (id)init:(NSString*)s;
+- (FuzzyPredicate*)init:(NSString*)s;
 - (id)compareWithParser:(FuzzyParser*)parser and:(NSString*)rule;
 -(void)unspacify;
 - (NSRange)rangeOfString:(NSString*)s;

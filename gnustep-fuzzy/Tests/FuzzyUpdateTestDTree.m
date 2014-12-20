@@ -51,12 +51,13 @@
 	NSLog(@"FOO");
 	FuzzyPredicate *pred = [FuzzyPredicate new];
 	NSLog(@"FOO");
-	[pred init:[@"not x" retain]];
+	//[pred init:[@"not x" retain]];
+	[pred init:@"not x"];
 	NSLog(@"FOO");
 	[_factory makeCompound:pred];
 	NSLog(@"FOO");
 	FuzzyPredicate *pred2 = [FuzzyPredicate new];
-	[pred2 init:[@"x" retain]];
+	[pred2 init:@"x"];
 	NSLog(@"FOO");
 	[_factory makeAtom:pred2];
 

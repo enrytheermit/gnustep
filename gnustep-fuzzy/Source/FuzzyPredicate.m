@@ -29,7 +29,7 @@
 #import "../Headers/FuzzyParser.h"
  
  @implementation FuzzyPredicate 
-
+@synthesize stringHolder = stringHolder;
 -(id)new
 {
 	if( (self = [super init]) ) {
@@ -38,16 +38,23 @@
 	return self;
 }
 
+- (FuzzyPredicate*)initWithCharactersNoCopy:(unichar *)characters length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer {
+    self = [super init];
+    if (self) {
+        self.stringHolder = [[NSString alloc] initWithCharactersNoCopy:characters length:length freeWhenDone:freeBuffer];
+    }
+    return self;
+}
 -(int)length
 {
 	return [self length];
 }
 
--(id)init:(NSString*)s
+-(FuzzyPredicate*)init:(NSString*)s
 {
 	//self = [[NSMutableString alloc] initWithString:s];
-	[self initWithFormat:s arguments:nil];	
-	//self = s;
+	//[self initWithFormat:s arguments:nil];	
+	self.stringHolder = s; //KLUDGE FIXME
 	return self;
 }
 
