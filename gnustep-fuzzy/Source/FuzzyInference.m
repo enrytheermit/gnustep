@@ -28,6 +28,7 @@
 #import "../Headers/FuzzyDB.h"
 #import "../Headers/FuzzyInference.h"
 #import "../Headers/FuzzyManipulator.h"
+#import "../Headers/FuzzyDTree.h"
 #import "../Headers/FuzzyVisitor.h"
  
 @implementation InferenceNode
@@ -222,7 +223,9 @@
 		i++;
 	}
     	[weights removeObjectAtIndex:idx];
-	[_tree addNode:[[_atoms dictionary] objectForKey:atomp]];	
+	////[_tree addNode:[[_atoms dictionary] objectForKey:atomp]];	
+	FuzzyDTreeNode *n = [[FuzzyDTreeNode new] init:[[_atoms dictionary] objectForKey:atomp]]; 
+	[_tree addNode:n];	
     }
     
 }
@@ -243,7 +246,7 @@
 				wn++;	
 			}		
 		}
-		[weights insertObject:wn atIndex:idx++];
+		[weights insertObject:[NSNumber numberWithInt:wn] atIndex:idx++];
 	}
 	return weights;
 }

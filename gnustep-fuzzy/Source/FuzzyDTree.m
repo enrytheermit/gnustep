@@ -137,12 +137,12 @@
 
 - (id) new
 {
-	_cons = [[NSMutableArray alloc] init];
 	return self;
 }
 
 - (FuzzyDTreeNode*) init:(InferenceADT*)adt
 {
+	_cons = [[NSMutableArray alloc] init];
 	_adt = adt;
 	return self;
 }
