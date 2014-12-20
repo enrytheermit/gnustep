@@ -1,0 +1,17 @@
+{
+    ApplicationDescription = "GNUstep roguelike game";
+    ApplicationIcon = "Ghack.tiff";
+    ApplicationName = Ghack;
+    ApplicationRelease = "0.2";
+    Authors = (
+	"Marko Riedel"
+    );
+    Copyright = "Copyright (C) 2002-2011 Free Software Foundation, Inc";
+    CopyrightDescription = "Released under GPL v2";
+    FullVersionID = "0.2";
+    NSExecutable = Ghack;
+    NSIcon = "Ghack.tiff";
+    NSPrincipalClass = NSApplication;
+    NSRole = Application;
+    URL = "http://gap.nongnu.org/gmines/";
+}

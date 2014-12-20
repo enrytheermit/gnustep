@@ -1,0 +1,10 @@
+. make png byte array to pixel drawer (as GBA)
+. or use xpm
+. use TiffRepresnetation of a BitmapImageRep
+
+. setCovered not to WALL1
+. calculate energy of map matrix
+. [row][col] and [yi][xi] swap errors
+. drawing origin
+
+. do not forget dealloc when creating something new
