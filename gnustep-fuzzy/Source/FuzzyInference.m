@@ -229,7 +229,7 @@
      */
 	CGFloat max = 0.0, idx = 0.0;
 	int i;
-	/* atom predicate is at front of array, start from 1 not 0 */
+	/* root atom predicate is at front of array, start from 1 not 0 */
 	for (i = 1; i < [weights count]; i++) {
 		if ([[weights objectAtIndex:i] intValue] > max) {
 			max = [[weights objectAtIndex:i] floatValue];
@@ -243,11 +243,23 @@
 	/* atom predicate is at front of array */
     	NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
     	id atomp;
+	FuzzyDTreeNode *n = rn;
     	while ((atomp = [enumerator nextObject])) {
-		FuzzyDTreeNode *n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]];
-		[rn addNode:n];//gives the root node's node a connection with n at the end	
-   		 
-	}
+		FuzzyDTreeNode *n2 = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]];
+		max = 0.0;
+		idx = 0.0;
+		/* root atom predicate is at front of array, start from 1 not 0 */
+		for (i = 1; i < [weights count]; i++) {
+			if ([[weights objectAtIndex:i] intValue] > max) {
+				max = [[weights objectAtIndex:i] floatValue];
+				idx = i;
+			}
+			i++;
+		}
+    		[weights removeObjectAtIndex:idx];
+		[n addNode:n2];//gives the root node's node a connection with n at the end	
+   		n = n2;
+	} 
     
 	[_tree addToRootNode:rn];//adds the root node a connection with n at the end	
 }
