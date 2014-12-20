@@ -218,18 +218,19 @@
 -(void)compileTree
 {
     NSLog(@"Compiling Tree...");
+    /*
+     * construct weights i.e. count / numberOfAtoms
+     */
     NSMutableArray *weights = [self weightAtoms];
-
+    FuzzyDTreeNode *n;
     /*
      * Atoms with the biggest weight in compounds get put at
      * the fore of the connections in the treeroot node
      */
-    NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
-    id atomp;
-    while ((atomp = [enumerator nextObject])) {
 	CGFloat max = 0.0, idx = 0.0;
 	int i;
-	for (i = 0; i < [weights count]; i++) {
+	/* atom predicate is at front of array, start from 1 not 0 */
+	for (i = 1; i < [weights count]; i++) {
 		if ([[weights objectAtIndex:i] intValue] > max) {
 			max = [[weights objectAtIndex:i] floatValue];
 			idx = i;
@@ -237,8 +238,13 @@
 		i++;
 	}
     	[weights removeObjectAtIndex:idx];
-	FuzzyDTreeNode *n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]]; 
+	/* atom predicate is at front of array */
+	n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:
+		[weights objectAtIndex:0]]]; 
 	[_tree addToRootNode:n];//gives the root node a connection with n at the end	
+    NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
+    id atomp;
+    while ((atomp = [enumerator nextObject])) {
     }
     
 }
@@ -254,6 +260,8 @@
     		NSEnumerator *enumerator2 = [[_atoms dictionary] keyEnumerator];
     		id atomkey;
 		int wn = 0;
+		/* insert atom predicate at head of array */
+		[weights insertObject:atomkey atIndex:idx];
     		while ((atomkey = [enumerator2 nextObject])) {
 			if ([[compoundkey pred] searchFor:atomkey]) {
 				wn++;	
