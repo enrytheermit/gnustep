@@ -37,7 +37,7 @@
 	return self;
 }
 
--(id)init:(FuzzyPredicate*)p{
+-(id)initNode:(FuzzyPredicate*)p{
 	_data = nil;
 	_predicate = p;
 	return self;
@@ -157,13 +157,13 @@
 -(id) init:(int)caps
 {
 	_atoms = [FuzzyDB new];	
-	[_atoms init];	
+	[_atoms initDB];	
 	_vars = [FuzzyDB new];	
-	[_vars init];	
+	[_vars initDB];	
 	_numbers = [FuzzyDB new];	
-	[_numbers init];	
+	[_numbers initDB];	
 	_compounds = [FuzzyDB new];	
-	[_compounds init];	
+	[_compounds initDB];	
 	//_tree = nil;
 	NSLog(@"Constructed inference engine");
 	return self;
@@ -227,7 +227,8 @@
      * Atoms with the biggest weight in compounds get put at
      * the fore of the connections in the treeroot node
      */
-	CGFloat max = 0.0, idx = 0.0;
+	CGFloat max = 0.0;
+	int idx = 0;
 	int i;
 	/* root atom predicate is at front of array, start from 1 not 0 */
 	for (i = 1; i < [weights count]; i++) {
@@ -262,6 +263,15 @@
 	} 
     
 	[_tree addToRootNode:rn];//adds the root node a connection with n at the end	
+  
+	//compile in compounds
+  	NSEnumerator *cenumerator = [[_compounds dictionary] keyEnumerator];
+    	id compp;
+    	while ((compp = [cenumerator nextObject])) {
+
+		[_tree compileCompoundToTree:[[_compounds dictionary] objectForKey:compp]];
+
+	}
 }
 
 -(NSMutableArray*)weightAtoms

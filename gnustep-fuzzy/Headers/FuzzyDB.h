@@ -34,7 +34,7 @@
 	NSMutableDictionary *_dictionary;
 }
  - (id)new;
- - (id)init;
+ - (FuzzyDB*)initDB;
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif;
  -(void)setObject:(id)value forKey:(NSString*)s;
  - (NSObject*)getWithKey:(NSString*)key;

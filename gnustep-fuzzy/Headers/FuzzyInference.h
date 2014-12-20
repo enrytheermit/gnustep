@@ -41,7 +41,7 @@
 	FuzzyPredicate *_predicate;
 }
 -(id)new;
--(id)init:(FuzzyPredicate*)p;
+-(id)initNode:(FuzzyPredicate*)p;
 -(id)data;
 -(NSString*)dataToString;
 -(void)data:(id)d;

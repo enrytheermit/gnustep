@@ -189,7 +189,11 @@
 - (void)splitForNot:(FuzzyPredicate *)p
 {
 	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
-	[c initNode:self];
+	InferenceCompound *ic = [InferenceCompound new];
+	InferenceNode *in = [InferenceNode new];
+	[in initNode:p];
+	[ic node:in];
+	[c initNode:[[FuzzyDTreeNode new] initADT:ic]];
 	[_cons addObject:c];	
 } 
 - (void)addForNot:(FuzzyPredicate *)p
@@ -291,13 +295,6 @@
 	*/
 	//[ps unspacify];
 	if ([ps rangeOfString:NOTS].length == 3) {
-		/* NOTE : for speed
-			unsigned int len = [[[comp node] data] length];
-			char buffer[len];
-			strncpy(buffer, [ps UTF8String], [ps length]); 
-			//or [ps getCharacters:buffer range:NSMakeRange(3, [ps length])];
-			FuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
-		*/
 		FuzzyPredicate *p = [FuzzyPredicate new];
 		[p init:[ps substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];

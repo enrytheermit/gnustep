@@ -33,9 +33,9 @@
 	return self; 
 }
 
--(id) init 
+-(FuzzyDB*) initDB 
 {
-	_dictionary = [[NSMutableDictionary alloc] init];
+	_dictionary = [NSMutableDictionary new]; 
 	return self; 
 }
 
