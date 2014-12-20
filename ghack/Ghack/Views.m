@@ -301,31 +301,14 @@ You should have received a copy of the GNU General Public License along with thi
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-/*    if(tileState==COV_COVERED && marked==NO){
-        [con untileState:self];
-        [self setCovered:COV_UNCOVERED_BY_CLICK];
-    }
-*/
-
-
-	//[con uncoverRegion:self];// TILE_CLICKED;
-//FIXMNOTE	[con untileState:self];
-//    	[self setNeedsDisplay:YES];
-
 	//FIXME update character xy
 	int xx = [con getCharacterX]; 
 	int yy = [con getCharacterY];
-	int mx = -1,my = -1;
-	//if (theEvent && [theEvent type] != NSLeftMouseUp) {
-	//	NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:self];
-		//mx = point.x / DIMENSION;//[self row];
-		mx = [self col];
-		my = [self row];
+	int mx = [self col];
+	int my = [self row];
 	//NSPoint        point;
-	//float          dx,dy;
 
    	//point = [self convertPoint:[theEvent locationInWindow] fromView:self];
-	//}
 	NSLog(@"mouse **** %d,%d", mx,my);
 	NSLog(@"self **** %d,%d", xx,yy);
 
@@ -344,9 +327,7 @@ You should have received a copy of the GNU General Public License along with thi
 		[con moveUp:self];
 	} else if (my >= 0 && my < yy) {
 		[con moveDown:self];
-	} else {
 	}
-
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent
