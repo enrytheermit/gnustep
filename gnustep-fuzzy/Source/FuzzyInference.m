@@ -237,9 +237,8 @@
 		i++;
 	}
     	[weights removeObjectAtIndex:idx];
-	////[_tree addNode:[[_atoms dictionary] objectForKey:atomp]];	
 	FuzzyDTreeNode *n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]]; 
-	[_tree addNode:n];	
+	[_tree addToRootNode:n];//gives the root node a connection with n at the end	
     }
     
 }

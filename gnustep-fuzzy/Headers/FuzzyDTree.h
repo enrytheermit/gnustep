@@ -61,6 +61,7 @@
 	FuzzyDTreeNode *_rootnode;
 }
 - (id) new; 
+-(void)addToRootNode:(FuzzyDTreeNode*)n;
 -(void)addNode:(FuzzyDTreeNode*)n;
 -(void)printTree;
 @end
@@ -71,6 +72,7 @@
 - (id) new;
 - (FuzzyDTreeNode*) initADT:(InferenceADT*)adt;
 - (id) adt;
+-(void)addToRootNode:(FuzzyDTreeNode*)n;
 - (void)addNode:(FuzzyDTreeNode*)n;
 -(id)searchTreeFor:(FuzzyPredicate*)ds;
 -(void)printTree;
@@ -95,6 +97,7 @@
 -(void) compileNumberToTree:(InferenceNumber*)num;
 -(void) compileVariableToTree:(InferenceVariable*)var;
 -(void) compileCompoundToTree:(InferenceCompound*)comp;
+-(void)addToRootNode:(FuzzyDTreeNode*)n;
 - (void)addNode:(FuzzyDTreeNode*)n;
 -(void)printTree;
 @end

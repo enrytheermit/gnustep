@@ -127,6 +127,10 @@
 	[_rootnode printTree];
 }
 
+-(void)addToRootNode:(FuzzyDTreeNode*)n
+{
+	[_rootnode addToRootNode:n];
+}
 -(void)addNode:(FuzzyDTreeNode*)n
 {
 	[_rootnode addNode:n];
@@ -146,6 +150,14 @@
 	_adt = adt;
 	return self;
 }
+
+- (void)addToRootNode:(FuzzyDTreeNode*)n
+{
+	NSLog(@"adding to root node");
+	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	[c initNode:n];
+	[_cons addObject:c];	
+} 
 
 - (void)addNode:(FuzzyDTreeNode*)n
 {
@@ -255,6 +267,11 @@
 {
 	[comp parse:_inference]; //NOTE adds compound to _compounds DB
 }
+-(void)addToRootNode:(FuzzyDTreeNode*)n
+{
+	[_root addToRootNode:n];
+}
+
 -(void)addNode:(FuzzyDTreeNode*)n
 {
 	[_root addNode:n];
