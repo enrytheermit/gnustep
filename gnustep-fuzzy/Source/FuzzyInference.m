@@ -217,12 +217,12 @@
 
 -(void)compileTree
 {
-    NSLog(@"Compiling Tree...");
+	NSLog(@"Compiling Tree...");
     /*
      * construct weights i.e. count / numberOfAtoms
      */
-    NSMutableArray *weights = [self weightAtoms];
-    FuzzyDTreeNode *n;
+	NSMutableArray *weights = [self weightAtoms];	
+	FuzzyDTreeNode *rn;
     /*
      * Atoms with the biggest weight in compounds get put at
      * the fore of the connections in the treeroot node
@@ -237,16 +237,19 @@
 		}
 		i++;
 	}
+	rn = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:
+		[weights objectAtIndex:0]]]; 
     	[weights removeObjectAtIndex:idx];
 	/* atom predicate is at front of array */
-	n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:
-		[weights objectAtIndex:0]]]; 
-	[_tree addToRootNode:n];//gives the root node a connection with n at the end	
-    NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
-    id atomp;
-    while ((atomp = [enumerator nextObject])) {
-    }
+    	NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
+    	id atomp;
+    	while ((atomp = [enumerator nextObject])) {
+		FuzzyDTreeNode *n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]];
+		[rn addNode:n];//gives the root node's node a connection with n at the end	
+   		 
+	}
     
+	[_tree addToRootNode:rn];//adds the root node a connection with n at the end	
 }
 
 -(NSMutableArray*)weightAtoms
