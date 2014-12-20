@@ -46,6 +46,7 @@
 -(NSString*)dataToString;
 -(void)data:(id)d;
 -(FuzzyPredicate*)predicate;
+-(FuzzyPredicate*)pred;
 -(void)predicate:(FuzzyPredicate*)d;
 @end
 
@@ -59,6 +60,7 @@
 -(void)node:(InferenceNode*)n;
 -(int)nodeid;
 -(void)nodeid:(int)n;
+-(id) parse:(FuzzyInference*)inf;
 @end
 
 @interface InferenceAtom : InferenceADT
@@ -103,6 +105,7 @@
 -(void)addNumber:(InferenceNumber*)a with:(FuzzyPredicate*)p;
 -(void)addVariable:(InferenceVariable*)a with:(FuzzyPredicate*)p;
 -(void)addCompound:(id)a with:(FuzzyPredicate*)p;
+-(void)compileTree;
 -(NSMutableArray*)weightAtoms;
 @end
  

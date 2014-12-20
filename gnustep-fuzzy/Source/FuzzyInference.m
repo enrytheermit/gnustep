@@ -59,6 +59,10 @@
 {
 	return _predicate;
 }
+-(FuzzyPredicate*)pred
+{
+	return _predicate;
+}
 -(void)predicate:(FuzzyPredicate*)p
 {
 	_predicate = p;
@@ -86,6 +90,11 @@
 {
 	_nodeid = n;
 }
+-(id) parse:(FuzzyInference*)inf
+{
+	NSLog(@"InferenceADT subclass responsibility");
+	return self;
+}
 @end
 
 @implementation InferenceAtom
@@ -93,16 +102,16 @@
 {
 	//////if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
 	NSLog(@"Atom");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
-	[inf addAtom:self with:[[self node] predicate]];
+	[inf addAtom:self with:[[self node] pred]];
 	return self;
 }
 @end
 @implementation InferenceVariable
 -(id) parse:(FuzzyInference*)inf
 {
-	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
-		NSLog(@"Parsing InferenceVariable as FuzzyPredicate: %@", [[_node predicate] UTF8String]);
-		[inf addVariable:self with:[[self node] predicate]];	
+	if ([[_node pred] isKindOfClass:[FuzzyPredicate class]]) {
+		NSLog(@"Parsing InferenceVariable as FuzzyPredicate: %@", [[_node pred] UTF8String]);
+		[inf addVariable:self with:[[self node] pred]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -113,9 +122,9 @@
 @implementation InferenceNumber
 -(id) parse:(FuzzyInference*)inf
 {
-	if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
-		NSLog(@"Parsing InferenceNumber as FuzzyPredicate: %@", [[_node predicate] UTF8String]);
-		[inf addNumber:self with:[[self node] predicate]];	
+	if ([[_node pred] isKindOfClass:[FuzzyPredicate class]]) {
+		NSLog(@"Parsing InferenceNumber as FuzzyPredicate: %@", [[_node pred] UTF8String]);
+		[inf addNumber:self with:[[self node] pred]];	
 			
 	} else {
 		/* FIXME stringify [_node data] int _nodeid */
@@ -131,9 +140,9 @@
 }
 -(id) parse:(FuzzyInference*)inf
 {
-	/////if ([[_node predicate] isKindOfClass:[NSString class]]) {
-	NSLog(@"BAR");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
-	[inf addCompound:self with:[[self node] predicate]];
+	/////if ([[_node pred] isKindOfClass:[NSString class]]) {
+	NSLog(@"BAR");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] pred]);
+	[inf addCompound:self with:[[self node] pred]];
 	return self;
 }
 @end
@@ -214,17 +223,18 @@
     NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
     id atomp;
     while ((atomp = [enumerator nextObject])) {
-	    int max, i, idx;
-	    for (i = 0; i < [weights count]; i++) {
-	     	if ([[weights objectAtIndex:i] intValue] > max) {
-			max = [[weights objectAtIndex:i] intValue];
+	CGFloat max = 0.0, idx = 0.0;
+	int i;
+	for (i = 0; i < [weights count]; i++) {
+		if ([[weights objectAtIndex:i] intValue] > max) {
+			max = [[weights objectAtIndex:i] floatValue];
 			idx = i;
 		}
 		i++;
 	}
     	[weights removeObjectAtIndex:idx];
 	////[_tree addNode:[[_atoms dictionary] objectForKey:atomp]];	
-	FuzzyDTreeNode *n = [[FuzzyDTreeNode new] init:[[_atoms dictionary] objectForKey:atomp]]; 
+	FuzzyDTreeNode *n = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]]; 
 	[_tree addNode:n];	
     }
     
@@ -236,17 +246,17 @@
 	NSMutableArray *weights = [[NSMutableArray alloc] init];
     	NSEnumerator *enumerator = [[_compounds dictionary] keyEnumerator];
     	id compoundkey;
-	int idx;
+	int idx = 0;
     	while ((compoundkey = [enumerator nextObject])) {
     		NSEnumerator *enumerator2 = [[_atoms dictionary] keyEnumerator];
     		id atomkey;
-		int wn;
+		int wn = 0;
     		while ((atomkey = [enumerator2 nextObject])) {
-			if ([[compoundkey predicate] searchFor:atomkey]) {
+			if ([[compoundkey pred] searchFor:atomkey]) {
 				wn++;	
 			}		
 		}
-		[weights insertObject:[NSNumber numberWithInt:wn] atIndex:idx++];
+		[weights insertObject:[NSNumber numberWithFloat:wn / natoms] atIndex:idx++];
 	}
 	return weights;
 }

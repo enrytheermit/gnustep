@@ -42,7 +42,8 @@ int main(int argc, const char **argv, char **env)
 	NSLog(@"FOO");
    FuzzyInference *inf = [FuzzyInference new];
    [inf init:0];
-   FuzzyUpdateDTree *dtree = [[FuzzyUpdateDTree new] init:[FuzzyDTreeFactory new] with:inf]; 
+   FuzzyUpdateDTree *dtree = [FuzzyUpdateDTree new]; 
+   [dtree init:[FuzzyDTreeFactory new] with:inf]; 
    [dtree makeUpdateDTree];
 
    [pool release];

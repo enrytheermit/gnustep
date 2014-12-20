@@ -47,7 +47,7 @@
 - (id)makeUpdateDTree
 {
 	[_inference setTree:self];
-	[_factory init:_inference];
+	[_factory initInference:_inference];
 	NSLog(@"FOO");
 	FuzzyPredicate *pred = [FuzzyPredicate new];
 	NSLog(@"FOO");

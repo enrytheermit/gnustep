@@ -42,6 +42,8 @@
 -(void)unspacify;
 - (NSRange)rangeOfString:(NSString*)s;
 -(NSString*)nsstring; 
- @end
+-(BOOL)searchFor:(NSString*)key;
+ 
+@end
  
  #endif

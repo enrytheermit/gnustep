@@ -39,7 +39,7 @@
 	return self;
 }
 
-- (FuzzyDTreeFactory*)init:(FuzzyInference*)inf
+- (FuzzyDTreeFactory*)initInference:(FuzzyInference*)inf
 {
 	_inference = inf;
 	return self;
@@ -268,7 +268,7 @@
 -(void) compileCompoundToTree:(InferenceCompound*)comp
 {
 	NSLog(@"Compiling compound to tree.");
-	FuzzyPredicate *ps = [[comp node] predicate]; 
+	FuzzyPredicate *ps = [[comp node] pred]; 
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
 	*/
@@ -282,7 +282,7 @@
 			FuzzyDTreeNode *n = [self searchTreeFor:[[NSString alloc] initWithCharacters:buffer length:len]];
 		*/
 		FuzzyPredicate *p = [FuzzyPredicate new];
-		[p init:[[ps UTF8String] substringWithRange:NSMakeRange(3,[ps length]-3)]];
+		[p init:[ps substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			NSLog(@"splitting node for not clause");

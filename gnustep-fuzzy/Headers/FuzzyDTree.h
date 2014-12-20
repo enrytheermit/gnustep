@@ -46,6 +46,7 @@
 {
 	FuzzyInference *_inference;		
 }
+- (FuzzyDTreeFactory*)initInference:(FuzzyInference*)inf;
 - (id) makeDTree;
 - (id) makeADT:(FuzzyPredicate*)p with:(Class)adt; 
 - (id) makeAtom:(FuzzyPredicate*)p; 

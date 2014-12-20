@@ -40,7 +40,7 @@
 	FuzzyDTreeFactory *_factory;
 }
 - (id) new;
--(id)init:(FuzzyDTreeFactory*)fact;
+-(id)init:(FuzzyDTreeFactory*)fact with:(FuzzyInference*)inf;
 - (id) makeUpdateDTree;
 @end
 #endif
