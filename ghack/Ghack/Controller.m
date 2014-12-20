@@ -543,12 +543,12 @@ You should have received a copy of the GNU General Public License along with thi
 }
 - (int)getCharacterX
 {
-	return [character col];
+	return [character row];
 }
 
 - (int)getCharacterY
 {
-	return [character row];
+	return [character col];
 }
 
 - (void)setCharacterX:(int)r
