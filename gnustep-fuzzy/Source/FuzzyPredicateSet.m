@@ -31,15 +31,35 @@
  @implementation FuzzyPredicateSet 
 -(id)new
 {
-	if( (self = [super init]) ) {
-	}	
 	return self;
 }
 
--(FuzzyPredicateSet*)init:(NSString*)s
+- (void)addObject:(id)o
 {
-	_set = [[NSMutableArray alloc] init];
-	return self;
+	[_set addObject:o];
 }
 
+- (NSMutableArray*)set
+{
+	return _set;
+}
+
+- (int)count
+{
+	return [_set count];
+}
+
+- (CGFloat)entropy
+{
+	CGFloat e = 0.0;
+	for (FuzzyPredicate*p in _set) {
+		NSArray *array = [p componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];	
+		int x = [array count];
+		CGFloat px = x / [_set count];
+	
+		CGFloat logpx = log10f(px) / log10f(2);
+		e -= px * logpx;	
+	}
+	return e;
+}	
 @end

@@ -36,8 +36,11 @@
  }
 
 - (id)new;
-- (FuzzyPredicateSet*)init:(NSString*)s;
- 
+- (void)addObject:(id)o; 
+- (id)set;
+-(int)count;
+
+- (CGFloat)entropy;
 @end
  
- #endif
+#endif
