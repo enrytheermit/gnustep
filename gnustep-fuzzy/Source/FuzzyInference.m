@@ -277,6 +277,7 @@
     		id compp2;
 		// create a set
 		int i = 0;
+		//choose lower and upper bound to choose entropy function values
 		int lowerBound = arc4random() % [dict count];
 		int upperBound = arc4random() % [dict count];
 		int rnd = lowerBound + arc4random() % (upperBound - lowerBound);
@@ -285,6 +286,7 @@
 			if (arc4random() % 1 == 0 && i++)
 				[set addObject:compp2];	
 		}
+		//generate the entropy for this set of classes and pack
 		NSNumber *ee = [NSNumber numberWithFloat:[set entropyForAtoms:[_atoms dictionary]]];
 		[entropies setObject:set forKey:ee];
 		[dict removeObjectForKey:compp];	
@@ -293,10 +295,12 @@
  	NSEnumerator *eenumerator = [entropies keyEnumerator];
     	id eatoms;
     	while ((eatoms = [eenumerator nextObject])) {
+		//search for an entropy ~= 0
 		if ([eatoms floatValue] < _threshold) {
 			FuzzyPredicateSet *sett = [entropies objectForKey:eatoms];	
 			for (FuzzyPredicate*fp in [sett set])
-				//compile in compounds
+				//compile in compounds in the set with above 
+				//entropy
 				[_tree compileCompoundToTree:[[_compounds dictionary] objectForKey:fp]];
 			
 			}

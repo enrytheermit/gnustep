@@ -37,8 +37,10 @@
 - (id) new
 {
 	_threshold = 0.001;
-	_rules = [FuzzyDB new]; 
+	_rules = [FuzzyDB new];;
+	[_rules initDB]; 
 	_functions = [FuzzyDB new]; 
+	[_functions initDB]; 
 	return self;
 }
 
@@ -51,7 +53,7 @@
 - (void) addFunction:(NSString*)r with:(FuzzyFunction*)f
 {
 	[_functions reinitCapacity];	
-	[_functions addObjectToDict:r :f];
+	[_functions setObject:f forKey:r];
 }
 
 -(void) parseFor:(FuzzyPredicate*)predicate On:(id)o
@@ -61,15 +63,15 @@
 
 - (id) match:(FuzzyPredicate*)predicate On:(id)o
 {
-    NSEnumerator *enumerator = [_rules keyEnumerator];
+    NSEnumerator *enumerator = [[_rules dictionary] keyEnumerator];
     id key;
     while ((key = [enumerator nextObject])) {
 	/* greedy full match rule search */
-	if ([[predicate string] rangeOfString:key].length == 0)
+	if ([[predicate nsstring] rangeOfString:key].length == 0)
 			continue;
-	else if ([[predicate string] rangeOfString: key].length > 0) {
+	else if ([[predicate nsstring] rangeOfString: key].length > 0) {
 		/* if key found, perform fuzzy action on f(x) with x = 0 */
-		if ([[[_functions objectForKey:key] perform] x] < _threshold) { 
+		if ([[[_functions getWithKey:key] perform] x] < _threshold) { 
 			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];
 			return key;
 		}
@@ -81,16 +83,16 @@
 }	
 - (id) createManipulator
 {
-	return [FuzzyManipulator new:self];
+	return [[FuzzyManipulator new]initM:self];
 }
 
 - (id) createArgumentManipulator
 {
-	return [FuzzyArgumentManipulator new:self];
+	return [[FuzzyArgumentManipulator new]initM:self];
 }
 
 - (id) createParserManipulator
 {
-	return [FuzzyManipulator new:self];
+	return [[FuzzyManipulator new]initM:self];
 }
 @end

@@ -36,7 +36,7 @@
 {
 	return self;
 }
-- (FuzzyParserManipulator*) init:(NSObject*)o
+- (FuzzyParserManipulator*) initM:(id)o
 {
 	_o = o;
 	return self;
@@ -49,7 +49,7 @@
 {
 	return self;
 }
-- (FuzzyScreenManipulator*) init:(NSObject*)o
+- (FuzzyScreenManipulator*) initM:(id)o
 {
 	_o = o;
 	return self;
@@ -63,7 +63,7 @@
 {
 	return self;
 }
-- (FuzzyArgumentManipulator*) init:(NSObject*)o
+- (FuzzyArgumentManipulator*) initM:(id)o
 {
 	o = _o;
 	return self;
@@ -81,7 +81,7 @@
 {
 	return self;
 }
-- (FuzzyPaintManipulator*) init:(NSObject*)o
+- (FuzzyPaintManipulator*) initM:(id)o
 {
 	o = _o;
 	return self;
@@ -94,7 +94,7 @@
 {
 	return self;
 }
-- (FuzzyManipulator*) init:(NSObject*)o
+- (FuzzyManipulator*) initM:(id)o
 {
 	_o = o;
 	return self;

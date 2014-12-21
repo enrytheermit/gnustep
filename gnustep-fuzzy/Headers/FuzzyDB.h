@@ -37,7 +37,8 @@
  - (FuzzyDB*)initDB;
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif;
  -(void)setObject:(id)value forKey:(NSString*)s;
- - (NSObject*)getWithKey:(NSString*)key;
+ - (id)getWithKey:(NSString*)key;
+ - (id)objectForKey:(NSString*)key;
  - (void)reinitCapacity;
 -(NSMutableDictionary*)dictionary; 
  @end

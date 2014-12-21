@@ -29,7 +29,11 @@
  
  @implementation FuzzyFunction
  
- + (id)new:(SEL)pif
+ - (id)new
+ {
+ 	return self;
+ } 
+ - (id)initFunc:(SEL)pif
  {
  	pf = pif;
  	x = .0;	
@@ -72,7 +76,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(littlef)];
+ 	[self initFunc:@selector(littlef)];
 	return self; 
 }
  
@@ -87,7 +91,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(slightlyf)];
+ 	[self initFunc:@selector(slightlyf)];
 	return self; 
  }
  
@@ -102,7 +106,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(veryf)];
+ 	[self initFunc:@selector(veryf)];
 	return self; 
  }
  
@@ -117,7 +121,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(extremelyf)];
+ 	[self initFunc:@selector(extremelyf)];
 	return self; 
  }
  
@@ -132,7 +136,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(veryveryf)];
+ 	[self initFunc:@selector(veryveryf)];
 	return self; 
  }
  
@@ -147,7 +151,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(moreorlessf)];
+ 	[self initFunc:@selector(moreorlessf)];
 	return self; 
  }
  
@@ -162,7 +166,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(indeedf)];
+ 	[self initFunc:@selector(indeedf)];
 	return self; 
  }
  
@@ -177,7 +181,7 @@
  
  -(id) new 
  {
- 	[self new:@selector(idlef)];
+ 	[self initFunc:@selector(idlef)];
 	return self; 
  }
  

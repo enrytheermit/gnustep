@@ -78,18 +78,18 @@
 
 - (id) match:(FuzzyPredicate*)predicate On:(id)o
 {
-    NSEnumerator *enumerator = [_rules keyEnumerator];
+    NSEnumerator *enumerator = [[_rules dictionary] keyEnumerator];
     id key;
     while ((key = [enumerator nextObject])) {
 	/* greedy full match rule search */
-	if ([[predicate string] rangeOfString:key].length == 0)
+	if ([[predicate nsstring] rangeOfString:key].length == 0)
 			continue;
-	else if ([[predicate compareWithParser:[self parser] and: key] length] > 0) {
+	else if ([[[predicate compareWithParser:[self parser] and: key] string] length] > 0) {
 		/* if key found, perform fuzzy action and set arg with x:
 		 before */
-		if ([(FuzzyFunction*)[[_functions objectForKey:key] perform] x] < _threshold) { 
-		//if ([[_functions objectForKey:key] perform] != nil) { 
-			[self performSelector:(SEL)[_rules objectForKey:key] withObject:o];
+		if ([[[[_functions dictionary] objectForKey:key] perform] x] < _threshold) { 
+		//if ([[[_functions dictionary] objectForKey:key] perform] != nil) { 
+			[self performSelector:(SEL)[[_rules dictionary] objectForKey:key] withObject:o];
 			return key;
 		}
 	} else {
@@ -101,17 +101,17 @@
 
 - (id) createManipulator
 {
-	return [FuzzyPaintManipulator new:self];
+	return [[FuzzyPaintManipulator new]initM:self];
 }
 
 - (id) createArgumentManipulator
 {
-	return [FuzzyScreenManipulator new:_painter];
+	return [[FuzzyScreenManipulator new]initM:_painter];
 }
 
 - (id) createParserManipulator
 {
-	return [FuzzyParserManipulator new:_parser];
+	return [[FuzzyParserManipulator new]initM:_parser];
 }
 
 @end

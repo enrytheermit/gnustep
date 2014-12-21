@@ -34,10 +34,10 @@
 //FIXME super class
 @interface FuzzyManipulator : NSObject
 {
-	NSObject* _o;
+	id _o;
 }
 - (id)new;
-- (FuzzyManipulator*)init:(NSObject*)o;
+- (FuzzyManipulator*)initM:(id)o;
 @end
 
 @interface InferenceManipulator : FuzzyManipulator
@@ -47,31 +47,31 @@
 
 @interface FuzzyArgumentManipulator : NSObject 
 {
-	NSObject* _o;
+	id _o;
 }
 - (id)new;
-- (FuzzyArgumentManipulator*)init:(NSObject*)o;
+- (FuzzyArgumentManipulator*)initM:(id)o;
 @end
 
 @interface FuzzyParserManipulator : FuzzyManipulator
 {
 }
 - (id)new;
-- (FuzzyParserManipulator*)init:(NSObject*)o;
+- (FuzzyParserManipulator*)initM:(id)o;
 @end
 
 @interface FuzzyScreenManipulator : FuzzyArgumentManipulator
 {
 }
 - (id)new;
-- (FuzzyScreenManipulator*)init:(NSObject*)o;
+- (FuzzyScreenManipulator*)initM:(id)o;
 @end
 
 @interface FuzzyPaintManipulator : FuzzyManipulator
 {
 }
 - (id)new;
-- (FuzzyPaintManipulator*)init:(NSObject*)o;
+- (FuzzyPaintManipulator*)initM:(id)o;
 @end
 
 

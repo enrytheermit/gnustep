@@ -50,7 +50,12 @@
 	[_dictionary setObject:value forKey:s];
 }	
  
- - (NSObject*)getWithKey:(NSString*)key
+ - (id)getWithKey:(NSString*)key
+ {
+ 	return [_dictionary objectForKey:key];	
+ }
+ 
+ - (id)objectForKey:(NSString*)key
  {
  	return [_dictionary objectForKey:key];	
  }

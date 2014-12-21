@@ -175,7 +175,7 @@
 	{
 		NSString *dds = [[[con node] adt] dataToString];
 		if ([dds UTF8String] == [ds UTF8String]) {
-		return [con node];
+			return [con node];
 		}
     	}
     //descend recursively through all connections towards their linked node
@@ -292,19 +292,22 @@
 	FuzzyPredicate *ps = [[comp node] pred]; 
 	/* 
 	pack comp data (a string) to without spaces e.g. "not x" becomes "notx"
-	*/
 	//[ps unspacify];
+	*/
 	if ([ps rangeOfString:NOTS].length == 3) {
 		FuzzyPredicate *p = [FuzzyPredicate new];
+		//search for a node with the negated value p
 		[p init:[ps substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
 		if (n) {
 			NSLog(@"splitting node for not clause");
 			[n splitForNot:ps];	
 		} else {
-			NSLog(@"adding node for not clause = %@", [ps UTF8String]);
-			FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] initADT:comp]; 
-			[_root addNode:nn];	
+		//if node not found, this is should be impossible as atoms
+		//are all already in the tree
+		//other compound clauses are compiled further
+			/////FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] initADT:comp]; 
+			////[_root addNode:nn];	
 		}	
 	}	
 /***	if ([[comp data] rangeOfString:ORS] == [ORS length]) {
