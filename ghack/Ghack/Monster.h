@@ -10,18 +10,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #import "MonsterInfo.h"
-/*** 
-//typedef struct {} monsterinfo_t;
-__Def(struct __struct_MonsterTypeInfo) 
-__DefMonsterInfo(struct __struct_MonsterTypeInfo)
-monsterinfo_t typeinfo;
-***/
-/*** 
-typedef monsterinfo_t; 
-typedef struct {} __struct_MonsterTypeInfo;
-__DefMonsterInfo(__struct_MonsterTypeInfo);
-***/
-
 ////see monsterinfo.h typedef int monsterinfo_t; 
 #define DefMonsterTypeInfo \
 	typedef monsterinfo_t \
@@ -30,7 +18,7 @@ __DefMonsterInfo(__struct_MonsterTypeInfo)
 
 @interface MonsterTypeInfo : NSObject 
 {
-	typeinfo* _typeinfo;
+	typeinfo _typeinfo;
 }
 @end
 
@@ -42,9 +30,9 @@ __DefMonsterInfo(__struct_MonsterBaseInfo)
 @interface MonsterBaseInfo : NSObject 
 {
 @private
-	baseinfo *_baseinfo;
+	baseinfo _baseinfo;
 }
--(id)initHitpoints:(NSString*)hp Armor:(NSString*)a Strength:(NSString*)s;
+-(id)initHitpoints:(NSString*)hp armor:(NSString*)a strength:(NSString*)s;
 - (baseinfo*) baseinfo;
 @end
 
@@ -55,7 +43,8 @@ __DefMonsterInfo(__struct_MonsterManaInfo)
 
 @interface MonsterManaInfo : NSObject 
 {
-	manainfo * _manainfo;
+@private
+	manainfo _manainfo;
 }
 @end
 
@@ -66,7 +55,7 @@ __DefMonsterInfo(__struct_MonsterWizardInfo)
 
 @interface MonsterWizardInfo : NSObject 
 {
-	wizardinfo* _wizardinfo;
+	wizardinfo _wizardinfo;
 }
 @end
 
@@ -77,7 +66,7 @@ __DefMonsterInfo(__struct_MonsterPriestInfo)
 
 @interface MonsterPriestInfo : NSObject 
 {
-	priestinfo* _priestinfo;
+	priestinfo _priestinfo;
 }
 @end
 
@@ -88,7 +77,7 @@ __DefMonsterInfo(__struct_MonsterPriestInfo)
 
 @interface MonsterThiefInfo : NSObject 
 {
-	thiefinfo* _thiefinfo;
+	thiefinfo _thiefinfo;
 }
 @end
 
@@ -99,7 +88,7 @@ __DefMonsterInfo(__struct_MonsterLevelInfo)
 
 @interface MonsterLevelInfo : NSObject 
 {
-	levelinfo *_levelinfo;
+	levelinfo _levelinfo;
 }
 @end
 
@@ -110,7 +99,7 @@ __DefMonsterInfo(__struct_MonsterEquipmentInfo)
 
 @interface MonsterEquipmentInfo : NSObject 
 {
-	equipmentinfo* _equipmentinfo;
+	equipmentinfo _equipmentinfo;
 }
 @end
 

@@ -14,7 +14,7 @@ typedef struct __struct_MonsterBaseInfo { char *hitpoints; char *armor; char *st
 typedef struct __struct_MonsterManaInfo { char *manapoints; char *spells; char *manalevel; } manainfo;
 typedef struct __struct_MonsterWizardInfo { char *manapoints; char *spells; char *manalevel; } wizardinfo;
 typedef struct __struct_MonsterPriestInfo { char *clericpoints; char *spells; char *clericlevel; } priestinfo;
-typedef struct __struct_MonsterThiefInfo { char *clericpoints; char *spells; char *clericlevel; } thiefinfo;
+typedef struct __struct_MonsterThiefInfo { char *thiefpoints; char *skills; char *thieflevel; } thiefinfo;
 typedef struct __struct_MonsterLevelInfo { char *strength; char *dexterity;
 				char *intelligence; char *constitution;
 				char *charisma; } levelinfo;
