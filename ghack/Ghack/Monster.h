@@ -20,6 +20,8 @@ __DefMonsterInfo(__struct_MonsterTypeInfo)
 {
 	typeinfo _typeinfo;
 }
+-(void)setName:(NSString*)name;
+-(void)setClass:(NSString*)class;
 @end
 
 #define DefMonsterBaseInfo \
@@ -33,7 +35,9 @@ __DefMonsterInfo(__struct_MonsterBaseInfo)
 	baseinfo _baseinfo;
 }
 -(id)initHitpoints:(NSString*)hp armor:(NSString*)a strength:(NSString*)s;
-- (baseinfo*) baseinfo;
+-(void)setHitpoints:(NSString*)name;
+-(void)setArmor:(NSString*)armor;
+-(void)setStrength:(NSString*)s;
 @end
 
 #define DefMonsterManaInfo \
@@ -55,6 +59,7 @@ __DefMonsterInfo(__struct_MonsterWizardInfo)
 
 @interface MonsterWizardInfo : NSObject 
 {
+@private
 	wizardinfo _wizardinfo;
 }
 @end
@@ -66,6 +71,7 @@ __DefMonsterInfo(__struct_MonsterPriestInfo)
 
 @interface MonsterPriestInfo : NSObject 
 {
+@private
 	priestinfo _priestinfo;
 }
 @end
@@ -77,6 +83,7 @@ __DefMonsterInfo(__struct_MonsterPriestInfo)
 
 @interface MonsterThiefInfo : NSObject 
 {
+@private
 	thiefinfo _thiefinfo;
 }
 @end
@@ -88,6 +95,7 @@ __DefMonsterInfo(__struct_MonsterLevelInfo)
 
 @interface MonsterLevelInfo : NSObject 
 {
+@private
 	levelinfo _levelinfo;
 }
 @end
@@ -99,6 +107,7 @@ __DefMonsterInfo(__struct_MonsterEquipmentInfo)
 
 @interface MonsterEquipmentInfo : NSObject 
 {
+@private
 	equipmentinfo _equipmentinfo;
 }
 @end
@@ -106,6 +115,7 @@ __DefMonsterInfo(__struct_MonsterEquipmentInfo)
 
 @interface Monster : NSObject 
 {
+//@private
 	MonsterTypeInfo *_typeinfo;
 	MonsterBaseInfo *_baseinfo;
 	MonsterManaInfo *_manainfo;
@@ -116,6 +126,12 @@ __DefMonsterInfo(__struct_MonsterEquipmentInfo)
 }
 - (id)new;
 - (id)init;
+
+-(void)setName:(NSString*)name;
+-(void)setClass:(NSString*)class;
+-(void)setHitpoints:(NSString*)name;
+-(void)setArmor:(NSString*)armor;
+-(void)setStrength:(NSString*)s;
 
 @end
 

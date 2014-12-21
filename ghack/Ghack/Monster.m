@@ -173,5 +173,30 @@ You should have received a copy of the GNU General Public License along with thi
 	return self;
 }
 
+-(void)setName:(NSString*)name
+{
+	[_typeinfo setName:name];
+}	
+-(void)setClass:(NSString*)class
+{
+	[_typeinfo setclass:class];
+}
+
+-(void)setHitpoints:(NSString*)name
+{
+	[_baseinfo setHitpoints:name];
+}
+
+-(void)setArmor:(NSString*)armor
+{
+	[_baseinfo setArmor:armor];
+}
+
+-(void)setStrength:(NSString*)s
+{
+	[_baseinfo setStrength:s];
+}
+
+
 @end
 

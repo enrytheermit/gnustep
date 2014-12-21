@@ -15,14 +15,24 @@ You should have received a copy of the GNU General Public License along with thi
 -(id)new
 {
 	[super new];
+	[super init];
 	return self;
 }
 
 - (id)init
 {
-	_baseinfo = [MonsterBaseInfo new]; 
+	[super init];
 	return self;
 }
 
+-(id)roll
+{
+	[_typeinfo setName:@"grue"];
+	[_typeinfo setClass:@"fighter"];
+	[_baseinfo setHitpoints:@"4"];
+	[_baseinfo setArmor:@"18"];
+	[_baseinfo setStrength:@"4"];
+	return self;
+}
 @end
 
