@@ -12,9 +12,15 @@ You should have received a copy of the GNU General Public License along with thi
 
 @implementation Grue 
 
+-(id)new
+{
+	[super new];
+	return self;
+}
+
 - (id)init
 {
-
+	_baseinfo = [MonsterBaseInfo new]; 
 	return self;
 }
 

@@ -9,7 +9,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
-#include "Monster.h"
+#include "MonsterInfo.h"
 
 /*** 
 //typedef struct {} monsterinfo_t;
@@ -23,7 +23,7 @@ typedef struct {} __struct_MonsterTypeInfo;
 __DefMonsterInfo(__struct_MonsterTypeInfo);
 ***/
 
-typedef int monsterinfo_t; 
+////see monsterinfo.h typedef int monsterinfo_t; 
 #define DefMonsterTypeInfo \
 	typedef monsterinfo_t \
 typedef struct {} __struct_MonsterTypeInfo \
@@ -44,6 +44,7 @@ __DefMonsterInfo(__struct_MonsterBaseInfo)
 {
 	monsterinfo_t _baseinfo;
 }
+-(id)initHitpoints:(NSString*)hp Armor:(NSString*)a Strength:(NSString*)s;
 @end
 
 #define DefMonsterManaInfo \
@@ -115,7 +116,6 @@ __DefMonsterInfo(__struct_MonsterEquipmentInfo)
 
 @interface Monster : NSObject 
 {
-
 	MonsterTypeInfo *_typeinfo;
 	MonsterBaseInfo *_baseinfo;
 	MonsterManaInfo *_manainfo;
@@ -123,9 +123,8 @@ __DefMonsterInfo(__struct_MonsterEquipmentInfo)
 	MonsterPriestInfo *_priestinfo;
 	MonsterLevelInfo *_levelinfo;
 	MonsterEquipmentInfo *_equipmentinfo;
-
 }
-
+- (id)new;
 - (id)init;
 
 @end

@@ -32,7 +32,8 @@ struct __struct_MonsterCustomInfo {};
 #define __Def(type) \
 	typedef type
 /***
-  Note : This was made for chaning monsterinfo_t types as non-persistent types*/
+  Note : This was made for chaning monsterinfo_t types as non-persistent types
+*/
 #define __DefMonsterInfo(type) \
 	typedef type monsterinfo_t 
 
@@ -44,7 +45,7 @@ __DefMonsterInfo(monsterinfo_t);
  */
 @interface MonsterInfo : NSObject 
 {
-	void *info;
+	id info;
 }
 
 -(id) init;

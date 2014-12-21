@@ -11,13 +11,13 @@ You should have received a copy of the GNU General Public License along with thi
 */
 #import "Monster.h"
 
-@interface Grue : NSObject 
+@interface Grue : Monster
 {
 
 
 
 }
-
+- (id)new;
 - (id)init;
 
 @end

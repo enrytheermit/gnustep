@@ -10,8 +10,24 @@ You should have received a copy of the GNU General Public License along with thi
 
 #import "Monster.h"
 
+@implementation MonsterTypeInfo 
+@end
+
+@implementation MonsterBaseInfo 
+-(id)initHitpoints:(NSString*)hp Armor:(NSString*)a Strength:(NSString*)s
+{
+
+	return self;
+}
+@end
+
 
 @implementation Monster 
+
+- (id)new
+{
+	return self;
+}
 
 - (id)init
 {
