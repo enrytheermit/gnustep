@@ -19,9 +19,18 @@ You should have received a copy of the GNU General Public License along with thi
 
 -(id)initName:(NSString*)name Class:(NSString*)c
 {
-	_typeinfo.name = name;
-	_typeinfo.class = c;
+	_typeinfo.name = [name UTF8String];
+	_typeinfo.class = [c UTF8String];
 	return self;	
+}
+
+-(void)setName:(NSString*)name
+{
+	_typeinfo.name = [name UTF8String];
+}
+-(void)setClass:(NSString*)c
+{
+	_typeinfo.class = [c UTF8String];
 }
 @end
 
