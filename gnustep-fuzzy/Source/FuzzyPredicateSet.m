@@ -49,7 +49,7 @@
 	return [_set count];
 }
 
-- (CGFloat)entropy
+- (CGFloat)entropy0
 {
 	CGFloat e = 0.0;
 	for (FuzzyPredicate*p in _set) {

@@ -25,6 +25,7 @@
     Boston, MA 02110-1301, USA.
  */
 #import "../Headers/FuzzyPredicate.h"
+#import "../Headers/FuzzyPredicateSet.h"
 #import "../Headers/FuzzyDB.h"
 #import "../Headers/FuzzyInference.h"
 #import "../Headers/FuzzyManipulator.h"
@@ -265,12 +266,38 @@
 	[_tree addToRootNode:rn];//adds the root node a connection with n at the end	
   
 	//compile in compounds
+/***********************
   	NSEnumerator *cenumerator = [[_compounds dictionary] keyEnumerator];
     	id compp;
     	while ((compp = [cenumerator nextObject])) {
 
 		[_tree compileCompoundToTree:[[_compounds dictionary] objectForKey:compp]];
 
+	}
+***********************/
+
+	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[_compounds dictionary]];
+	FuzzyPredicateSet *set = [FuzzyPredicateSet new];
+	NSMutableDictionary *entropies = [[NSMutableDictionary alloc] init]; 
+ 	NSEnumerator *cenumerator = [dict keyEnumerator];
+    	id compp;
+    	while ((compp = [cenumerator nextObject])) {
+	  	NSEnumerator *cenumerator2 = [dict keyEnumerator];
+    		id compp2;
+		// create a set
+		int i = 0;
+		int lowerBound = arc4random() % [dict count];
+		int upperBound = arc4random() % [dict count];
+		int rnd = lowerBound + arc4random() % (upperBound - lowerBound);
+    		while ((compp2 = [cenumerator2 nextObject])) {
+			if (i >= rnd) break;
+			if (arc4random() % 1 == 0 && i++)
+				[set addObject:compp2];	
+		}
+		NSNumber *ee = [NSNumber numberWithFloat:[set entropy0]];
+		[entropies setObject:ee forKey:ee];
+		[dict removeObjectForKey:compp];	
+ 		cenumerator = [dict keyEnumerator];
 	}
 }
 

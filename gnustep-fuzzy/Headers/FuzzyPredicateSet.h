@@ -40,7 +40,7 @@
 - (id)set;
 -(int)count;
 
-- (CGFloat)entropy;
+- (CGFloat)entropy0;
 @end
  
 #endif
