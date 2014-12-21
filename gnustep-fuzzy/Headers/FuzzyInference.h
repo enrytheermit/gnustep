@@ -86,6 +86,7 @@
 @end
  
 @interface FuzzyInference : NSObject {
+	CGFloat _threshold;
 	FuzzyDB *_atoms;	
 	FuzzyDB *_vars;	
 	FuzzyDB *_numbers;	

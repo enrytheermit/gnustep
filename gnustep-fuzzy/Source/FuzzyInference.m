@@ -164,7 +164,8 @@
 	_numbers = [FuzzyDB new];	
 	[_numbers initDB];	
 	_compounds = [FuzzyDB new];	
-	[_compounds initDB];	
+	[_compounds initDB];
+	_threshold = 0.01;	
 	//_tree = nil;
 	NSLog(@"Constructed inference engine");
 	return self;
@@ -265,16 +266,6 @@
     
 	[_tree addToRootNode:rn];//adds the root node a connection with n at the end	
   
-	//compile in compounds
-/***********************
-  	NSEnumerator *cenumerator = [[_compounds dictionary] keyEnumerator];
-    	id compp;
-    	while ((compp = [cenumerator nextObject])) {
-
-		[_tree compileCompoundToTree:[[_compounds dictionary] objectForKey:compp]];
-
-	}
-***********************/
 
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[_compounds dictionary]];
 	FuzzyPredicateSet *set = [FuzzyPredicateSet new];
@@ -295,10 +286,22 @@
 				[set addObject:compp2];	
 		}
 		NSNumber *ee = [NSNumber numberWithFloat:[set entropyForAtoms:[_atoms dictionary]]];
-		[entropies setObject:ee forKey:ee];
+		[entropies setObject:set forKey:ee];
 		[dict removeObjectForKey:compp];	
  		cenumerator = [dict keyEnumerator];
 	}
+ 	NSEnumerator *eenumerator = [entropies keyEnumerator];
+    	id eatoms;
+    	while ((eatoms = [eenumerator nextObject])) {
+		if ([eatoms floatValue] < _threshold) {
+			FuzzyPredicateSet *sett = [entropies objectForKey:eatoms];	
+			for (FuzzyPredicate*fp in [sett set])
+				//compile in compounds
+				[_tree compileCompoundToTree:[[_compounds dictionary] objectForKey:fp]];
+			
+			}
+	}
+	
 }
 
 -(NSMutableArray*)weightAtoms
