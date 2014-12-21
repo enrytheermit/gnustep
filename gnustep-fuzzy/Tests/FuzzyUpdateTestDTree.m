@@ -48,11 +48,11 @@
 {
 	[_inference setTree:self];
 	[_factory initInference:_inference];
-	//FuzzyPredicate *pred = [FuzzyPredicate new];
-	///////[pred init:@"not x"];
-	///////[_factory makeCompound:pred];
+	FuzzyPredicate *pred = [FuzzyPredicate new];
+	[pred init:@"not update"];
+	[_factory makeCompound:pred];
 	FuzzyPredicate *pred2 = [FuzzyPredicate new];
-	[pred2 init:@"x"];
+	[pred2 init:@"update"];
 	[_factory makeAtom:pred2];
 
 	[_inference compileTree];

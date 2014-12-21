@@ -38,8 +38,6 @@ int main(int argc, const char **argv, char **env)
 
    pool = [NSAutoreleasePool new];
 
-	fprintf(stdout, "FOO");
-	NSLog(@"FOO");
    FuzzyInference *inf = [FuzzyInference new];
    [inf init:0];
    FuzzyUpdateDTree *dtree = [FuzzyUpdateDTree new]; 

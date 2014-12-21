@@ -102,7 +102,6 @@
 -(id) parse:(FuzzyInference*)inf
 {
 	//////if ([[_node predicate] isKindOfClass:[FuzzyPredicate class]]) {
-	NSLog(@"Atom");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] predicate]);
 	[inf addAtom:self with:[[self node] pred]];
 	return self;
 }
@@ -142,7 +141,6 @@
 -(id) parse:(FuzzyInference*)inf
 {
 	/////if ([[_node pred] isKindOfClass:[NSString class]]) {
-	NSLog(@"BAR");//"Parsing InferenceCompound as FuzzyPredicate: %@", [[self node] pred]);
 	[inf addCompound:self with:[[self node] pred]];
 	return self;
 }
@@ -211,7 +209,6 @@
 }
 -(void)addCompound:(id)a with:(FuzzyPredicate*)p
 {
-	NSLog(@"Init Added compound to rules DB");
 	[_compounds setObject:a forKey:[p nsstring]];		
 	//[_tree compileCompoundToTree:a];	
 	NSLog(@"Added compound to rules DB");
