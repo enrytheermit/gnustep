@@ -41,6 +41,7 @@
 -(int)count;
 
 - (CGFloat)entropy0;
+-(CGFloat)entropyForAtoms:(NSMutableDictionary*)atoms;
 @end
  
 #endif

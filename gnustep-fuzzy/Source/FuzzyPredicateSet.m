@@ -62,4 +62,24 @@
 	}
 	return e;
 }	
+
+-(CGFloat)entropyForAtoms:(NSMutableDictionary*)atoms
+{
+	CGFloat e = 0.0;
+	for (FuzzyPredicate*p in _set) {
+		NSEnumerator *enumerator = [atoms keyEnumerator];
+		id atomp;
+		while ((atomp = [enumerator nextObject])) {
+			NSArray *array = [p componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:atomp]];	
+			int x = [array count];
+			CGFloat px = x / [_set count];
+	
+			CGFloat logpx = log10f(px) / log10f(2);
+			e -= px * logpx;	
+		}
+	}
+	return e;
+}	
+	
+
 @end

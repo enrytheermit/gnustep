@@ -294,7 +294,7 @@
 			if (arc4random() % 1 == 0 && i++)
 				[set addObject:compp2];	
 		}
-		NSNumber *ee = [NSNumber numberWithFloat:[set entropy0]];
+		NSNumber *ee = [NSNumber numberWithFloat:[set entropyForAtoms:[_atoms dictionary]]];
 		[entropies setObject:ee forKey:ee];
 		[dict removeObjectForKey:compp];	
  		cenumerator = [dict keyEnumerator];
