@@ -35,7 +35,6 @@
 
  }
 
-@property (retain) NSString*stringHolder;
 - (id)new;
 - (int)length;
 -(id)appendString:(NSString*)s;
