@@ -9,8 +9,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
-#include "MonsterInfo.h"
-
+#import "MonsterInfo.h"
 /*** 
 //typedef struct {} monsterinfo_t;
 __Def(struct __struct_MonsterTypeInfo) 
@@ -42,9 +41,11 @@ __DefMonsterInfo(__struct_MonsterBaseInfo)
 
 @interface MonsterBaseInfo : NSObject 
 {
-	monsterinfo_t _baseinfo;
+@private
+	baseinfo *_baseinfo;
 }
 -(id)initHitpoints:(NSString*)hp Armor:(NSString*)a Strength:(NSString*)s;
+- (baseinfo*) baseinfo;
 @end
 
 #define DefMonsterManaInfo \

@@ -9,8 +9,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
-struct __struct_MonsterTypeInfo { char *name; char *class; };
-struct __struct_MonsterBaseInfo { char *hitpoints; char *armor; char *strength; };
+typedef struct __struct_MonsterTypeInfo { char *name; char *class; } typeinfo;
+typedef struct __struct_MonsterBaseInfo { char *hitpoints; char *armor; char *strength; } baseinfo;
 struct __struct_MonsterManaInfo { char *manapoints; char *spells; char *manalevel; };
 struct __struct_MonsterWizardInfo { char *manapoints; char *spells; char *manalevel; };
 struct __struct_MonsterPriestInfo { char *clericpoints; char *spells; char *clericlevel; };
