@@ -133,10 +133,23 @@ You should have received a copy of the GNU General Public License along with thi
 
 @end
 
+@implementation MonsterEquipmentInfo 
 
+-(id)init
+{
+	return self;
+}
 
+-(id)initHead:(NSString*)s body:(NSString*)d feet:(NSString*)i gloves:(NSString*)cs
+{
+	_equipmentinfo.head = [s UTF8String];
+	_equipmentinfo.body = [d UTF8String];
+	_equipmentinfo.feet = [i UTF8String];
+	_equipmentinfo.gloves = [cs UTF8String];
+	return self;
+}
 
-
+@end
 
 
 
@@ -149,6 +162,13 @@ You should have received a copy of the GNU General Public License along with thi
 
 - (id)init
 {
+	_typeinfo = [MonsterTypeInfo new];
+	_baseinfo = [MonsterBaseInfo new];
+	_manainfo = [MonsterManaInfo new];
+	_wizardinfo = [MonsterWizardInfo new];
+	_priestinfo = [MonsterPriestInfo new];
+	_levelinfo = [MonsterLevelInfo new];
+	_equipmentinfo = [MonsterEquipmentInfo new];
 
 	return self;
 }
