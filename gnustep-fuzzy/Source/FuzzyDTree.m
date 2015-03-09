@@ -34,9 +34,12 @@
 #import "../Headers/FuzzyMACROS.h"
  
 @implementation FuzzyDTreeFactory
-- (id)new
-{
-	return self;
+
+- (id) init { 
+	if ( self = [super init] ) {
+		_inference = nil;
+	}
+	 return self; 
 }
 
 - (FuzzyDTreeFactory*)initInference:(FuzzyInference*)inf
@@ -47,13 +50,13 @@
 
 - (id) makeDTree
 {
-	return [FuzzyDTree new];
+	return [[FuzzyDTree alloc] init];
 }
 
 - (id) makeADT:(FuzzyPredicate*)p with:(Class)adt
 {
-	InferenceADT *iadt = [[adt class] new];
-	InferenceNode *n = [InferenceNode new];
+	InferenceADT *iadt = [[[adt class] alloc] init];
+	InferenceNode *n = [[InferenceNode alloc] init];
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
@@ -62,8 +65,8 @@
 
 - (id) makeAtom:(FuzzyPredicate*)p
 {
-	InferenceAtom *iadt = [InferenceAtom new];
-	InferenceNode *n = [InferenceNode new];
+	InferenceAtom *iadt = [[InferenceAtom alloc] init];
+	InferenceNode *n = [[InferenceNode alloc] init];
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
@@ -73,8 +76,8 @@
 
 - (id) makeNumber:(FuzzyPredicate*)p
 {
-	InferenceNumber *iadt = [InferenceNumber new];
-	InferenceNode *n = [InferenceNode new];
+	InferenceNumber *iadt = [[InferenceNumber alloc] init];
+	InferenceNode *n = [[InferenceNode alloc] init];
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
@@ -83,8 +86,8 @@
 
 - (id) makeVar:(FuzzyPredicate*)p
 {
-	InferenceVariable *iadt = [InferenceVariable new];
-	InferenceNode *n = [InferenceNode new];
+	InferenceVariable *iadt = [[InferenceVariable alloc] init];
+	InferenceNode *n = [[InferenceNode alloc] init];
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
@@ -93,8 +96,8 @@
 
 - (id) makeCompound:(FuzzyPredicate*)p
 {
-	InferenceCompound *iadt = [InferenceCompound new];
-	InferenceNode *n = [InferenceNode new];
+	InferenceCompound *iadt = [[InferenceCompound alloc] init];
+	InferenceNode *n = [[InferenceNode alloc] init];
 	//[n data:p];
 	[n predicate:p];
 	[iadt node:n];
@@ -104,16 +107,16 @@
 /***
 - (InferenceManipulator*) createInferenceManipulator
 {
-	return [[InferenceManipulator new] init:_inference];
+	return [[[InferenceManipulator alloc] init] init:_inference];
 }
 ***/
 @end
 
 @implementation FuzzyDTreeRoot
 
-- (id) new
+- (id) init 
 {
-	_rootnode = [FuzzyDTreeNode new];
+	_rootnode = [[FuzzyDTreeNode alloc] init];
 	return self;
 }
 
@@ -139,10 +142,6 @@
 
 @implementation FuzzyDTreeNode
 
-- (id) new
-{
-	return self;
-}
 
 - (FuzzyDTreeNode*) initADT:(InferenceADT*)adt
 {
@@ -154,7 +153,7 @@
 - (void)addToRootNode:(FuzzyDTreeNode*)n
 {
 	NSLog(@"adding to root node");
-	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	FuzzyDTreeNodeCon *c = [[FuzzyDTreeNodeCon alloc] init];
 	[c initNode:n];
 	[_cons addObject:c];	
 } 
@@ -162,7 +161,7 @@
 - (void)addNode:(FuzzyDTreeNode*)n
 {
 	NSLog(@"adding node");
-	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	FuzzyDTreeNodeCon *c = [[FuzzyDTreeNodeCon alloc] init];
 	[c initNode:n];
 	[_cons addObject:c];	
 } 
@@ -188,18 +187,18 @@
 
 - (void)splitForNot:(FuzzyPredicate *)p
 {
-	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
-	InferenceCompound *ic = [InferenceCompound new];
-	InferenceNode *in = [InferenceNode new];
+	FuzzyDTreeNodeCon *c = [[FuzzyDTreeNodeCon alloc] init];
+	InferenceCompound *ic = [[InferenceCompound alloc] init];
+	InferenceNode *in = [[InferenceNode alloc] init];
 	[in initNode:p];
 	[ic node:in];
-	[c initNode:[[FuzzyDTreeNode new] initADT:ic]];
+	[c initNode:[[[FuzzyDTreeNode alloc] init] initADT:ic]];
 	[_cons addObject:c];	
 } 
 - (void)addForNot:(FuzzyPredicate *)p
 {
 	//NSLog(@"_cons has length %d in node %@", [_cons count], self); 
-	FuzzyDTreeNodeCon *c = [FuzzyDTreeNodeCon new];
+	FuzzyDTreeNodeCon *c = [[FuzzyDTreeNodeCon alloc] init];
 	[c initNode:self];
 	[_cons addObject:c];	
 	//NSLog(@"_cons has length %d in node %@", [_cons count], self); 
@@ -230,7 +229,7 @@
 @end
 @implementation FuzzyDTreeNodeCon
 
-- (id) new
+- (id) init 
 {
 	return self;
 }
@@ -250,7 +249,7 @@
 
 @implementation FuzzyDTree
 
--(id)new
+-(id) init
 {
 	return self;
 }
@@ -258,7 +257,7 @@
 - (FuzzyDTree*)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf
 {
 	_inference = inf; 
-	_root = [FuzzyDTreeRoot new];
+	_root = [[FuzzyDTreeRoot alloc] init];
 	return self;
 } 
 
@@ -295,7 +294,7 @@
 	//[ps unspacify];
 	*/
 	if ([ps rangeOfString:NOTS].length == 3) {
-		FuzzyPredicate *p = [FuzzyPredicate new];
+		FuzzyPredicate *p = [[FuzzyPredicate alloc] init];
 		//search for a node with the negated value p
 		[p init:[ps substringWithRange:NSMakeRange(3,[ps length]-3)]];
 		FuzzyDTreeNode *n = [self searchTreeFor:p];
@@ -306,7 +305,7 @@
 		//if node not found, this is should be impossible as atoms
 		//are all already in the tree
 		//other compound clauses are compiled further
-			/////FuzzyDTreeNode *nn = [[FuzzyDTreeNode new] initADT:comp]; 
+			/////FuzzyDTreeNode *nn = [[[FuzzyDTreeNode alloc] init] initADT:comp]; 
 			////[_root addNode:nn];	
 		}	
 	}	

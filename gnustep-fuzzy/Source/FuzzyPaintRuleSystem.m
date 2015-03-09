@@ -34,13 +34,20 @@
 
 @implementation FuzzyPaintRuleSystem
 
-- (id) new:(id)painter withParser:(id)parser
+- (id) init { 
+	if ( self = [super init] ) {
+		_painter = nil;
+		_parser = nil;	
+	}
+	 return self; 
+}
+/***- (id) new:(id)painter withParser:(id)parser
 {
 	_painter = painter;
 	_parser = parser;
 	return self;
 }
-
+***/
 - (void) setPaintSystem:(id)paintsystem
 {
 	_painter = paintsystem;

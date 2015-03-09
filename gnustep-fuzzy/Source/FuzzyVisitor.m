@@ -30,11 +30,12 @@
  
 @implementation FuzzyVisitor 
  
--(id) new 
-{
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
- 
+
 - (void) visitDTree:(FuzzyDTree *)dtree
 {} 
 - (void) visitInference:(FuzzyInference *)inf

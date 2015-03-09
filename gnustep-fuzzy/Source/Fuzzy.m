@@ -29,10 +29,13 @@
  
  @implementation FuzzyFunction
  
- - (id)new
- {
- 	return self;
- } 
+- (id) init { 
+	if ( self = [super init] ) {
+		pf = nil
+	}
+	 return self; 
+}
+
  - (id)initFunc:(SEL)pif
  {
  	pf = pif;

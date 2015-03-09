@@ -29,9 +29,10 @@
 #import "../Headers/FuzzyParser.h"
  
  @implementation FuzzyPredicateSet 
--(id)new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 
 - (void)addObject:(id)o

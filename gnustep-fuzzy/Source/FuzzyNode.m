@@ -31,10 +31,11 @@
 
 @implementation FuzzyPaintNode
 
-- (id) new
-{
-	_rules = [FuzzyPaintRuleSystem new];
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+		_rules = [[FuzzyPaintRuleSystem alloc] init];
+	}
+	 return self; 
 }
 
 @end

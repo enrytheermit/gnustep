@@ -30,9 +30,10 @@
 
 @implementation FuzzyNetwork
 
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 
 @end

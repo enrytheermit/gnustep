@@ -29,12 +29,11 @@
 #import "../Headers/FuzzyParser.h"
  
 @implementation FuzzyPredicate 
--(id)new
-{
-	if( (self = [super init]) ) {
+- (id) init { 
+	if ( self = [super init] ) {
     		[self initWithFormat:@""];	
-	}	
-	return self;
+	}
+	 return self; 
 }
 
 -(int)length

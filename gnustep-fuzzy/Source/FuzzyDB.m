@@ -28,15 +28,10 @@
  
 @implementation FuzzyDB 
 
-- (id)new
-{
-	return self; 
-}
-
--(FuzzyDB*) initDB 
-{
-	_dictionary = [NSMutableDictionary new]; 
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif

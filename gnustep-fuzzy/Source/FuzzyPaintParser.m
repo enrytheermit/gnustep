@@ -29,8 +29,10 @@
  
 @implementation FuzzyPaintParser
  
- -(id)new {
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 
 /*

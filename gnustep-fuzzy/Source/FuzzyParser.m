@@ -30,8 +30,10 @@
  
  @implementation FuzzyParser
  
- -(id)new {
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 
 - (id) compare:(FuzzyPredicate*)predicate with:(NSString*)rule

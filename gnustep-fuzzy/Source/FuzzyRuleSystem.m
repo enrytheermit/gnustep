@@ -34,6 +34,15 @@
 
 @implementation FuzzyRuleSystem
 
+- (id) init { 
+	if ( self = [super init] ) {
+		_threshold = 0.001;
+		_rules = [[FuzzyDB alloc] init];
+		_functions = [[FuzzyDB alloc] init]; 
+	}
+	 return self; 
+}
+
 - (id) new
 {
 	_threshold = 0.001;

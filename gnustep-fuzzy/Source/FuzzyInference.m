@@ -33,9 +33,12 @@
 #import "../Headers/FuzzyVisitor.h"
  
 @implementation InferenceNode
--(id)new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+		_data = nil;
+		_predicate = nil;	
+	}
+	 return self; 
 }
 
 -(id)initNode:(FuzzyPredicate*)p{
@@ -155,14 +158,10 @@
 
 -(id) init:(int)caps
 {
-	_atoms = [FuzzyDB new];	
-	[_atoms initDB];	
-	_vars = [FuzzyDB new];	
-	[_vars initDB];	
-	_numbers = [FuzzyDB new];	
-	[_numbers initDB];	
-	_compounds = [FuzzyDB new];	
-	[_compounds initDB];
+	_atoms = [[FuzzyDB alloc] init];	
+	_vars = [[FuzzyDB alloc] init];	
+	_numbers = [[FuzzyDB alloc] init];	
+	_compounds = [[FuzzyDB alloc] init];	
 	_threshold = 0.01;	
 	//_tree = nil;
 	NSLog(@"Constructed inference engine");

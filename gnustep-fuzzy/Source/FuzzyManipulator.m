@@ -32,9 +32,11 @@
 @end
 @implementation FuzzyParserManipulator
 
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+		_o = nil;
+	}
+	 return self; 
 }
 - (FuzzyParserManipulator*) initM:(id)o
 {
