@@ -31,7 +31,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
-		pf = nil
+		pf = nil;
 	}
 	 return self; 
 }
