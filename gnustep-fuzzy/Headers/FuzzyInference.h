@@ -94,7 +94,6 @@
 	FuzzyDTree *_tree;
 }
 - (id) init;
-- (id) init:(int)caps;
 - (FuzzyDTree*) tree;
 -(id) parse:(InferenceADT*)adt;
 - (void)accept:(FuzzyVisitor*)v;

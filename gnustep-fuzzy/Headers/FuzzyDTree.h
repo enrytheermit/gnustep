@@ -46,7 +46,7 @@
 {
 	FuzzyInference *_inference;		
 }
-- (FuzzyDTreeFactory*)initInference:(FuzzyInference*)inf;
+- (void)setInference:(FuzzyInference*)inf;
 - (id) makeDTree;
 - (id) makeADT:(FuzzyPredicate*)p with:(Class)adt; 
 - (id) makeAtom:(FuzzyPredicate*)p; 
@@ -68,7 +68,7 @@
 	InferenceADT *_adt;
 	NSMutableArray *_cons;
 }
-- (FuzzyDTreeNode*) initADT:(InferenceADT*)adt;
+- (void) setADT:(InferenceADT*)adt;
 - (id) adt;
 -(void)addToRootNode:(FuzzyDTreeNode*)n;
 - (void)addNode:(FuzzyDTreeNode*)n;

@@ -42,7 +42,7 @@
 	 return self; 
 }
 
-- (FuzzyDTreeFactory*)initInference:(FuzzyInference*)inf
+- (void)setInference:(FuzzyInference*)inf
 {
 	_inference = inf;
 	return self;
@@ -143,11 +143,11 @@
 @implementation FuzzyDTreeNode
 
 
-- (FuzzyDTreeNode*) initADT:(InferenceADT*)adt
+- (void) setADT:(InferenceADT*)adt
 {
+	//FIXME random alloc
 	_cons = [[NSMutableArray alloc] init];
 	_adt = adt;
-	return self;
 }
 
 - (void)addToRootNode:(FuzzyDTreeNode*)n
@@ -192,7 +192,9 @@
 	InferenceNode *in = [[InferenceNode alloc] init];
 	[in initNode:p];
 	[ic node:in];
-	[c initNode:[[[FuzzyDTreeNode alloc] init] initADT:ic]];
+	FuzzyDTreeNode * tn = [[FuzzyDTreeNode alloc] init];
+	[tn setADT:ic];
+	[c initNode:tn];
 	[_cons addObject:c];	
 } 
 - (void)addForNot:(FuzzyPredicate *)p
@@ -305,7 +307,7 @@
 		//if node not found, this is should be impossible as atoms
 		//are all already in the tree
 		//other compound clauses are compiled further
-			/////FuzzyDTreeNode *nn = [[[FuzzyDTreeNode alloc] init] initADT:comp]; 
+			/////FuzzyDTreeNode *nn = [[[FuzzyDTreeNode alloc] init] setADT:comp]; 
 			////[_root addNode:nn];	
 		}	
 	}	

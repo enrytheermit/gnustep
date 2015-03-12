@@ -41,10 +41,8 @@
 	 return self; 
 }
 
--(id)initNode:(FuzzyPredicate*)p{
-	_data = nil;
+-(void)setNode:(FuzzyPredicate*)p{
 	_predicate = p;
-	return self;
 }
 -(id)data
 {
@@ -53,7 +51,7 @@
 -(NSString*)dataToString
 {
 	NSLog(@"dataToString");
-	return [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+	return [[[NSString alloc] init] initWithData:_data encoding:NSUTF8StringEncoding];
 }
 -(void)data:(id)d
 {
@@ -154,20 +152,16 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
+		_atoms = [[FuzzyDB alloc] init];	
+		_vars = [[FuzzyDB alloc] init];	
+		_numbers = [[FuzzyDB alloc] init];	
+		_compounds = [[FuzzyDB alloc] init];	
+		_threshold = 0.01;	
+		//_tree = nil;
+		NSLog(@"Constructed inference engine");
+		return self;
 	}
 	 return self; 
-}
-
--(id) init:(int)caps
-{
-	_atoms = [[FuzzyDB alloc] init];	
-	_vars = [[FuzzyDB alloc] init];	
-	_numbers = [[FuzzyDB alloc] init];	
-	_compounds = [[FuzzyDB alloc] init];	
-	_threshold = 0.01;	
-	//_tree = nil;
-	NSLog(@"Constructed inference engine");
-	return self;
 }
 
 -(FuzzyDTree*)tree
@@ -238,15 +232,20 @@
 		}
 		i++;
 	}
-	rn = [[[FuzzyDTreeNode alloc] init] initADT:[[_atoms dictionary] objectForKey:
-		[weights objectAtIndex:0]]]; 
+	//FIXME setADT: returns void
+	FuzzyDTreeNode *dtn = [[FuzzyDTreeNode alloc] init];
+	[dtn setADT:[_atoms dictionary]];
+	rn = [dtn objectForKey:
+		[weights objectAtIndex:0]]; 
     	[weights removeObjectAtIndex:idx];
 	/* atom predicate is at front of array */
     	NSEnumerator *enumerator = [[_atoms dictionary] keyEnumerator];
     	id atomp;
 	FuzzyDTreeNode *n = rn;
     	while ((atomp = [enumerator nextObject])) {
-		FuzzyDTreeNode *n2 = [[[FuzzyDTreeNode alloc] init] initADT:[[_atoms dictionary] objectForKey:atomp]];
+		FuzzyDTreeNode *n3 = [[FuzzyDTreeNode alloc] init];
+		[n3 setADT:[[_atoms dictionary] objectForKey:atomp]];
+		FuzzyDTreeNode *n2 = n3;
 		max = 0.0;
 		idx = 0.0;
 		/* root atom predicate is at front of array, start from 1 not 0 */

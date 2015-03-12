@@ -47,7 +47,7 @@
 - (id)makeUpdateDTree
 {
 	[_inference setTree:self];
-	[_factory initInference:_inference];
+	[_factory setInference:_inference];
 	FuzzyPredicate *pred = [FuzzyPredicate new];
 	[pred init:@"not update"];
 	[_factory makeCompound:pred];

@@ -30,6 +30,7 @@
 
 - (id) init { 
 	if ( self = [super init] ) {
+		_dictionary = [[NSMutableDictionary alloc] init];
 	}
 	 return self; 
 }

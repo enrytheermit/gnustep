@@ -37,7 +37,7 @@
  	SEL pf;
  	CGFloat x;
  }
-- (id) initFunc:(SEL) pif; 
+- (void) setFunc:(SEL) pif; 
 - (id)perform:(CGFloat)c;
 - (id)perform;
 - (CGFloat)x;

@@ -36,7 +36,7 @@
 	 return self; 
 }
 
- - (id)initFunc:(SEL)pif
+ - (void)setFunc:(SEL)pif
  {
  	pf = pif;
  	x = .0;	
@@ -79,7 +79,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(littlef)];
+ 		[self setFunc:@selector(littlef)];
 	}
 	 return self; 
 }
@@ -95,7 +95,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(slightlyf)];
+ 		[self setFunc:@selector(slightlyf)];
 	}
 	 return self; 
 }
@@ -110,7 +110,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(veryf)];
+ 		[self setFunc:@selector(veryf)];
 	}
 	 return self; 
 }
@@ -126,7 +126,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(extremelyf)];
+ 		[self setFunc:@selector(extremelyf)];
 	}
 	 return self; 
 }
@@ -142,7 +142,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(veryveryf)];
+ 		[self setFunc:@selector(veryveryf)];
 	}
 	 return self; 
 }
@@ -157,7 +157,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(moreorlessf)];
+ 		[self setFunc:@selector(moreorlessf)];
 	}
 	 return self; 
 }
@@ -173,7 +173,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(indeedf)];
+ 		[self setFunc:@selector(indeedf)];
 	}
 	 return self; 
 }
@@ -189,7 +189,7 @@
  
 - (id) init { 
 	if ( self = [super init] ) {
- 		[self initFunc:@selector(idlef)];
+ 		[self setFunc:@selector(idlef)];
 	}
 	 return self; 
 }

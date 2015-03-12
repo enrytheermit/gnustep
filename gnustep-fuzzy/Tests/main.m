@@ -38,10 +38,9 @@ int main(int argc, const char **argv, char **env)
 
    pool = [NSAutoreleasePool new];
 
-   FuzzyInference *inf = [FuzzyInference new];
-   [inf init:0];
-   FuzzyUpdateDTree *dtree = [FuzzyUpdateDTree new]; 
-   [dtree init:[FuzzyDTreeFactory new] with:inf]; 
+   FuzzyInference *inf = [[FuzzyInference alloc] init];
+   FuzzyUpdateDTree *dtree = [[FuzzyUpdateDTree alloc] init]; 
+   [dtree init:[[FuzzyDTreeFactory alloc] init] with:inf]; 
    [dtree makeUpdateDTree];
 
    [pool release];
