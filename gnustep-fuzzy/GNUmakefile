@@ -41,6 +41,7 @@ libgnustepfuzzy_OBJC_FILES = \
  Source/FuzzyPaintParser.m \
  Source/FuzzyParser.m \
  Source/FuzzyPredicate.m \
+ Source/FuzzyPredicateSet.m \
  Source/FuzzyVisitor.m \
  Source/FuzzyNetwork.m \
  Source/FuzzyNode.m \

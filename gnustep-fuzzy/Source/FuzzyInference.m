@@ -276,12 +276,12 @@
 		// create a set
 		int i = 0;
 		//choose lower and upper bound to choose entropy function values
-		int lowerBound = arc4random() % [dict count];
-		int upperBound = arc4random() % [dict count];
-		int rnd = lowerBound + arc4random() % (upperBound - lowerBound);
+		int lowerBound = random() % [dict count];
+		int upperBound = random() % [dict count];
+		int rnd = lowerBound + random() % (upperBound - lowerBound);
     		while ((compp2 = [cenumerator2 nextObject])) {
 			if (i >= rnd) break;
-			if (arc4random() % 1 == 0 && i++)
+			if (random() % 1 == 0 && i++)
 				[set addObject:compp2];	
 		}
 		//generate the entropy for this set of classes and pack
