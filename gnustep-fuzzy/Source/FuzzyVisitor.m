@@ -45,27 +45,31 @@
 
 @implementation FuzzyConstructVisitor 
  
--(id) new 
-{
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
+
 - (void) visitDTree:(FuzzyDTree *)dtree
 {
-	dtree = [FuzzyDTree new];
+	dtree = [[FuzzyDTree alloc] init];
 } 
 - (void) visitInference:(FuzzyInference *)inf
 {
-	inf = [FuzzyInference new];
+	inf = [[FuzzyInference alloc] init];
 }
 
 @end
 
 @implementation FuzzySetVisitor 
  
--(id) new 
-{
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
+
 - (void) visitDTree:(FuzzyDTree *)dtree
 {
 	_dtree = dtree;

@@ -108,17 +108,17 @@
 
 - (id) createManipulator
 {
-	return [[FuzzyPaintManipulator new]initM:self];
+	return [[[FuzzyPaintManipulator alloc] init]initM:self];
 }
 
 - (id) createArgumentManipulator
 {
-	return [[FuzzyScreenManipulator new]initM:_painter];
+	return [[[FuzzyScreenManipulator alloc] init]initM:_painter];
 }
 
 - (id) createParserManipulator
 {
-	return [[FuzzyParserManipulator new]initM:_parser];
+	return [[[FuzzyParserManipulator alloc] init]initM:_parser];
 }
 
 @end

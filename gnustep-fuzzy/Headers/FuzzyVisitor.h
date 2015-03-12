@@ -34,7 +34,7 @@
  
 @interface FuzzyVisitor : NSObject {
 }
-- (id)new;
+- (id)init;
 
 - (void) visitDTree:(FuzzyDTree *)dtree; 
 - (void) visitInference:(FuzzyInference *)inf;
@@ -43,7 +43,7 @@
 @interface FuzzyConstructVisitor : FuzzyVisitor {
 
 }
-- (id)new;
+- (id)init;
 
 - (void) visitDTree:(FuzzyDTree *)dtree; 
 - (void) visitInference:(FuzzyInference *)inf;
@@ -52,7 +52,7 @@
 @interface FuzzySetVisitor : FuzzyVisitor {
 	FuzzyDTree *_dtree;
 }
-- (id)new;
+- (id)init;
 
 - (void) visitDTree:(FuzzyDTree *)dtree; 
 - (void) visitInference:(FuzzyInference *)inf;

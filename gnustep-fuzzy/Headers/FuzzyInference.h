@@ -40,7 +40,6 @@
 	NSData *_data;
 	FuzzyPredicate *_predicate;
 }
--(id)new;
 -(id)initNode:(FuzzyPredicate*)p;
 -(id)data;
 -(NSString*)dataToString;
@@ -55,7 +54,7 @@
 	InferenceNode* _node;
 	int _nodeid;
 }
-- (id)new;
+- (id)init;
 -(id)node;
 -(void)node:(InferenceNode*)n;
 -(int)nodeid;
@@ -81,7 +80,7 @@
 @interface InferenceCompound : InferenceADT
 {
 }
-- (id)new;
+- (id)init;
 -(id) parse:(FuzzyInference*)inf;
 @end
  
@@ -94,7 +93,7 @@
  
 	FuzzyDTree *_tree;
 }
-- (id) new;
+- (id) init;
 - (id) init:(int)caps;
 - (FuzzyDTree*) tree;
 -(id) parse:(InferenceADT*)adt;

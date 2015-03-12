@@ -42,9 +42,11 @@
 
 @implementation FuzzyNode
 
-- (id) new
+- (id) init
 {
-	_rules = [FuzzyRuleSystem new];
+	if ( self = [super init] ) {
+		_rules = [[FuzzyRuleSystem alloc] init];
+	}
 	return self;
 }
 

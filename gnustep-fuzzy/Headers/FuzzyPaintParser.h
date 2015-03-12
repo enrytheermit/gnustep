@@ -32,7 +32,7 @@
  
 @interface FuzzyPaintParser : FuzzyParser {
 }
-- (id)new;
+- (id)init;
 - (id) compare:(FuzzyPredicate*)predicate with:(NSString*)rule;
  
 @end

@@ -32,7 +32,7 @@
 
 @interface FuzzyNetwork : NSObject {
 }
-- (id) new;
+- (id) init;
  
 @end
 

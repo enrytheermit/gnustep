@@ -40,7 +40,7 @@
 	FuzzyDB *_rules;
 	FuzzyDB *_functions;
 }
-- (id) new;
+- (id) init;
 - (void) addRule:(NSString*)r with:(SEL)s;
 - (void) addFunction:(NSString*)r with:(FuzzyFunction*)f;
 -(void) parseFor:(FuzzyPredicate*)predicate On:(id)o;

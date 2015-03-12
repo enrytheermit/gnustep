@@ -33,7 +33,6 @@
  @interface FuzzyDB : NSObject {
 	NSMutableDictionary *_dictionary;
 }
- - (id)new;
  - (FuzzyDB*)initDB;
  - (void)addSelectorToDict:(NSString*)key :(SEL)pif;
  -(void)setObject:(id)value forKey:(NSString*)s;

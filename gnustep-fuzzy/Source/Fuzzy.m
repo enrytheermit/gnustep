@@ -77,10 +77,11 @@
  	return sqrt(x) / 1.3;
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(littlef)];
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(littlef)];
+	}
+	 return self; 
 }
  
  @end
@@ -92,12 +93,12 @@
  	return sqrt(x) / 1.7;
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(slightlyf)];
-	return self; 
- }
- 
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(slightlyf)];
+	}
+	 return self; 
+}
  @end
  
  @implementation FuzzyFunctionVery
@@ -107,11 +108,12 @@
  	return x * x;
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(veryf)];
-	return self; 
- }
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(veryf)];
+	}
+	 return self; 
+}
  
  @end
  
@@ -122,11 +124,12 @@
  	return x * x * x;
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(extremelyf)];
-	return self; 
- }
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(extremelyf)];
+	}
+	 return self; 
+}
  
  @end
  
@@ -137,12 +140,12 @@
  	return x * x * x * x;
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(veryveryf)];
-	return self; 
- }
- 
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(veryveryf)];
+	}
+	 return self; 
+}
  @end
  
  @implementation FuzzyFunctionMoreorLess
@@ -152,11 +155,12 @@
  	return sqrt(x);
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(moreorlessf)];
-	return self; 
- }
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(moreorlessf)];
+	}
+	 return self; 
+}
  
  @end
  
@@ -167,11 +171,12 @@
  	return 2 * x * x;
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(indeedf)];
-	return self; 
- }
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(indeedf)];
+	}
+	 return self; 
+}
  
  @end
  
@@ -182,12 +187,12 @@
  	return .0; //IDLEVALUE(x);
  }
  
- -(id) new 
- {
- 	[self initFunc:@selector(idlef)];
-	return self; 
- }
- 
+- (id) init { 
+	if ( self = [super init] ) {
+ 		[self initFunc:@selector(idlef)];
+	}
+	 return self; 
+}
  @end
  
  

@@ -60,7 +60,6 @@
 @interface FuzzyDTreeRoot : NSObject {
 	FuzzyDTreeNode *_rootnode;
 }
-- (id) new; 
 -(void)addToRootNode:(FuzzyDTreeNode*)n;
 -(void)addNode:(FuzzyDTreeNode*)n;
 -(void)printTree;
@@ -69,7 +68,6 @@
 	InferenceADT *_adt;
 	NSMutableArray *_cons;
 }
-- (id) new;
 - (FuzzyDTreeNode*) initADT:(InferenceADT*)adt;
 - (id) adt;
 -(void)addToRootNode:(FuzzyDTreeNode*)n;
@@ -88,7 +86,6 @@
 	FuzzyDTreeRoot *_root;		
 	FuzzyInference *_inference;		
 }
-- (id)new;
 - (FuzzyDTree*)init:(FuzzyDTreeFactory*)factory with:(FuzzyInference*)inf; 
 - (void)accept:(FuzzyVisitor*)v;
 - (void) addCompound:(InferenceCompound*)comp;

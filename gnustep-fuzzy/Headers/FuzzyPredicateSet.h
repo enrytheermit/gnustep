@@ -35,7 +35,7 @@
 	NSMutableArray *_set;
  }
 
-- (id)new;
+- (id)init;
 - (void)addObject:(id)o; 
 - (id)set;
 -(int)count;

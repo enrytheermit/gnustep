@@ -37,7 +37,6 @@
  	SEL pf;
  	CGFloat x;
  }
-- (id) new; 
 - (id) initFunc:(SEL) pif; 
 - (id)perform:(CGFloat)c;
 - (id)perform;
@@ -48,39 +47,30 @@
  
  @interface FuzzyFunctionLittle : FuzzyFunction {
  }
- - (id) new; 
  @end
  @interface FuzzyFunctionSlightly : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionVery : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionExtremely : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionVeryVery : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionMoreorLess : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionSomewhat : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionIndeed : FuzzyFunction {
  }
-  -(id) new; 
  @end
  @interface FuzzyFunctionIdle : FuzzyFunction {
  }
-  -(id) new; 
  @end
  
  @interface Fuzzy : NSObject {

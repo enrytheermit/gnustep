@@ -74,9 +74,10 @@
 @end
 
 @implementation InferenceADT
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 -(id)node
 {
@@ -136,10 +137,10 @@
 }
 @end
 @implementation InferenceCompound
-- (id) new
-{
-	self = [super new];
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 -(id) parse:(FuzzyInference*)inf
 {
@@ -151,9 +152,10 @@
  
 @implementation FuzzyInference 
  
--(id) new 
-{
-	return self; 
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 
 -(id) init:(int)caps
@@ -236,7 +238,7 @@
 		}
 		i++;
 	}
-	rn = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:
+	rn = [[[FuzzyDTreeNode alloc] init] initADT:[[_atoms dictionary] objectForKey:
 		[weights objectAtIndex:0]]]; 
     	[weights removeObjectAtIndex:idx];
 	/* atom predicate is at front of array */
@@ -244,7 +246,7 @@
     	id atomp;
 	FuzzyDTreeNode *n = rn;
     	while ((atomp = [enumerator nextObject])) {
-		FuzzyDTreeNode *n2 = [[FuzzyDTreeNode new] initADT:[[_atoms dictionary] objectForKey:atomp]];
+		FuzzyDTreeNode *n2 = [[[FuzzyDTreeNode alloc] init] initADT:[[_atoms dictionary] objectForKey:atomp]];
 		max = 0.0;
 		idx = 0.0;
 		/* root atom predicate is at front of array, start from 1 not 0 */
@@ -264,7 +266,7 @@
   
 
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[_compounds dictionary]];
-	FuzzyPredicateSet *set = [FuzzyPredicateSet new];
+	FuzzyPredicateSet *set = [[FuzzyPredicateSet alloc] init];
 	NSMutableDictionary *entropies = [[NSMutableDictionary alloc] init]; 
  	NSEnumerator *cenumerator = [dict keyEnumerator];
     	id compp;

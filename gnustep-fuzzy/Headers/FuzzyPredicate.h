@@ -35,7 +35,7 @@
 
  }
 
-- (id)new;
+- (id)init;
 - (int)length;
 -(id)appendString:(NSString*)s;
 - (FuzzyPredicate*)init:(NSString*)s;

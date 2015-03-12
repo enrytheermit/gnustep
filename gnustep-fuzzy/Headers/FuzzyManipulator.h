@@ -36,7 +36,7 @@
 {
 	id _o;
 }
-- (id)new;
+- (id)init;
 - (FuzzyManipulator*)initM:(id)o;
 @end
 
@@ -49,28 +49,28 @@
 {
 	id _o;
 }
-- (id)new;
+- (id)init;
 - (FuzzyArgumentManipulator*)initM:(id)o;
 @end
 
 @interface FuzzyParserManipulator : FuzzyManipulator
 {
 }
-- (id)new;
+- (id)init;
 - (FuzzyParserManipulator*)initM:(id)o;
 @end
 
 @interface FuzzyScreenManipulator : FuzzyArgumentManipulator
 {
 }
-- (id)new;
+- (id)init;
 - (FuzzyScreenManipulator*)initM:(id)o;
 @end
 
 @interface FuzzyPaintManipulator : FuzzyManipulator
 {
 }
-- (id)new;
+- (id)init;
 - (FuzzyPaintManipulator*)initM:(id)o;
 @end
 

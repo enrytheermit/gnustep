@@ -43,16 +43,6 @@
 	 return self; 
 }
 
-- (id) new
-{
-	_threshold = 0.001;
-	_rules = [FuzzyDB new];;
-	[_rules initDB]; 
-	_functions = [FuzzyDB new]; 
-	[_functions initDB]; 
-	return self;
-}
-
 - (void) addRule:(NSString*)r with:(SEL)s
 {
 	[_rules reinitCapacity];	
@@ -92,16 +82,16 @@
 }	
 - (id) createManipulator
 {
-	return [[FuzzyManipulator new]initM:self];
+	return [[[FuzzyManipulator alloc] init]initM:self];
 }
 
 - (id) createArgumentManipulator
 {
-	return [[FuzzyArgumentManipulator new]initM:self];
+	return [[[FuzzyArgumentManipulator alloc] init]initM:self];
 }
 
 - (id) createParserManipulator
 {
-	return [[FuzzyManipulator new]initM:self];
+	return [[[FuzzyManipulator alloc] init]initM:self];
 }
 @end

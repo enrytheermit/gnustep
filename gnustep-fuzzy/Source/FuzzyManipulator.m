@@ -47,9 +47,10 @@
 
 @implementation FuzzyScreenManipulator
 
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 - (FuzzyScreenManipulator*) initM:(id)o
 {
@@ -61,9 +62,11 @@
 
 @implementation FuzzyArgumentManipulator
 
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+		_o = nil;
+	}
+	 return self; 
 }
 - (FuzzyArgumentManipulator*) initM:(id)o
 {
@@ -79,9 +82,10 @@
 
 @implementation FuzzyPaintManipulator
 
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 - (FuzzyPaintManipulator*) initM:(id)o
 {
@@ -92,9 +96,10 @@
 
 @implementation FuzzyManipulator
 
-- (id) new
-{
-	return self;
+- (id) init { 
+	if ( self = [super init] ) {
+	}
+	 return self; 
 }
 - (FuzzyManipulator*) initM:(id)o
 {
